@@ -13,7 +13,7 @@ client.on("interactionCreate", async (interaction) => {
   const { commandName } = interaction;
 
   if (commandName === "ping") {
-    return await interaction.reply("Pang!");
+    return await interaction.reply("Pong!");
   }
 
   if (commandName === "server") {
