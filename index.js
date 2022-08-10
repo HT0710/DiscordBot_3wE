@@ -23,12 +23,16 @@ for (const file of commandFiles) {
   client.commands.set(command.data.name, command);
 }
 
-client.once("ready", () => {
-  console.log("Ready to Die!?");
+client.once("ready", (client) => {
+  console.log(`${client.user.tag} was summoned! Ready to Die?`);
 });
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
+
+  console.log(
+    `${interaction.user.tag} in #${interaction.guild.name} triggered ${interaction}.`
+  );
 
   const command = client.commands.get(interaction.commandName);
 
