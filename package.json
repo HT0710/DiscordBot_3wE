@@ -2,7 +2,7 @@
   "name": "discordbot_3we",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +19,8 @@
   "homepage": "https://github.com/HT0710/DiscordBot_3wE#readme",
   "dependencies": {
     "@discordjs/rest": "^1.0.1",
-    "discord.js": "^14.1.2"
+    "custom-env": "^2.0.1",
+    "discord.js": "^14.1.2",
+    "dotenv": "^16.0.1"
   }
 }
