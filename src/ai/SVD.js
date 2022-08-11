@@ -1,6 +1,7 @@
-const exec = require("child_process").exec;
+const { exec } = require("child_process");
 const path = require("node:path");
 const fs = require("node:fs");
+const { count } = require("console");
 
 module.exports = SVD = async (interaction) => {
   const url = interaction.options.getAttachment("image").proxyURL;
@@ -8,24 +9,22 @@ module.exports = SVD = async (interaction) => {
   fs.writeFileSync("./API.txt", url + "\n" + value);
 
   const pyExec = path.join(__dirname, "/py/SVD.py");
-  exec(`python ${pyExec}`);
+  exec(`python3 ${pyExec}`);
 
-  async function delay(mili) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(2);
-      }, mili);
-    });
-  }
+  await interaction.reply("Wait a few second!");
 
-  (async () => {
-    await delay(2000);
-    await interaction.reply("Wait a few second!");
-    await delay(3000);
-    await interaction.channel.send(
-      `Value:**\`${value}\`** - Remember the output is alway *Grayscale*.`
-    );
-    await delay(4000);
-    await interaction.channel.send({ files: ["./SVD.png"] });
+  let check = "";
+  (function loop() {
+    setTimeout(() => {
+      check = fs.readFileSync(
+        `${path.join(__dirname, "../../API.txt")}`,
+        "utf-8"
+      );
+      if (check !== "done") {
+        loop();
+      } else {
+        interaction.channel.send({ files: ["./SVD.png"] });
+      }
+    }, 1000);
   })();
 };
