@@ -1,1 +1,1 @@
-worker: node src/index.js
+worker: python src/ai/py/SVD.py
