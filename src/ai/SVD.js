@@ -9,8 +9,8 @@ module.exports = SVD = async (interaction) => {
 
   const pyExec = path.join(__dirname, "/py/SVD.py");
   exec(`python ${pyExec}`);
-
-  await interaction.reply("Wait a second!").then(async () => {
+  setTimeout(() => {}, 2000);
+  await interaction.reply("Wait a few second!").then(async () => {
     setTimeout(() => {
       interaction.channel.send(
         `Value:**\`${value}\`** - Remember the output is alway *Grayscale*.`
