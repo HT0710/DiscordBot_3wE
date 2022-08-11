@@ -1,5 +1,3 @@
-import matplotlib.pyplot as plt
-import matplotlib.image as pli
 import numpy as np
 from PIL import Image
 import requests

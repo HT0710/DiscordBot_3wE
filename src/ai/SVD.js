@@ -9,15 +9,23 @@ module.exports = SVD = async (interaction) => {
 
   const pyExec = path.join(__dirname, "/py/SVD.py");
   exec(`python ${pyExec}`);
-  setTimeout(() => {}, 2000);
-  await interaction.reply("Wait a few second!").then(async () => {
-    setTimeout(() => {
-      interaction.channel.send(
-        `Value:**\`${value}\`** - Remember the output is alway *Grayscale*.`
-      );
+
+  async function delay(mili) {
+    return new Promise((resolve) => {
       setTimeout(() => {
-        interaction.channel.send({ files: ["./SVD.png"] });
-      }, 4000);
-    }, 2000);
-  });
+        resolve(2);
+      }, mili);
+    });
+  }
+
+  (async () => {
+    await delay(2000);
+    await interaction.reply("Wait a few second!");
+    await delay(3000);
+    await interaction.channel.send(
+      `Value:**\`${value}\`** - Remember the output is alway *Grayscale*.`
+    );
+    await delay(4000);
+    await interaction.channel.send({ files: ["./SVD.png"] });
+  })();
 };
