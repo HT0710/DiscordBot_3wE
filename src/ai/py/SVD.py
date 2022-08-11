@@ -24,8 +24,6 @@ def main():
     reconstimg = np.matrix(U[:, :value]) * \
         np.diag(sigma[:value]) * np.matrix(V[:value, :])
 
-    plt.imshow(reconstimg, cmap='gray')
-
     data = Image.fromarray(reconstimg).convert("RGB")
 
     data.save("SVD.png")

@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-const help_list = ["avatar", "ping"].sort();
+const help_list = ["ai", "avatar", "ping"].sort();
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -15,11 +15,11 @@ module.exports = {
         {
           name: help_list[1],
           value: help_list[1],
+        },
+        {
+          name: help_list[2],
+          value: help_list[2],
         }
-        // {
-        //   name: help_list[2],
-        //   value: help_list[2],
-        // }
       )
     ),
   async execute(interaction) {
@@ -35,11 +35,11 @@ module.exports = {
       return await interaction.reply("**`/ping`**: Return the **Latency**.");
     }
 
-    // if (value === "ai") {
-    //   return await interaction.reply(
-    //     "**`/ai`**: Choose algorithms to process your data."
-    //   );
-    // }
+    if (value === "ai") {
+      return await interaction.reply(
+        "**`/ai`**: Choose algorithms to process your data."
+      );
+    }
 
     return await interaction.reply(
       `All available **\`/\`** commands: ${help_list

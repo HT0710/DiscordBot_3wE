@@ -1,12 +1,12 @@
-const fs = require("node:fs");
-const path = require("node:path");
-const { prefix } = require("../json/config.json");
 const {
   Client,
   Collection,
   GatewayIntentBits,
   ActivityType,
 } = require("discord.js");
+const fs = require("node:fs");
+const path = require("node:path");
+const { prefix } = require("./json/config.json");
 const token = (() => {
   if (process.env.TOKEN === undefined) {
     const dotenv = require("dotenv");
@@ -16,7 +16,7 @@ const token = (() => {
 })();
 
 const slashUpdate = true;
-if (slashUpdate) require("./slash-commands");
+if (slashUpdate) require("./handlers/commandHandle");
 
 const client = new Client({
   intents: [
@@ -27,12 +27,13 @@ const client = new Client({
     GatewayIntentBits.DirectMessages,
   ],
 });
-
 client.commands = new Collection();
-const commandsPath = path.join(__dirname, "../commands");
+client.commandArray = [];
+
+const commandsPath = path.join(__dirname, "./commands");
 const commandFiles = fs
   .readdirSync(commandsPath)
-  .filter((file) => file.endsWith(".js") && file !== "AI.js");
+  .filter((file) => file.endsWith(".js"));
 
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
