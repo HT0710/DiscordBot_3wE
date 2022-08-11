@@ -9,10 +9,21 @@ const token = (() => {
   return process.env.TOKEN;
 })();
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const slashUpdate = true;
+if (slashUpdate) require("./slash-commands");
+
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.DirectMessages,
+  ],
+});
 
 client.commands = new Collection();
-const commandsPath = path.join(__dirname, "commands");
+const commandsPath = path.join(__dirname, "../commands");
 const commandFiles = fs
   .readdirSync(commandsPath)
   .filter((file) => file.endsWith(".js"));
@@ -49,7 +60,30 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
-require("http")
-  .createServer((req, res) => res.end("Bot is alive!"))
-  .listen(3000);
+client.on("messageCreate", async (message) => {
+  if (message.author.bot) return;
+
+  const prefix = ">";
+
+  if (message.content.startsWith(prefix)) {
+    const command = client.commands.get(message.content.slice(1));
+
+    if (!command) return;
+
+    try {
+      await command.execute(message);
+    } catch (error) {
+      console.error(error);
+      await message.reply({
+        content: "There was an error while executing this command!",
+        ephemeral: true,
+      });
+    }
+  }
+});
+
 client.login(token);
+
+// require("http")
+//   .createServer((req, res) => res.end("Bot is alive!"))
+//   .listen(3000);
