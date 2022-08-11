@@ -8,7 +8,7 @@ module.exports = SVD = async (interaction) => {
   fs.writeFileSync("./API.txt", url + "\n" + value);
 
   const pyExec = path.join(__dirname, "/py/SVD.py");
-  exec(`python3 ${pyExec}`);
+  exec(`python ${pyExec}`);
 
   await interaction.reply("Wait a second!").then(async () => {
     setTimeout(() => {
