@@ -2,7 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord.js");
-const { clientId } = require("./config.json");
+const { clientId } = require("../json/config.json");
 const token = (() => {
   if (process.env.TOKEN === undefined) {
     const dotenv = require("dotenv");
@@ -12,7 +12,7 @@ const token = (() => {
 })();
 
 const commands = [];
-const commandsPath = path.join(__dirname, "commands");
+const commandsPath = path.join(__dirname, "../commands");
 const commandFiles = fs
   .readdirSync(commandsPath)
   .filter((file) => file.endsWith(".js"));
@@ -25,7 +25,7 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: "10" }).setToken(token);
 
-rest
+module.exports = rest
   .put(Routes.applicationCommands(clientId), { body: commands })
   .then(() => console.log(`Successfully updated.`))
   .catch(console.error);

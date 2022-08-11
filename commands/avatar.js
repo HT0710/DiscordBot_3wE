@@ -12,12 +12,12 @@ module.exports = {
   async execute(interaction) {
     const user = interaction.options.getUser("target");
     if (user)
-      return interaction.reply(
+      return await interaction.reply(
         `${user.displayAvatarURL({
           dynamic: true,
         })}?size=4096`
       );
-    return interaction.reply(
+    return await interaction.reply(
       `${interaction.user.displayAvatarURL({
         dynamic: true,
       })}?size=4096`
