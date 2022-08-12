@@ -1,8 +1,6 @@
 const { SlashCommandBuilder, PermissionsBitField } = require("discord.js");
 const fs = require("node:fs");
-const file = fs.readFileSync("./src/json/config.json", "utf-8");
-const config = JSON.parse(file);
-const write = () => {
+const write = (config) => {
   fs.writeFile("./src/json/config.json", JSON.stringify(config), (err) => {
     if (err) throw err;
   });
@@ -33,13 +31,17 @@ module.exports = {
         )
     ),
   async execute(interaction) {
+    const file = fs.readFileSync("./src/json/config.json", "utf-8");
+    const config = JSON.parse(file);
+
     const id = interaction.guildId;
+    console.log();
     if (!config.guildId[id].hasOwnProperty("prefix")) {
       config.guildId[id].prefix = {
         set: ">",
         activation: true,
       };
-      write();
+      write(config);
     }
 
     const newPrefix = interaction.options.getString("prefix");
@@ -67,7 +69,7 @@ module.exports = {
         });
       }
       prefix.set = newPrefix;
-      write();
+      write(config);
       return await interaction.reply(
         `Prefix has been change to **\`${newPrefix}\`**`
       );
@@ -82,7 +84,7 @@ module.exports = {
           }
 
           prefix.activation = true;
-          write();
+          write(config);
           return interaction.reply("Prefix has been set to **`on`**");
 
         case "off":
@@ -94,7 +96,7 @@ module.exports = {
           }
 
           prefix.activation = false;
-          write();
+          write(config);
           return interaction.reply("Prefix has been set to **`off`**");
       }
     } else {

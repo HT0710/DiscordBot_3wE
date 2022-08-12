@@ -1,9 +1,10 @@
 const { fs } = require("../handlers/importHandle");
-const file = fs.readFileSync("./src/json/config.json", "utf-8");
-const config = JSON.parse(file);
 
 module.exports = (client, guild) => {
   console.log(`${client.user.tag} has joined #${guild.name}`);
+
+  const file = fs.readFileSync("./src/json/config.json", "utf-8");
+  const config = JSON.parse(file);
 
   config.guildId[guild.id] = {
     name: guild.name,
