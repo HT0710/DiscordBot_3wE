@@ -8,6 +8,7 @@ module.exports = (client, guild) => {
 
   config.guildId[guild.id] = {
     name: guild.name,
+    prefix: { set: ">", activation: true },
   };
 
   fs.writeFile("./src/json/config.json", JSON.stringify(config), (err) => {

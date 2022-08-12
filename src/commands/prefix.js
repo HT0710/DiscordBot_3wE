@@ -34,16 +34,6 @@ module.exports = {
     const file = fs.readFileSync("./src/json/config.json", "utf-8");
     const config = JSON.parse(file);
 
-    const id = interaction.guildId;
-    console.log();
-    if (!config.guildId[id].hasOwnProperty("prefix")) {
-      config.guildId[id].prefix = {
-        set: ">",
-        activation: true,
-      };
-      write(config);
-    }
-
     const newPrefix = interaction.options.getString("prefix");
     const changeActivate = interaction.options.getString("activate");
 
@@ -60,7 +50,7 @@ module.exports = {
       }
     }
 
-    let prefix = config.guildId[id].prefix;
+    let prefix = config.guildId[interaction.guildId].prefix;
     if (newPrefix !== null) {
       if (prefix.set === newPrefix) {
         return await interaction.reply({

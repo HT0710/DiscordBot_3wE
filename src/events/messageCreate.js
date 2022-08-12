@@ -8,6 +8,8 @@ module.exports = async (client, message) => {
 
   if (!config.guildId[message.guildId].hasOwnProperty("prefix")) return;
 
+  if (!config.guildId[message.guildId].prefix.activation) return;
+
   const prefix = config.guildId[message.guildId].prefix.set;
   if (!message.content.startsWith(prefix)) return;
 
