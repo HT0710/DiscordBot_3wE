@@ -1,11 +1,18 @@
 {
   "token": "",
   "clientId": "1006591332204154951",
-  "prefix": ">",
-  "guildId": [
-    "866676356201185280",
-    "911864508618788884",
-    "865460184591892490",
-    "692723312505126953"
-  ]
+  "guildId": {
+    "911864508618788884": {
+      "name": "Bot",
+      "prefix": { "set": ">", "activation": true }
+    },
+    "866676356201185280": {
+      "name": "Dảk Heaven",
+      "prefix": { "set": "<", "activation": true }
+    },
+    "968419374505545828": {
+      "name": "<Command Prompt/>",
+      "prefix": { "set": ">", "activation": true }
+    }
+  }
 }

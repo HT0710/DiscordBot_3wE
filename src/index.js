@@ -1,19 +1,6 @@
-const {
-  Client,
-  Collection,
-  GatewayIntentBits,
-  ActivityType,
-} = require("discord.js");
-const fs = require("node:fs");
-const path = require("node:path");
-const { prefix } = require("./json/config.json");
-const token = (() => {
-  if (process.env.TOKEN === undefined) {
-    const dotenv = require("dotenv");
-    dotenv.config();
-  }
-  return process.env.TOKEN;
-})();
+const { Client, Collection, GatewayIntentBits } = require("discord.js");
+const { fs, path, dotenv } = require("./handlers/importHandle");
+dotenv.config();
 
 const slashUpdate = true;
 if (slashUpdate) require("./handlers/commandHandle");
@@ -41,78 +28,18 @@ for (const file of commandFiles) {
   client.commands.set(command.data.name, command);
 }
 
-client.once("ready", (client) => {
-  console.log(`${client.user.tag} was summoned! Ready to Die?`);
-  client.user.setActivity("Diệt Cộng Sản", { type: ActivityType.Playing });
-});
+const ready = require("./events/ready");
+client.once("ready", (client) => ready(client));
 
-client.on("interactionCreate", async (interaction) => {
-  if (!interaction.isChatInputCommand()) return;
+const guildCreate = require("./events/guildCreate");
+client.on("guildCreate", (guild) => guildCreate(client, guild));
 
-  console.log(
-    `${interaction.user.tag} in #${interaction.guild.name} triggered ${interaction}.`
-  );
+const interactionCreate = require("./events/interactionCreate");
+client.on("interactionCreate", async (interaction) =>
+  interactionCreate(client, interaction)
+);
 
-  const command = client.commands.get(interaction.commandName);
+const messageCreate = require("./events/messageCreate");
+client.on("messageCreate", async (message) => messageCreate(client, message));
 
-  if (!command) return;
-
-  try {
-    await command.execute(interaction);
-  } catch (error) {
-    console.error(error);
-    await interaction.reply({
-      content: "There was an error while executing this command!",
-      ephemeral: true,
-    });
-  }
-});
-
-let channelID = 0;
-client.on("messageCreate", async (message) => {
-  if (message.author.bot) return;
-
-  if (!message.content.startsWith(prefix)) return;
-
-  const ctx = message.content.slice(1).split(" ");
-  const command = client.commands.get(ctx[0]);
-  if (command) {
-    try {
-      await command.execute(message);
-    } catch (error) {
-      console.error(error);
-      await message.reply({
-        content: "There was an error while executing this command!",
-        ephemeral: true,
-      });
-    }
-  }
-
-  switch (ctx[0]) {
-    case "test":
-      (async () => {
-        await message.reply("test");
-      })();
-      break;
-
-    case "setChannel":
-      (async () => {
-        channelID = ctx[1];
-        await message.reply("Done!");
-      })();
-      break;
-
-    case "say":
-      (async () => {
-        if (channelID === 0)
-          return await message.reply("use >setChannel [id of channel to say]");
-        await message.guild.channels.cache.get(channelID).send(ctx[1]);
-      })();
-      break;
-
-    default:
-      await message.reply(`${ctx.join(" ")}? Are you sure about that.`);
-  }
-});
-
-client.login(token);
+client.login(process.env.TOKEN);

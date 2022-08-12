@@ -1,0 +1,10 @@
+{
+  "commands": {
+    "ai": { "SVD": [] },
+    "avatar": [],
+    "clean": [],
+    "help": [],
+    "ping": []
+  },
+  "other": []
+}

@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-const help_list = ["ai", "avatar", "ping"].sort();
+const help_list = ["ai", "avatar", "ping", "prefix", "clean"].sort();
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -19,6 +19,14 @@ module.exports = {
         {
           name: help_list[2],
           value: help_list[2],
+        },
+        {
+          name: help_list[3],
+          value: help_list[3],
+        },
+        {
+          name: help_list[4],
+          value: help_list[4],
         }
       )
     ),
@@ -39,6 +47,16 @@ module.exports = {
       return await interaction.reply(
         "**`/ai`**: Choose algorithms to process your data."
       );
+    }
+
+    if (value === "prefix") {
+      return await interaction.reply(
+        "**`/prefix`**: Shows server current prefix and prefix commands."
+      );
+    }
+
+    if (value === "clean") {
+      return await interaction.reply("**`/clean`**: Delete channel messages.");
     }
 
     return await interaction.reply(
