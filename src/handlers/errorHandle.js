@@ -1,4 +1,3 @@
-const console = require("node:console");
 const fs = require("node:fs");
 const date = new Date();
 

@@ -1,8 +1,13 @@
+const fs = require("node:fs");
 let channelID = 0;
 module.exports = async (client, message) => {
   if (message.author.bot) return;
 
-  const config = require("../json/config.json");
+  const file = fs.readFileSync("./src/json/config.json", "utf-8");
+  const config = JSON.parse(file);
+
+  if (!config.guildId[message.guildId].hasOwnProperty("prefix")) return;
+
   const prefix = config.guildId[message.guildId].prefix.set;
   if (!message.content.startsWith(prefix)) return;
 
