@@ -35,7 +35,7 @@ module.exports = {
 
     if (value === "avatar") {
       return await interaction.reply(
-        "**`/avatar`**: Return *your* __avatar__ or **@mention** __avatar__."
+        "**`/avatar`**: Return avatar of the member, the guild or yourself."
       );
     }
 
