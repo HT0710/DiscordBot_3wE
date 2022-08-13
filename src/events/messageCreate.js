@@ -24,14 +24,7 @@ module.exports = async (client, message) => {
             if (err) throw err;
           }
         );
-        return console.log("Done");
-      }
-
-      case "config": {
-        for (const id in config.guildId) {
-          console.log(`"${id}"`, ":", config.guildId[id], ",");
-        }
-        return;
+        return console.log(`"${message.guildId}"`, ":", config.guildId[id]);
       }
     }
   }
