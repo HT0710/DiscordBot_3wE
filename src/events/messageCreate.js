@@ -17,7 +17,6 @@ module.exports = async (client, message) => {
           name: message.guild.name,
           prefix: { set: ">", activation: true },
         };
-
         fs.writeFile(
           "./src/json/config.json",
           JSON.stringify(config),
@@ -25,12 +24,10 @@ module.exports = async (client, message) => {
             if (err) throw err;
           }
         );
-
         return console.log("Done");
       }
 
       case "config": {
-        const config = require("../json/config.json");
         for (const id in config.guildId) {
           console.log(`"${id}"`, ":", config.guildId[id], ",");
         }

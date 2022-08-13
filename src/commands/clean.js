@@ -14,13 +14,15 @@ module.exports = {
   async execute(interaction) {
     const pms = PermissionsBitField.Flags.ManageMessages;
     if (!interaction.appPermissions.has(pms))
-      return await interaction.reply(
-        "Bot don't have permissions to execute this command."
-      );
+      return await interaction.reply({
+        content: "Bot don't have permissions to execute this command.",
+        ephemeral: true,
+      });
     if (!interaction.memberPermissions.has(pms))
-      return await interaction.reply(
-        "User don't have permissions to execute this command."
-      );
+      return await interaction.reply({
+        content: "User don't have permissions to execute this command.",
+        ephemeral: true,
+      });
 
     const amount = interaction.options.getInteger("amount");
 
