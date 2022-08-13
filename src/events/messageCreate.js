@@ -6,7 +6,24 @@ module.exports = async (client, message) => {
   const file = fs.readFileSync("./src/json/config.json", "utf-8");
   const config = JSON.parse(file);
 
-  if (!config.guildId[message.guildId].hasOwnProperty("prefix")) return;
+  if (message.content.startsWith("$setup")) {
+    if (config.guildId.hasOwnProperty(message.guildId))
+      return console.log("This server is already setup");
+
+    config.guildId[message.guildId] = {
+      name: message.guild.name,
+      prefix: { set: ">", activation: true },
+    };
+
+    fs.writeFile("./src/json/config.json", JSON.stringify(config), (err) => {
+      if (err) throw err;
+    });
+
+    const config = require("../json/config.json");
+    for (const id in config.guildId) {
+      console.log(`"${id}"`, ":", config.guildId[id], ",");
+    }
+  }
 
   if (!config.guildId[message.guildId].prefix.activation) return;
 
