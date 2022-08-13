@@ -3,6 +3,12 @@
 ## -> [Invite link](https://discord.com/api/oauth2/authorize?client_id=1006591332204154951&permissions=8&scope=bot%20applications.commands)
 
 # Version logs
+## v0.5@14022
+- Add network errors handle
+- Update prefix command
+- Update avatar command
+- Optimize & Organize
+
 ## v0.4@130822
 - Add clean command
 - Add prefix command
