@@ -6,6 +6,8 @@ module.exports = (client, guild) => {
   const file = fs.readFileSync("./src/json/config.json", "utf-8");
   const config = JSON.parse(file);
 
+  if (config.guildId[guild.id] !== undefined) return;
+
   config.guildId[guild.id] = {
     name: guild.name,
     prefix: { set: ">", activation: true },
