@@ -24,7 +24,11 @@ module.exports = async (client, message) => {
             if (err) throw err;
           }
         );
-        return console.log(`"${message.guildId}"`, ":", config.guildId[id]);
+        return console.log(
+          `"${message.guildId}"`,
+          ":",
+          config.guildId[message.guildId]
+        );
       }
     }
   }
