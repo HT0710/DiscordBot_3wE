@@ -4,7 +4,7 @@
   "guildId": {
     "866676356201185280": {
       "name": "Dảk Heaven",
-      "prefix": { "set": "<", "activation": true }
+      "prefix": { "set": ">", "activation": true }
     },
     "968419374505545828": {
       "name": "<Command Prompt/>",
@@ -16,6 +16,14 @@
     },
     "1007724357734379540": {
       "name": "ArtA's server",
+      "prefix": { "set": ">", "activation": true }
+    },
+    "870286904535425035": {
+      "name": "A3 never die",
+      "prefix": { "set": ">", "activation": true }
+    },
+    "865460184591892490": {
+      "name": "Anh Em Chí Cốt Group",
       "prefix": { "set": ">", "activation": true }
     }
   }

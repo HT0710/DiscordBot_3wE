@@ -1,37 +1,14 @@
 const fs = require("node:fs");
 let channelID = 0;
+const content = (str) => ({
+  content: str,
+  ephemeral: true,
+});
 module.exports = async (client, message) => {
   if (message.author.bot) return;
 
   const file = fs.readFileSync("./src/json/config.json", "utf-8");
   const config = JSON.parse(file);
-
-  if (message.content.startsWith("$get")) {
-    const ctx = message.content.split(" ")[1];
-    switch (ctx) {
-      case "setup": {
-        if (config.guildId.hasOwnProperty(message.guildId))
-          return console.log("This server is already setup");
-
-        config.guildId[message.guildId] = {
-          name: message.guild.name,
-          prefix: { set: ">", activation: true },
-        };
-        fs.writeFile(
-          "./src/json/config.json",
-          JSON.stringify(config),
-          (err) => {
-            if (err) throw err;
-          }
-        );
-        return console.log(
-          `"${message.guildId}"`,
-          ":",
-          config.guildId[message.guildId]
-        );
-      }
-    }
-  }
 
   if (!config.guildId[message.guildId].prefix.activation) return;
 
@@ -41,32 +18,69 @@ module.exports = async (client, message) => {
   const ctx = message.content.slice(1).split(" ");
 
   switch (ctx[0]) {
-    case "test":
-      (async () => {
-        await message.reply("test");
-      })();
-      break;
+    case "test": {
+      return await message.reply(content("test"));
+    }
 
-    case "setChannel":
-      (async () => {
-        channelID = ctx[1];
-        await message.reply("Done!");
-      })();
-      break;
+    case "speed": {
+      return await message.delete();
+    }
 
-    case "say":
-      (async () => {
-        if (channelID === 0)
-          return await message.reply({
-            content: `use ${prefix}setChannel [id of channel to say]`,
-            ephemeral: true,
-          });
-        await message.guild.channels.cache.get(channelID).send(ctx[1]);
-      })();
-      break;
+    case "setChannel": {
+      channelID = ctx[1];
+      return await message.reply(content("Done!"));
+    }
+
+    case "say": {
+      if (channelID === 0)
+        return await message.reply(
+          content(`use ${prefix}setChannel [id of channel to say]`)
+        );
+      return await message.guild.channels.cache.get(channelID).send(ctx[1]);
+    }
+
+    case "admin": {
+      if (message.author.id !== "779359246227472425") {
+        return await message.reply(
+          content("You don't have permissions to execute this command.")
+        );
+      }
+
+      await message.delete();
+
+      switch (ctx[1]) {
+        case "get": {
+          switch (ctx[2]) {
+            case "config": {
+              for (const id in config.guildId) {
+                console.log(`"${id}"`, ":", config.guildId[id], ",");
+              }
+              return;
+            }
+
+            case "errors": {
+              const file = fs.readFileSync("./src/json/errors.json", "utf-8");
+              const errors = JSON.parse(file);
+              return console.log(errors);
+            }
+
+            default:
+              return console.log("Get what?");
+          }
+        }
+
+        default:
+          return console.log("Need argument!");
+      }
+    }
 
     default:
-      await message.reply(`${ctx.join(" ")}? Are you sure about that.`);
-      await message.channel.send("Try using **`/prefix`**.");
+      await message.reply(
+        content(
+          `${ctx.join(
+            " "
+          )}? Are you sure about that.\nTry using **\`/prefix\`**.`
+        )
+      );
   }
 };
