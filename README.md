@@ -1,9 +1,9 @@
-# DiscordBot_3wE - v0.4@130822
+# DiscordBot_3wE - v0.5@140822
 
 ## -> [Invite link](https://discord.com/api/oauth2/authorize?client_id=1006591332204154951&permissions=8&scope=bot%20applications.commands)
 
 # Version logs
-## v0.5@14022
+## v0.5@140822
 - Add network errors handle
 - Update prefix command
 - Update avatar command
@@ -27,3 +27,9 @@
 - Add SVD
 - Add AI command
 - Organize
+
+## v0.1@100822
+- Hello world!
+- Add ping
+- Add avatar
+- Add help
