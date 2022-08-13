@@ -2,7 +2,6 @@ const { fs, path, dotenv } = require("./importHandle");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord.js");
 const { clientId } = require("../json/config.json");
-dotenv.config();
 
 const commands = [];
 const commandsPath = path.join(__dirname, "../commands");
