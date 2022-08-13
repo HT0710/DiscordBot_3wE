@@ -6,6 +6,8 @@ module.exports = async (client, message) => {
   const file = fs.readFileSync("./src/json/config.json", "utf-8");
   const config = JSON.parse(file);
 
+  console.log(config);
+
   if (message.content.startsWith("$setup")) {
     if (config.guildId.hasOwnProperty(message.guildId))
       return console.log("This server is already setup");
