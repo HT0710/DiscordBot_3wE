@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 const fs = require("node:fs");
 const path = require("node:path");
 const { prefix } = require("../json/config.json");
@@ -17,6 +18,11 @@ const token = (() => {
 
 const slashUpdate = true;
 if (slashUpdate) require("./slash-commands");
+=======
+const { Client, Collection, GatewayIntentBits } = require("discord.js");
+const fs = require("fs");
+const dotenv = require("dotenv").config();
+>>>>>>> Stashed changes
 
 const client = new Client({
   intents: [
@@ -29,6 +35,7 @@ const client = new Client({
 });
 
 client.commands = new Collection();
+<<<<<<< Updated upstream
 const commandsPath = path.join(__dirname, "../commands");
 const commandFiles = fs
   .readdirSync(commandsPath)
@@ -97,5 +104,21 @@ client.on("messageCreate", async (message) => {
       await message.reply(`${ctx}? Are you sure about that.`);
   }
 });
+=======
+client.commandArray = [];
+
+const functionsFolder = fs.readdirSync("./src/functions");
+for (const folder of functionsFolder) {
+  const functionsFile = fs
+    .readdirSync(`./src/functions/${folder}`)
+    .filter((file) => file.endsWith(".js"));
+  for (const file of functionsFile) {
+    require(`./functions/${folder}/${file}`)(client);
+  }
+}
+
+client.handleEvents();
+client.handleCommands();
+>>>>>>> Stashed changes
 
 client.login(token);
