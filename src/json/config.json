@@ -25,6 +25,10 @@
     "865460184591892490": {
       "name": "Anh Em Chí Cốt Group",
       "prefix": { "set": ">", "activation": true }
+    },
+    "1008455165210276010": {
+      "name": "Test Bot",
+      "prefix": { "set": ">", "activation": true }
     }
   }
 }
