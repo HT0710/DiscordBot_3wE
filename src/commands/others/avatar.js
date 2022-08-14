@@ -39,13 +39,20 @@ module.exports = {
       }
 
       case "guild": {
-        return await interaction.reply(
-          interaction.guild.iconURL({
-            dynamic: true,
-            extension: "png",
-            size: 4096,
-          })
-        );
+        try {
+          return await interaction.reply(
+            interaction.guild.iconURL({
+              dynamic: true,
+              extension: "png",
+              size: 4096,
+            })
+          );
+        } catch {
+          return await interaction.reply({
+            content: "I don't think this guild has a avatar.",
+            ephemeral: true,
+          });
+        }
       }
 
       default: {
