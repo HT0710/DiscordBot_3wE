@@ -1,0 +1,43 @@
+{
+  "total": 0,
+  "commands": [
+    {
+      "name": "avatar",
+      "count": 0
+    },
+    {
+      "name": "ping",
+      "count": 0
+    },
+    {
+      "name": "help",
+      "count": 0
+    }
+  ],
+  "guilds": [
+    {
+      "id": "866676356201185280",
+      "count": 0,
+      "member": [
+        {
+          "id": "779359246227472425",
+          "count": 0,
+          "commands": [
+            {
+              "name": "avatar",
+              "count": 0
+            },
+            {
+              "name": "ping",
+              "count": 0
+            },
+            {
+              "name": "help",
+              "count": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
