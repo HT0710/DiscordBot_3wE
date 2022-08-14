@@ -1,10 +1,14 @@
 const { SlashCommandBuilder, PermissionsBitField } = require("discord.js");
-const fs = require("node:fs");
+const fs = require("fs");
 const write = (config) => {
   fs.writeFile("./src/json/config.json", JSON.stringify(config), (err) => {
     if (err) throw err;
   });
 };
+const content = (str, private = true) => ({
+  content: str,
+  ephemeral: private,
+});
 
 const commands = ["test"];
 
@@ -31,77 +35,80 @@ module.exports = {
         )
     ),
   async execute(interaction) {
+    // Read file
     const file = fs.readFileSync("./src/json/config.json", "utf-8");
     const config = JSON.parse(file);
 
+    // Get options
     const newPrefix = interaction.options.getString("prefix");
     const changeActivate = interaction.options.getString("activate");
 
+    // Check permissions
     if (newPrefix !== null || changeActivate !== null) {
       if (
         !interaction.memberPermissions.has(
           PermissionsBitField.Flags.ManageGuild
         )
       ) {
-        return await interaction.reply({
-          content: "You don't have permission to do that!",
-          ephemeral: true,
-        });
+        return await interaction.reply(
+          content("You don't have permission to do that!")
+        );
       }
     }
 
+    // Execute
     let prefix = config.guildId[interaction.guildId].prefix;
+    // If set prefix
     if (newPrefix !== null) {
       if (prefix.set === newPrefix) {
-        return await interaction.reply({
-          content: `Prefix is already **\`${newPrefix}\`**!`,
-          ephemeral: true,
-        });
+        return await interaction.reply(
+          content(`Prefix is already **\`${newPrefix}\`**!`)
+        );
       }
       prefix.set = newPrefix;
       write(config);
       return await interaction.reply(
         `Prefix has been change to **\`${newPrefix}\`**`
       );
-    } else if (changeActivate !== null) {
+    }
+
+    // If change activate
+    if (changeActivate !== null) {
       switch (changeActivate) {
         case "on":
           if (prefix.activation === true) {
-            return interaction.reply({
-              content: "Prefix is already **`on`**!",
-              ephemeral: true,
-            });
+            return await interaction.reply(
+              content("Prefix is already **`on`**!")
+            );
           }
 
           prefix.activation = true;
           write(config);
-          return interaction.reply("Prefix has been set to **`on`**");
+          return await interaction.reply("Prefix has been set to **`on`**");
 
         case "off":
           if (prefix.activation === false) {
-            return interaction.reply({
-              content: "Prefix is already **`off`**!",
-              ephemeral: true,
-            });
+            return await interaction.reply(
+              content("Prefix is already **`off`**!")
+            );
           }
 
           prefix.activation = false;
           write(config);
-          return interaction.reply("Prefix has been set to **`off`**");
+          return await interaction.reply("Prefix has been set to **`off`**");
       }
-    } else {
-      if (prefix.activation === false)
-        return await interaction.reply({
-          content:
-            "Server prefix is **off**. **`/prefix activate`** to change.",
-          ephemeral: true,
-        });
-      return await interaction.reply({
-        content: `Current server prefix: **\`${
-          prefix.set
-        }\`**, commands: ${commands.map((x) => `**\`${x}\`**`).join(", ")}.`,
-        ephemeral: false,
-      });
     }
+
+    // If deactivate
+    if (prefix.activation === false) {
+      return await interaction.reply(content("Server prefix is **`off`**."));
+    }
+
+    // If none of those
+    return await interaction.reply(
+      `Current server prefix: **\`${prefix.set}\`**, commands: ${commands
+        .map((x) => `**\`${x}\`**`)
+        .join(", ")}.`
+    );
   },
 };

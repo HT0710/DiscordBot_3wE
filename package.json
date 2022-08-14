@@ -19,7 +19,7 @@
   "homepage": "https://github.com/HT0710/DiscordBot_3wE#readme",
   "dependencies": {
     "@discordjs/rest": "^1.0.1",
-    "custom-env": "^2.0.1",
+    "discord-api-types": "^0.37.2",
     "discord.js": "^14.1.2",
     "dotenv": "^16.0.1"
   }

@@ -1,5 +1,3 @@
-const { execute } = require("./ready");
-
 module.exports = {
   name: "interactionCreate",
   async execute(interaction, client) {

@@ -27,7 +27,7 @@ module.exports = {
     ),
   async execute(interaction) {
     if (interaction.options.getSubcommand() === "svd") {
-      const SVD = require("../../ai/SVD");
+      const SVD = require("./ai/SVD");
       return SVD(interaction);
     }
   },
