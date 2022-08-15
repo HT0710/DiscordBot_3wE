@@ -21,9 +21,18 @@ module.exports = (client) => {
     }
 
     const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
-    await rest
-      .put(Routes.applicationCommands(clientId), { body: client.commandArray })
-      .then(() => console.log(`Successfully updated.`))
-      .catch((err) => console.error(err));
+
+    (async () => {
+      try {
+        await rest
+          .put(Routes.applicationCommands(process.env.ID), {
+            body: client.commandArray,
+          })
+          .then(() => console.log(`Successfully commands updated.`))
+          .catch((err) => console.error(err));
+      } catch (err) {
+        console.error(err);
+      }
+    })();
   };
 };
