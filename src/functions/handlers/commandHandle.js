@@ -28,7 +28,7 @@ module.exports = (client) => {
           .put(Routes.applicationCommands(process.env.ID), {
             body: client.commandArray,
           })
-          .then(() => console.log(`Successfully commands updated.`))
+          .then(() => console.log(`Successfully updated.`))
           .catch((err) => console.error(err));
       } catch (err) {
         console.error(err);
