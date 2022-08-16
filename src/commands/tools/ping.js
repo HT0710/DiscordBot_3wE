@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, Colors } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -9,12 +9,14 @@ module.exports = {
       fetchReply: true,
     });
 
-    await interaction.editReply({
-      content: `Pong!\nServer ping: **\`${
-        client.ws.ping
-      }ms\`** & My ping: **\`${
-        message.createdTimestamp - interaction.createdTimestamp
-      }ms\`**`,
-    });
+    const embed = new EmbedBuilder()
+      .setColor(Colors.Yellow)
+      .setTitle(
+        `Ping: **\`${client.ws.ping}ms\`** ~ Latency: **\`${
+          message.createdTimestamp - interaction.createdTimestamp
+        }ms\`**`
+      );
+
+    await interaction.editReply({ embeds: [embed] });
   },
 };

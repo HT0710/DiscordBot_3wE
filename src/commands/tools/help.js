@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-const help_list = ["ai", "avatar", "ping", "prefix", "clean"].sort();
+const help_list = ["ai", "avatar", "ping", "prefix", "clean", "invite"].sort();
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -27,6 +27,10 @@ module.exports = {
         {
           name: help_list[4],
           value: help_list[4],
+        },
+        {
+          name: help_list[5],
+          value: help_list[5],
         }
       )
     ),
@@ -57,6 +61,12 @@ module.exports = {
 
     if (value === "clean") {
       return await interaction.reply("**`/clean`**: Delete channel messages.");
+    }
+
+    if (value === "invite") {
+      return await interaction.reply(
+        "**`/invite`**: Invite me to your server or Create a server invite."
+      );
     }
 
     return await interaction.reply(

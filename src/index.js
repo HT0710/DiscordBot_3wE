@@ -7,6 +7,7 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildInvites,
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.DirectMessages,
     GatewayIntentBits.GuildInvites,
@@ -14,6 +15,7 @@ const client = new Client({
 });
 
 client.commands = new Collection();
+client.buttons = new Collection();
 client.commandArray = [];
 
 const functionsFolder = fs.readdirSync("./src/functions");
@@ -29,5 +31,6 @@ for (const folder of functionsFolder) {
 
 client.handleEvents();
 client.handleCommands();
+client.handleComponents();
 
 client.login(process.env.TOKEN);
