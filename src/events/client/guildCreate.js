@@ -5,9 +5,7 @@ module.exports = {
   async execute(guild, client) {
     console.log(`${client.user.tag} has joined #${guild.name} - ${guild.id}`);
 
-    guild.systemChannel.send(
-      "You are't summon me! I's REINCARNATED.\n**`/help`** for the info."
-    );
+    guild.systemChannel.send("I finally awaked. **`/help`** for the info.");
 
     const file = fs.readFileSync("./src/json/config.json", "utf-8");
     const config = JSON.parse(file);
