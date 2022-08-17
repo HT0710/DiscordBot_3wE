@@ -1,0 +1,27 @@
+{
+  "tools": [
+    {
+      "name": "avatar",
+      "dis": "Return avatar of the member or the server or the user."
+    },
+    {
+      "name": "clean",
+      "dis": "Delete channel messages."
+    },
+    {
+      "name": "invite",
+      "dis": "Invite me to your server or Create a server invite."
+    },
+    {
+      "name": "ping",
+      "dis": "Return the ping and the latency."
+    },
+    {
+      "name": "prefix",
+      "dis": "Show server current prefix, prefix status and prefix commands."
+    }
+  ],
+  "moderation": [],
+  "music": [],
+  "others": [{ "name": "ai", "dis": "Choose algorithms to process your data." }]
+}

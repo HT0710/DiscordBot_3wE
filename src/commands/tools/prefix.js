@@ -17,7 +17,7 @@ module.exports = {
     .setName("prefix")
     .setDescription("Shows prefix commands or Set the prefix of the bot.")
     .addStringOption((option) =>
-      option.setName("prefix").setDescription("Set new prefix for 3wE.")
+      option.setName("change").setDescription("Set new prefix for 3wE.")
     )
     .addStringOption((option) =>
       option
@@ -40,7 +40,7 @@ module.exports = {
     const config = JSON.parse(file);
 
     // Get options
-    const newPrefix = interaction.options.getString("prefix");
+    const newPrefix = interaction.options.getString("change");
     const changeActivate = interaction.options.getString("activate");
 
     // Check permissions
