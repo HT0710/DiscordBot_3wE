@@ -15,10 +15,10 @@ module.exports = {
         )
     )
     .addSubcommand((subcommand) =>
-      subcommand.setName("myself").setDescription("Show myself profile avatar.")
+      subcommand.setName("server").setDescription("Show server profile avatar.")
     )
     .addSubcommand((subcommand) =>
-      subcommand.setName("guild").setDescription("Show guild profile avatar.")
+      subcommand.setName("user").setDescription("Show myself profile avatar.")
     ),
   async execute(interaction) {
     switch (interaction.options.getSubcommand()) {
@@ -38,7 +38,7 @@ module.exports = {
         );
       }
 
-      case "guild": {
+      case "server": {
         try {
           return await interaction.reply(
             interaction.guild.iconURL({
@@ -49,7 +49,7 @@ module.exports = {
           );
         } catch {
           return await interaction.reply({
-            content: "I don't think this guild has a avatar.",
+            content: "I don't think this server has a avatar.",
             ephemeral: true,
           });
         }
