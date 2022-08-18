@@ -112,7 +112,7 @@ module.exports = async (interaction, client, value, backButton) => {
           for (const type in helpList) {
             helpList[type].forEach((command) => {
               commands.push({
-                name: `**\`/${command.name}**\``,
+                name: `**\`/${command.name}\`**`,
                 value: command.dis,
               });
             });
