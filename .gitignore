@@ -1,8 +1,3 @@
 .env
 node_modules/
 test.js
-src/commands/others/button.js
-src/commands/others/embed.js
-src/commands/others/menu.js
-src/components/buttons/sub-yt.js
-src/components/selectMenus/sub-menu.js

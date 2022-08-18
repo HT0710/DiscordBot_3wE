@@ -1,12 +1,14 @@
-# DiscordBot_3wE - v0.8@180822
+# DiscordBot_3wE - v0.8@190822
 
 ## -> [Invite link](https://discord.com/api/oauth2/authorize?client_id=1006591332204154951&permissions=8&scope=bot%20applications.commands)
 
 # Version logs
-## v0.8@180822
+## v0.8@190822
 - Add select menu
+- Add "new" command
 - Update help command v2.0
-- Minor change on avatar, prefix command
+- Minor change on avatar, prefix, ping command
+- Optimize & Organize
 
 ## v0.7@170822
 - Add Invite command

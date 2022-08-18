@@ -7,7 +7,7 @@ module.exports = async (interaction, client, value) => {
         embeds: [
           new EmbedBuilder()
             .setColor(Colors.Yellow)
-            .setTitle("/avatar [*]")
+            .setTitle("**/avatar [*]**")
             .setDescription("*Options:")
             .addFields(
               {
@@ -32,7 +32,7 @@ module.exports = async (interaction, client, value) => {
         embeds: [
           new EmbedBuilder()
             .setColor(Colors.Yellow)
-            .setTitle("/ping")
+            .setTitle("**/ping**")
             .setDescription("Return the ping and the latency."),
         ],
       });
@@ -43,7 +43,7 @@ module.exports = async (interaction, client, value) => {
         embeds: [
           new EmbedBuilder()
             .setColor(Colors.Yellow)
-            .setTitle("/ai [*]")
+            .setTitle("**/ai [*]**")
             .setDescription(
               "Choose algorithms to process your data.\n*Options:"
             )
@@ -61,7 +61,7 @@ module.exports = async (interaction, client, value) => {
         embeds: [
           new EmbedBuilder()
             .setColor(Colors.Yellow)
-            .setTitle("/prefix [*]")
+            .setTitle("**/prefix [*]**")
             .setDescription("Show server current prefix and status.\n*Options:")
             .addFields(
               {
@@ -82,7 +82,7 @@ module.exports = async (interaction, client, value) => {
         embeds: [
           new EmbedBuilder()
             .setColor(Colors.Yellow)
-            .setTitle("/clean [amount]")
+            .setTitle("**/clean [amount]**")
             .setDescription("Delete channel messages.")
             .addFields({
               name: "**amount**",
@@ -97,7 +97,7 @@ module.exports = async (interaction, client, value) => {
         embeds: [
           new EmbedBuilder()
             .setColor(Colors.Yellow)
-            .setTitle("/invite [*]")
+            .setTitle("**/invite [*]**")
             .setDescription("Create a invite.\n*Options:")
             .addFields(
               {
@@ -109,6 +109,17 @@ module.exports = async (interaction, client, value) => {
                 value: "Invite people to this server.",
               }
             ),
+        ],
+      });
+    }
+
+    case "new": {
+      return await interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setColor(Colors.Yellow)
+            .setTitle("**/new**")
+            .setDescription("Show recent 3wE update."),
         ],
       });
     }

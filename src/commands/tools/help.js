@@ -1,11 +1,4 @@
-const {
-  SlashCommandBuilder,
-  SelectMenuBuilder,
-  ActionRowBuilder,
-  SelectMenuOptionBuilder,
-  EmbedBuilder,
-  Colors,
-} = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 
 const commandList = [];
 const commands = require("../../json/help.json");
@@ -17,7 +10,7 @@ module.exports = {
     .setName("help")
     .setDescription("Shows info about 3wE commands.")
     .addStringOption((option) => {
-      option.setName("command").setDescription("Help about...");
+      option.setName("command").setDescription("Help on a specific command.");
       commandList.sort().forEach((command) =>
         option.addChoices({
           name: command,
@@ -25,75 +18,44 @@ module.exports = {
         })
       );
       return option;
-    }),
+    })
+    .addStringOption((option) =>
+      option
+        .setName("type")
+        .setDescription("Help on a command type.")
+        .setChoices(
+          {
+            name: "tools",
+            value: "tools",
+          },
+          {
+            name: "moderation",
+            value: "moderation",
+          },
+          {
+            name: "music",
+            value: "music",
+          },
+          {
+            name: "others",
+            value: "others",
+          },
+          {
+            name: "all",
+            value: "all",
+          }
+        )
+    ),
   async execute(interaction, client) {
-    const value = interaction.options.getString("command");
-    const commandList = require("./functions/commandList");
+    const commandCase = require("../../components/functions/commandCase");
+    const command = interaction.options.getString("command");
+    if (command) return await commandCase(interaction, client, command);
 
-    if (value) return await commandList(interaction, client, value);
+    const typeCase = require("../../components/functions/typeCase");
+    const type = interaction.options.getString("type");
+    if (type) return await typeCase(interaction, client, type);
 
-    return await interaction.reply({
-      embeds: [
-        new EmbedBuilder()
-          .setColor(Colors.Yellow)
-          .setTitle("**What you wanna help about?**")
-          .setThumbnail(
-            "https://cdn.discordapp.com/attachments/904361331795300362/1009492357516902481/question.gif"
-          )
-          .addFields(
-            {
-              name: "**Tools**",
-              value: "`/help tools`",
-              inline: true,
-            },
-            {
-              name: "**Moderator**",
-              value: "`/help moderator`",
-              inline: true,
-            },
-            {
-              name: "**Music**",
-              value: "`/help music`",
-              inline: true,
-            },
-            {
-              name: "**Others**",
-              value: "`/help others`",
-              inline: true,
-            }
-          ),
-      ],
-      components: [
-        new ActionRowBuilder().addComponents(
-          new SelectMenuBuilder()
-            .setCustomId("helpMenu")
-            .setMinValues(1)
-            .setMaxValues(1)
-            .setPlaceholder("👉 Select here!")
-            .setOptions(
-              new SelectMenuOptionBuilder()
-                .setLabel("Tools")
-                .setEmoji("🛠️")
-                .setDescription("Tools that help you manage the server.")
-                .setValue("tools"),
-              new SelectMenuOptionBuilder()
-                .setLabel("Moderation")
-                .setEmoji("🚫")
-                .setDescription("Options that help you to manage members.")
-                .setValue("moderation"),
-              new SelectMenuOptionBuilder()
-                .setLabel("Music")
-                .setEmoji("🎵")
-                .setDescription("Control bot's music player.")
-                .setValue("music"),
-              new SelectMenuOptionBuilder()
-                .setLabel("Others")
-                .setEmoji("🔸")
-                .setDescription("My other additional commands.")
-                .setValue("others")
-            )
-        ),
-      ],
-    });
+    const helpInterface = require("../../components/functions/helpInterface");
+    return await interaction.reply(helpInterface);
   },
 };
