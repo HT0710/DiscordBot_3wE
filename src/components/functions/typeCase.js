@@ -111,7 +111,10 @@ module.exports = async (interaction, client, value, backButton) => {
           const helpList = require("../../json/help.json");
           for (const type in helpList) {
             helpList[type].forEach((command) => {
-              commands.push({ name: command.name, value: command.dis });
+              commands.push({
+                name: `**\`/${command.name}**\``,
+                value: command.dis,
+              });
             });
           }
 
