@@ -23,5 +23,8 @@
   ],
   "moderation": [],
   "music": [],
-  "others": [{ "name": "ai", "dis": "Choose algorithms to process your data." }]
+  "others": [
+    { "name": "ai", "dis": "Choose algorithms to process your data." },
+    { "name": "new", "dis": "Show recent 3wE update." }
+  ]
 }

@@ -15,7 +15,8 @@ module.exports = {
         `Ping: **\`${client.ws.ping}ms\`** ~ Latency: **\`${
           message.createdTimestamp - interaction.createdTimestamp
         }ms\`**`
-      );
+      )
+      .setTimestamp();
 
     await interaction.editReply({ embeds: [embed] });
   },
