@@ -5,7 +5,7 @@
 # Version logs
 ## v0.8@180822
 - Add select menu
-- Update help command
+- Update help command v2.0
 - Minor change on avatar, prefix command
 
 ## v0.7@170822

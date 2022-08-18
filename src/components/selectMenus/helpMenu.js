@@ -4,6 +4,8 @@ const {
   ButtonStyle,
   ActionRowBuilder,
   Colors,
+  SelectMenuBuilder,
+  SelectMenuOptionBuilder,
 } = require("discord.js");
 
 const { tools, moderation, music, others } = require("../../json/help.json");
@@ -20,6 +22,27 @@ module.exports = {
         .setLabel("Back to the selection.")
         .setStyle(ButtonStyle.Secondary)
     );
+    const commandMenu = (commandList) =>
+      new ActionRowBuilder().addComponents(
+        (() => {
+          const menu = new SelectMenuBuilder()
+            .setCustomId("commandMenu")
+            .setMinValues(1)
+            .setMaxValues(1)
+            .setPlaceholder("Select an option.");
+
+          commandList.forEach((cmd) =>
+            menu.addOptions(
+              new SelectMenuOptionBuilder()
+                .setLabel(cmd.name)
+                .setDescription(cmd.dis)
+                .setValue(cmd.name)
+            )
+          );
+          return menu;
+        })()
+      );
+
     switch (interaction.values[0]) {
       case "tools": {
         return await interaction.update({
@@ -51,7 +74,7 @@ module.exports = {
               )
               .setFooter({ text: "Page: 1/1" }),
           ],
-          components: [backButton],
+          components: [commandMenu(tools), backButton],
         });
       }
 
@@ -93,7 +116,7 @@ module.exports = {
               })
               .setFooter({ text: "Page: 1/1" }),
           ],
-          components: [backButton],
+          components: [commandMenu(others), backButton],
         });
       }
     }
