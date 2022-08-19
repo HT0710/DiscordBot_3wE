@@ -20,7 +20,7 @@ module.exports = {
     .addSubcommand((subcommand) =>
       subcommand.setName("user").setDescription("Show myself profile avatar.")
     ),
-  async execute(interaction) {
+  async execute(interaction, client) {
     switch (interaction.options.getSubcommand()) {
       case "member": {
         const target = interaction.options.getUser("target");

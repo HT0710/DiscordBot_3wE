@@ -25,7 +25,7 @@ module.exports = {
             .setRequired(true)
         )
     ),
-  async execute(interaction) {
+  async execute(interaction, client) {
     if (interaction.options.getSubcommand() === "svd") {
       const SVD = require("./ai/SVD");
       return SVD(interaction);

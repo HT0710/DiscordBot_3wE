@@ -123,5 +123,18 @@ module.exports = async (interaction, client, value) => {
         ],
       });
     }
+
+    case "feedback": {
+      return await interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setColor(Colors.Yellow)
+            .setTitle("**/feedback**")
+            .setDescription(
+              "Send 3wE a feedback, require a feature or report an error."
+            ),
+        ],
+      });
+    }
   }
 };

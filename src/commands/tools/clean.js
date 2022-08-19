@@ -14,7 +14,7 @@ module.exports = {
         .setDescription("Amount of messages to clean. Max: 20")
         .setRequired(true)
     ),
-  async execute(interaction) {
+  async execute(interaction, client) {
     // Check Permissions
     const MMP = PermissionsBitField.Flags.ManageMessages;
     if (!interaction.appPermissions.has(MMP))

@@ -34,7 +34,7 @@ module.exports = {
           }
         )
     ),
-  async execute(interaction) {
+  async execute(interaction, client) {
     // Read file
     const file = fs.readFileSync("./src/json/config.json", "utf-8");
     const config = JSON.parse(file);
