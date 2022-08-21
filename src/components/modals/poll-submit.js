@@ -1,4 +1,4 @@
-const { EmbedBuilder, Colors } = require("discord.js");
+const { EmbedBuilder, Colors, time } = require("discord.js");
 const Poll = require("../../schemas/poll");
 
 module.exports = {
@@ -11,8 +11,7 @@ module.exports = {
       ownerId: interaction.member.id,
     }).sort({ _id: -1 });
 
-    const { title, description } = poll;
-    const timer = parseInt(poll.timer) ? poll.timer : null;
+    const { title, description, timer } = poll;
 
     const descList = [];
     let desc = description !== null ? description.toString() : "";
@@ -29,7 +28,16 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setColor(Colors.Yellow)
       .setTitle(`**${title}**`)
-      .setDescription(descList.join("\n") + "\n" + "- \u200B \u200B".repeat(18))
+      .setDescription(
+        descList.join("\n") +
+          "\n" +
+          `Time left: **${time(
+            new Date(new Date().getTime() + (timer + 1) * 1000),
+            "R"
+          )}**` +
+          "\n" +
+          "- \u200B \u200B".repeat(18)
+      )
       .setFooter({
         text: `By ${interaction.member.displayName}`,
         iconURL: interaction.member.displayAvatarURL({ size: 4096 }),
@@ -87,7 +95,7 @@ module.exports = {
 
       choices.forEach((choice, index) => {
         choice.percent.int = Math.round(
-          ((collected.at(index).count - 1) / total) * 100
+          ((collected.at(index).count - 1) / total === 0 ? 1 : total) * 100
         );
         const repeat = Math.round(choice.percent.int / 10);
         choice.percent.str = "🟨".repeat(repeat) + "⬛".repeat(10 - repeat);

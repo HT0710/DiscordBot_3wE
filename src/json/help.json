@@ -18,7 +18,11 @@
     },
     {
       "name": "prefix",
-      "dis": "Show server current prefix, prefix status and prefix commands."
+      "dis": "Show server current prefix info and prefix commands."
+    },
+    {
+      "name": "poll",
+      "dis": "Create a poll."
     }
   ],
   "moderation": [],

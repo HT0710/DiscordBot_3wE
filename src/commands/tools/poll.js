@@ -24,17 +24,17 @@ module.exports = {
         .setDescription("Timer for your poll")
         .setRequired(true)
         .setChoices(
-          { name: "10s", value: "10" },
-          { name: "15s", value: "15" },
-          { name: "30s", value: "30" },
-          { name: "1m", value: "60" },
-          { name: "5m", value: "300" },
-          { name: "10m", value: "600" },
-          { name: "30m", value: "1800" },
-          { name: "1h", value: "3600" },
-          { name: "12h", value: "43200" },
-          { name: "1d", value: "86400" },
-          { name: "1w", value: "604800" },
+          { name: "10 second", value: "10" },
+          { name: "15 second", value: "15" },
+          { name: "30 second", value: "30" },
+          { name: "1 minute", value: "60" },
+          { name: "5 minutes", value: "300" },
+          { name: "10 minutes", value: "600" },
+          { name: "30 minutes", value: "1800" },
+          { name: "1 hour", value: "3600" },
+          { name: "12 hours", value: "43200" },
+          { name: "1 day", value: "86400" },
+          { name: "1 week", value: "604800" },
           { name: "forever", value: "forever" }
         )
     )
