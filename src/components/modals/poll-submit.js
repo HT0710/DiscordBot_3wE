@@ -94,9 +94,8 @@ module.exports = {
       collectedEmbed.setDescription(`Total: **${total}** reaction`);
 
       choices.forEach((choice, index) => {
-        choice.percent.int = Math.round(
-          ((collected.at(index).count - 1) / total === 0 ? 1 : total) * 100
-        );
+        let int = Math.round(((collected.at(index).count - 1) / total) * 100);
+        choice.percent.int = int ? int : 0;
         const repeat = Math.round(choice.percent.int / 10);
         choice.percent.str = "🟨".repeat(repeat) + "⬛".repeat(10 - repeat);
       });
