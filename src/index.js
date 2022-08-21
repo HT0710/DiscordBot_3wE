@@ -1,4 +1,5 @@
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
+const { connect } = require("mongoose");
 const fs = require("fs");
 require("dotenv").config();
 
@@ -8,15 +9,16 @@ const client = new Client({
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildInvites,
+    GatewayIntentBits.GuildMessageReactions,
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.DirectMessages,
-    GatewayIntentBits.GuildInvites,
   ],
 });
 
 client.commands = new Collection();
 client.buttons = new Collection();
 client.selectMenus = new Collection();
+client.modals = new Collection();
 client.commandArray = [];
 
 const functionsFolder = fs.readdirSync("./src/functions");
@@ -35,3 +37,8 @@ client.handleCommands();
 client.handleComponents();
 
 client.login(process.env.TOKEN);
+(async () => {
+  await connect(process.env.databaseTOKEN).catch((error) =>
+    console.error(error)
+  );
+})();

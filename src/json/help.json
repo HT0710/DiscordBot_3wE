@@ -18,13 +18,21 @@
     },
     {
       "name": "prefix",
-      "dis": "Show server current prefix, prefix status and prefix commands."
+      "dis": "Show server current prefix info and prefix commands."
+    },
+    {
+      "name": "poll",
+      "dis": "Create a poll."
     }
   ],
   "moderation": [],
   "music": [],
   "others": [
     { "name": "ai", "dis": "Choose algorithms to process your data." },
-    { "name": "new", "dis": "Show recent 3wE update." }
+    { "name": "new", "dis": "Show recent 3wE update." },
+    {
+      "name": "feedback",
+      "dis": "Send 3wE a feedback, require a feature or report an error."
+    }
   ]
 }

@@ -1,14 +1,14 @@
 const { EmbedBuilder, Colors } = require("discord.js");
 
 module.exports = async (interaction, client, value) => {
+  const embed = new EmbedBuilder().setColor(Colors.Yellow);
   switch (value) {
     case "avatar": {
       return await interaction.reply({
         embeds: [
-          new EmbedBuilder()
-            .setColor(Colors.Yellow)
-            .setTitle("**/avatar [*]**")
-            .setDescription("*Options:")
+          embed
+            .setTitle("**/avatar [+]**")
+            .setDescription("Options:")
             .addFields(
               {
                 name: "**member**",
@@ -30,8 +30,7 @@ module.exports = async (interaction, client, value) => {
     case "ping": {
       return await interaction.reply({
         embeds: [
-          new EmbedBuilder()
-            .setColor(Colors.Yellow)
+          embed
             .setTitle("**/ping**")
             .setDescription("Return the ping and the latency."),
         ],
@@ -41,12 +40,9 @@ module.exports = async (interaction, client, value) => {
     case "ai": {
       return await interaction.reply({
         embeds: [
-          new EmbedBuilder()
-            .setColor(Colors.Yellow)
-            .setTitle("**/ai [*]**")
-            .setDescription(
-              "Choose algorithms to process your data.\n*Options:"
-            )
+          embed
+            .setTitle("**/ai [+]**")
+            .setDescription("Choose algorithms to process your data.\nOptions:")
             .addFields({
               name: "**svd**",
               value:
@@ -59,10 +55,9 @@ module.exports = async (interaction, client, value) => {
     case "prefix": {
       return await interaction.reply({
         embeds: [
-          new EmbedBuilder()
-            .setColor(Colors.Yellow)
-            .setTitle("**/prefix [*]**")
-            .setDescription("Show server current prefix and status.\n*Options:")
+          embed
+            .setTitle("**/prefix [+]**")
+            .setDescription("Show server current prefix info.\n+Options:")
             .addFields(
               {
                 name: "**change**",
@@ -80,10 +75,9 @@ module.exports = async (interaction, client, value) => {
     case "clean": {
       return await interaction.reply({
         embeds: [
-          new EmbedBuilder()
-            .setColor(Colors.Yellow)
-            .setTitle("**/clean [amount]**")
-            .setDescription("Delete channel messages.")
+          embed
+            .setTitle("**/clean [!amount]**")
+            .setDescription("Delete channel messages.\n!Required")
             .addFields({
               name: "**amount**",
               value: "The amount of message to delete.",
@@ -95,10 +89,9 @@ module.exports = async (interaction, client, value) => {
     case "invite": {
       return await interaction.reply({
         embeds: [
-          new EmbedBuilder()
-            .setColor(Colors.Yellow)
-            .setTitle("**/invite [*]**")
-            .setDescription("Create a invite.\n*Options:")
+          embed
+            .setTitle("**/invite [+]**")
+            .setDescription("Create a invite.\nOptions:")
             .addFields(
               {
                 name: "**me**",
@@ -116,10 +109,43 @@ module.exports = async (interaction, client, value) => {
     case "new": {
       return await interaction.reply({
         embeds: [
-          new EmbedBuilder()
-            .setColor(Colors.Yellow)
-            .setTitle("**/new**")
-            .setDescription("Show recent 3wE update."),
+          embed.setTitle("**/new**").setDescription("Show recent 3wE update."),
+        ],
+      });
+    }
+
+    case "feedback": {
+      return await interaction.reply({
+        embeds: [
+          embed
+            .setTitle("**/feedback**")
+            .setDescription(
+              "Send 3wE a feedback, require a feature or report an error."
+            ),
+        ],
+      });
+    }
+
+    case "poll": {
+      return await interaction.reply({
+        embeds: [
+          embed
+            .setTitle("**/poll [!title] [!timer] [description]**")
+            .setDescription("Create a poll.\nOption (!Required)")
+            .addFields(
+              {
+                name: "title",
+                value: "Put a title for your poll.",
+              },
+              {
+                name: "timer",
+                value: "Timer for your poll.",
+              },
+              {
+                name: "description",
+                value: "Description for your poll.",
+              }
+            ),
         ],
       });
     }

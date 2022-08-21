@@ -16,23 +16,23 @@ module.exports = {
       )
       .addFields(
         {
-          name: "**Tools**",
+          name: "🛠️ \u200B \u200B **Tools**",
           value: "`/help type tools`",
         },
         {
-          name: "**Moderator**",
+          name: "🚫 \u200B \u200B **Moderator**",
           value: "`/help type moderator`",
         },
         {
-          name: "**Music**",
+          name: "🎵 \u200B \u200B **Music**",
           value: "`/help type music`",
         },
         {
-          name: "**Others**",
+          name: "🔸 \u200B \u200B **Others**",
           value: "`/help type others`",
         },
         {
-          name: "**All**",
+          name: "🔹 \u200B \u200B **All**",
           value: "`/help type all`",
         }
       ),
@@ -43,7 +43,7 @@ module.exports = {
         .setCustomId("helpMenu")
         .setMinValues(1)
         .setMaxValues(1)
-        .setPlaceholder("👉 Select here!")
+        .setPlaceholder("👉 \u200B \u200B Select here!")
         .setOptions(
           new SelectMenuOptionBuilder()
             .setLabel("Tools")

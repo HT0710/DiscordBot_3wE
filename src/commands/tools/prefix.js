@@ -1,14 +1,9 @@
 const { SlashCommandBuilder, PermissionsBitField } = require("discord.js");
-const fs = require("fs");
-const write = (config) => {
-  fs.writeFile("./src/json/config.json", JSON.stringify(config), (err) => {
-    if (err) throw err;
-  });
-};
 const content = (str, private = true) => ({
   content: str,
   ephemeral: private,
 });
+const Guild = require("../../schemas/guild");
 
 const commands = ["test"];
 
@@ -34,10 +29,9 @@ module.exports = {
           }
         )
     ),
-  async execute(interaction) {
-    // Read file
-    const file = fs.readFileSync("./src/json/config.json", "utf-8");
-    const config = JSON.parse(file);
+  async execute(interaction, client) {
+    // Get current prefix from database
+    const guild = await Guild.findOne({ id: interaction.guild.id });
 
     // Get options
     const newPrefix = interaction.options.getString("change");
@@ -57,16 +51,17 @@ module.exports = {
     }
 
     // Execute
-    let prefix = config.guildId[interaction.guildId].prefix;
     // If set prefix
     if (newPrefix !== null) {
-      if (prefix.set === newPrefix) {
+      if (guild.prefix.current === newPrefix) {
         return await interaction.reply(
           content(`Prefix is already **\`${newPrefix}\`**!`)
         );
       }
-      prefix.set = newPrefix;
-      write(config);
+      await guild
+        .updateOne({ $set: { "prefix.current": newPrefix } })
+        .catch((e) => console.error(e.message));
+      // await guild.save().catch((e) => console.error(e.message));
       return await interaction.reply(
         `Prefix has been change to **\`${newPrefix}\`**`
       );
@@ -76,39 +71,40 @@ module.exports = {
     if (changeActivate !== null) {
       switch (changeActivate) {
         case "on":
-          if (prefix.activation === true) {
+          if (guild.prefix.activation === true) {
             return await interaction.reply(
               content("Prefix is already **`on`**!")
             );
           }
 
-          prefix.activation = true;
-          write(config);
+          guild.prefix.activation = true;
+          await guild.save().catch((e) => console.error(e.message));
           return await interaction.reply("Prefix has been set to **`on`**");
 
         case "off":
-          if (prefix.activation === false) {
+          if (guild.prefix.activation === false) {
             return await interaction.reply(
               content("Prefix is already **`off`**!")
             );
           }
 
-          prefix.activation = false;
-          write(config);
+          guild.prefix.activation = false;
+          await guild.save().catch((e) => console.error(e.message));
           return await interaction.reply("Prefix has been set to **`off`**");
       }
     }
 
     // If deactivate
-    if (prefix.activation === false) {
+    if (guild.prefix.activation === false) {
       return await interaction.reply(content("Server prefix is **`off`**."));
     }
 
     // If none of those
+
     return await interaction.reply(
-      `Current server prefix: **\`${prefix.set}\`**, commands: ${commands
-        .map((x) => `**\`${x}\`**`)
-        .join(", ")}.`
+      `Current server prefix: **\`${
+        guild.prefix.current
+      }\`**, commands: ${commands.map((x) => `**\`${x}\`**`).join(", ")}.`
     );
   },
 };

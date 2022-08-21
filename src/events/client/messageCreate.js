@@ -1,5 +1,5 @@
-const fs = require("node:fs");
 let channelID = 0;
+const Guild = require("../../schemas/guild");
 const content = (str) => ({
   content: str,
   ephemeral: true,
@@ -11,15 +11,13 @@ module.exports = {
     // Check bot
     if (message.author.bot) return;
 
-    // Read file
-    const file = fs.readFileSync("./src/json/config.json", "utf-8");
-    const config = JSON.parse(file);
+    const guild = await Guild.findOne({ id: message.guildId });
+    const prefix = guild.prefix.current;
 
     // Check prefix activation
-    if (!config.guildId[message.guildId].prefix.activation) return;
+    if (!guild.prefix.activation) return;
 
     // Check does message startsWith prefix
-    const prefix = config.guildId[message.guildId].prefix.set;
     if (!message.content.startsWith(prefix)) return;
 
     // Get content

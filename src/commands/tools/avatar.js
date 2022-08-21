@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
+const Guild = require("../../schemas/guild");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -20,7 +21,7 @@ module.exports = {
     .addSubcommand((subcommand) =>
       subcommand.setName("user").setDescription("Show myself profile avatar.")
     ),
-  async execute(interaction) {
+  async execute(interaction, client) {
     switch (interaction.options.getSubcommand()) {
       case "member": {
         const target = interaction.options.getUser("target");
@@ -39,20 +40,14 @@ module.exports = {
       }
 
       case "server": {
-        try {
-          return await interaction.reply(
-            interaction.guild.iconURL({
-              dynamic: true,
-              extension: "png",
-              size: 4096,
-            })
-          );
-        } catch {
+        const guild = await Guild.findOne({ id: interaction.guildId });
+        if (!guild.iconURL)
           return await interaction.reply({
             content: "I don't think this server has a avatar.",
             ephemeral: true,
           });
-        }
+
+        return await interaction.reply(guild.iconURL);
       }
 
       default: {

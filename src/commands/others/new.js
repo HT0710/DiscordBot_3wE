@@ -19,11 +19,11 @@ module.exports = {
             })}`,
             url: `https://github.com/HT0710`,
           })
-          .setTitle("**v0.8@190822**")
+          .setTitle("**v0.9@210822**")
           .setDescription(
-            "- Add select menu\n- Add new command\n- Update help command v2.0\n- Minor change on avatar, prefix, ping command\n- Optimize & Organize"
+            "- Add poll command\n- Add database\n- Move guilds to database\n- Minor change and update"
           )
-          .setFooter({ text: "At 19/08/2022" }),
+          .setFooter({ text: "Date 21/08/2022" }),
       ],
     });
   },
