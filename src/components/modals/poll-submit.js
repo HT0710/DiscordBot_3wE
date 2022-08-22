@@ -25,16 +25,18 @@ module.exports = {
       return format(string[i + 1], i + 1);
     };
     format(desc, 0);
+
     const embed = new EmbedBuilder()
       .setColor(Colors.Yellow)
       .setTitle(`**${title}**`)
       .setDescription(
         descList.join("\n") +
           "\n" +
-          `Time left: **${time(
-            new Date(new Date().getTime() + (timer + 1) * 1000),
-            "R"
-          )}**` +
+          `Time left: **${
+            timer
+              ? time(new Date(new Date().getTime() + (timer + 1) * 1000), "R")
+              : "♾️"
+          }**` +
           "\n" +
           "- \u200B \u200B".repeat(18)
       )

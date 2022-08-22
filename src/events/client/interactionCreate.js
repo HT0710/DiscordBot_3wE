@@ -4,22 +4,24 @@ module.exports = {
   name: "interactionCreate",
   async execute(interaction, client) {
     const interactionType = () => {
-      if (interaction.isChatInputCommand()) return "command";
+      if (interaction.isChatInputCommand()) return "chatInputCommand";
       if (interaction.isButton()) return "button";
       if (interaction.isSelectMenu()) return "selectMenu";
-      if ((interaction.type = InteractionType.ModalSubmit)) return "modal";
+      if (interaction.type === InteractionType.ModalSubmit)
+        return "modalSubmit";
+      if (interaction.isContextMenuCommand()) return "contextMenuCommand";
     };
 
-    const logError = async (error) => {
-      console.error(error);
+    const logError = async (error, name) => {
+      console.error(error.message);
       await interaction.reply({
-        content: "There was an error while executing this command!",
+        content: `There was an error while executing ${name}!`,
         ephemeral: true,
       });
     };
 
     switch (interactionType()) {
-      case "command": {
+      case "chatInputCommand": {
         const command = client.commands.get(interaction.commandName);
 
         if (!command) return;
@@ -31,7 +33,7 @@ module.exports = {
         try {
           await command.execute(interaction, client);
         } catch (error) {
-          await logError(error);
+          await logError(error, interaction.commandName);
         }
         break;
       }
@@ -44,7 +46,7 @@ module.exports = {
         try {
           await button.execute(interaction, client);
         } catch (error) {
-          await logError(error);
+          await logError(error, interaction.commandName);
         }
         break;
       }
@@ -58,12 +60,12 @@ module.exports = {
         try {
           await menu.execute(interaction, client);
         } catch (error) {
-          await logError(error);
+          await logError(error, interaction.commandName);
         }
         break;
       }
 
-      case "modal": {
+      case "modalSubmit": {
         const modal = client.modals.get(interaction.customId);
 
         if (!modal) return console.error("There is no code for this modal.");
@@ -71,7 +73,20 @@ module.exports = {
         try {
           await modal.execute(interaction, client);
         } catch (error) {
-          await logError(error);
+          await logError(error, interaction.commandName);
+        }
+        break;
+      }
+
+      case "contextMenuCommand": {
+        const contextCommand = client.commands.get(interaction.commandName);
+
+        if (!contextCommand) return;
+
+        try {
+          await contextCommand.execute(interaction, client);
+        } catch (error) {
+          await logError(error, interaction.commandName);
         }
         break;
       }
