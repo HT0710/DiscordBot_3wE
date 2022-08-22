@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder, Colors } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("membercount")
-    .setDescription("Return the number of members in this server."),
+    .setDescription("Return the total number of current members."),
   async execute(interaction, client) {
     const embed = new EmbedBuilder()
       .setColor(Colors.Yellow)

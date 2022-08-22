@@ -8,7 +8,7 @@ module.exports = async (interaction, client, value) => {
         embeds: [
           embed
             .setTitle("**/avatar [+]**")
-            .setDescription("Options:")
+            .setDescription("Show avatar profile of the target.\nOptions:")
             .addFields(
               {
                 name: "**member**",
@@ -44,9 +44,9 @@ module.exports = async (interaction, client, value) => {
             .setTitle("**/ai [+]**")
             .setDescription("Choose algorithms to process your data.\nOptions:")
             .addFields({
-              name: "**svd**",
+              name: "**svd [image] [value]**",
               value:
-                "Singular Value Decomposition is used to automatically perform dimensionality reduction.",
+                "Singular Value Decomposition is used to automatically perform dimensionality reduction. Options:\n**image**: The image to process.\n**value**: The value to process the image. Smaller mean more reduced.",
             }),
         ],
       });
@@ -57,7 +57,7 @@ module.exports = async (interaction, client, value) => {
         embeds: [
           embed
             .setTitle("**/prefix [+]**")
-            .setDescription("Show server current prefix info.\n+Options:")
+            .setDescription("Show server current prefix info.\nOptions:")
             .addFields(
               {
                 name: "**change**",
@@ -77,7 +77,7 @@ module.exports = async (interaction, client, value) => {
         embeds: [
           embed
             .setTitle("**/clean [!amount]**")
-            .setDescription("Delete channel messages.\n!Required")
+            .setDescription("Delete channel messages.\nOptions(!Required):")
             .addFields({
               name: "**amount**",
               value: "The amount of message to delete.",
@@ -131,7 +131,7 @@ module.exports = async (interaction, client, value) => {
         embeds: [
           embed
             .setTitle("**/poll [!title] [!timer] [description]**")
-            .setDescription("Create a poll.\nOption (!Required)")
+            .setDescription("Create a poll.\nOptions(!Required):")
             .addFields(
               {
                 name: "title",
@@ -146,6 +146,36 @@ module.exports = async (interaction, client, value) => {
                 value: "Description for your poll.",
               }
             ),
+        ],
+      });
+    }
+
+    case "info": {
+      return await interaction.reply({
+        embeds: [
+          embed
+            .setTitle("**/info [+]**")
+            .setDescription("Return the information of the target.\nOptions:")
+            .addFields(
+              {
+                name: "member",
+                value: "Return the information of the member target.",
+              },
+              {
+                name: "server",
+                value: "Return the information of the server.",
+              }
+            ),
+        ],
+      });
+    }
+
+    case "membercount": {
+      return await interaction.reply({
+        embeds: [
+          embed
+            .setTitle("**/membercount**")
+            .setDescription("Return the total number of current members."),
         ],
       });
     }
