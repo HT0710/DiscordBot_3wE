@@ -7,6 +7,7 @@
 - Add context menu command
 - Add info command
 - Add membercount command
+- Minor change and update
 
 ## v0.9@210822
 - Add database
