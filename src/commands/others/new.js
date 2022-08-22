@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, Colors } = require("discord.js");
+const { imgFormat } = require("../../components/functions/exports");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -12,18 +13,14 @@ module.exports = {
           .setColor(Colors.Yellow)
           .setAuthor({
             name: `By ${client.application.owner.tag}`,
-            iconURL: `${client.application.owner.displayAvatarURL({
-              dynamic: true,
-              extension: "png",
-              size: 4096,
-            })}`,
+            iconURL: `${client.application.owner.displayAvatarURL(imgFormat)}`,
             url: `https://github.com/HT0710`,
           })
-          .setTitle("**v0.9@210822**")
+          .setTitle("**v1.0@230822**")
           .setDescription(
-            "- Add poll command\n- Add database\n- Move guilds to database\n- Minor change and update"
+            "- Add context menu command\n- Add info command\n- Add membercount command"
           )
-          .setFooter({ text: "Date 21/08/2022" }),
+          .setFooter({ text: "Date 23/08/2022" }),
       ],
     });
   },

@@ -1,11 +1,16 @@
-# DiscordBot_3wE - v0.9@210822
+# DiscordBot_3wE - v1.0@230822
 
 ## -> [Invite link](https://discord.com/api/oauth2/authorize?client_id=1006591332204154951&permissions=8&scope=bot%20applications.commands)
 
 # Version logs
+## v1.0@230822
+- Add context menu command
+- Add info command
+- Add membercount command
+
 ## v0.9@210822
-- Add poll command
 - Add database
+- Add poll command
 - Move guilds to database
 - Minor change and update
 

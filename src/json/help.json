@@ -23,6 +23,14 @@
     {
       "name": "poll",
       "dis": "Create a poll."
+    },
+    {
+      "name": "info",
+      "dis": "Return the information of the target."
+    },
+    {
+      "name": "membercount",
+      "dis": "Return the total number of current members."
     }
   ],
   "moderation": [],
