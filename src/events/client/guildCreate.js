@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Guild = require("../../schemas/guild");
+const imgFormat = require("../../components/functions/exports");
 
 module.exports = {
   name: "guildCreate",
@@ -15,11 +16,7 @@ module.exports = {
       id: interaction.guild.id,
       name: interaction.guild.name,
       iconURL: interaction.guild.iconURL()
-        ? interaction.guild.iconURL({
-            dynamic: true,
-            extension: "png",
-            size: 4096,
-          })
+        ? interaction.guild.iconURL(imgFormat)
         : null,
       ownerId: interaction.guild.ownerId,
       prefix: {
