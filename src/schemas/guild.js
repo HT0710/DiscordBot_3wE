@@ -13,8 +13,18 @@ const guildSchema = new Schema({
   iconURL: String,
   ownerId: String,
   prefix: {
-    current: String,
-    activation: Boolean,
+    current: {
+      type: String,
+      default: ">",
+    },
+    activation: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  history: {
+    type: String,
+    default: null,
   },
 });
 

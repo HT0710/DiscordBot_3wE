@@ -5,8 +5,7 @@ module.exports = {
   once: true,
   execute(client) {
     console.log(`${client.user.tag} was summoned! Ready to Die?`);
-    client.user.setActivity("Free Fire 🔥 /help", {
-      type: ActivityType.Playing,
-    });
+
+    client.pickPresence("online");
   },
 };

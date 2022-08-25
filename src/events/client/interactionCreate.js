@@ -10,6 +10,8 @@ module.exports = {
       if (interaction.type === InteractionType.ModalSubmit)
         return "modalSubmit";
       if (interaction.isContextMenuCommand()) return "contextMenuCommand";
+      if (interaction.type === InteractionType.ApplicationCommandAutocomplete)
+        return "autocomplete";
     };
 
     const logError = async (error, name) => {
@@ -85,6 +87,19 @@ module.exports = {
 
         try {
           await contextCommand.execute(interaction, client);
+        } catch (error) {
+          await logError(error, interaction.commandName);
+        }
+        break;
+      }
+
+      case "autocomplete": {
+        const command = client.commands.get(interaction.commandName);
+
+        if (!command) return;
+
+        try {
+          await command.autocomplete(interaction, client);
         } catch (error) {
           await logError(error, interaction.commandName);
         }

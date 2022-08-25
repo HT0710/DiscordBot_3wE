@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 const Guild = require("../../schemas/guild");
+const imgFormat = require("../../components/functions/exports");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -30,33 +31,19 @@ module.exports = {
             content: "Need a target to steal there avatar.",
             ephemeral: true,
           });
-        return await interaction.reply(
-          target.displayAvatarURL({
-            dynamic: true,
-            extension: "png",
-            size: 4096,
-          })
-        );
+        return await interaction.reply(target.displayAvatarURL(imgFormat));
       }
 
       case "server": {
         const guild = await Guild.findOne({ id: interaction.guildId });
-        if (!guild.iconURL)
-          return await interaction.reply({
-            content: "I don't think this server has a avatar.",
-            ephemeral: true,
-          });
+        if (!guild.iconURL) return await interaction.reply(imgFormat);
 
         return await interaction.reply(guild.iconURL);
       }
 
       default: {
         return await interaction.reply(
-          interaction.user.displayAvatarURL({
-            dynamic: true,
-            extension: "png",
-            size: 4096,
-          })
+          interaction.user.displayAvatarURL(imgFormat)
         );
       }
     }

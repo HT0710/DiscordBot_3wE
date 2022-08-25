@@ -31,6 +31,10 @@
     {
       "name": "membercount",
       "dis": "Return the total number of current members."
+    },
+    {
+      "name": "history",
+      "dis": "Set a channel to store deleted messages."
     }
   ],
   "moderation": [],

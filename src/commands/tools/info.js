@@ -3,6 +3,9 @@ const {
   EmbedBuilder,
   Colors,
   time,
+  GuildPremiumTier,
+  GuildNSFWLevel,
+  ChannelType,
 } = require("discord.js");
 const { imgFormat } = require("../../components/functions/exports");
 
@@ -126,7 +129,7 @@ module.exports = {
             name: "Category Channels",
             value: ((channelCache) =>
               channelCache
-                .map((channel) => channel.type === 4)
+                .map((channel) => channel.type === ChannelType.GuildCategory)
                 .filter((o) => o === true).length)(
               guild.channels.cache
             ).toString(),
@@ -136,7 +139,7 @@ module.exports = {
             name: "Text Channels",
             value: ((channelCache) =>
               channelCache
-                .map((channel) => channel.type === 0)
+                .map((channel) => channel.type === ChannelType.GuildText)
                 .filter((o) => o === true).length)(
               guild.channels.cache
             ).toString(),
@@ -146,7 +149,7 @@ module.exports = {
             name: "Voice Channels",
             value: ((channelCache) =>
               channelCache
-                .map((channel) => channel.type === 2)
+                .map((channel) => channel.type === ChannelType.GuildVoice)
                 .filter((o) => o === true).length)(
               guild.channels.cache
             ).toString(),
@@ -156,13 +159,13 @@ module.exports = {
             name: "NSFW Level",
             value: (() => {
               switch (guild.nsfwLevel) {
-                case 0:
+                case GuildNSFWLevel.Default:
                   return "Default";
-                case 1:
+                case GuildNSFWLevel.Explicit:
                   return "Explicit";
-                case 2:
+                case GuildNSFWLevel.Safe:
                   return "Safe";
-                case 3:
+                case GuildNSFWLevel.AgeRestricted:
                   return "AgeRestricted";
               }
             })(),
@@ -172,13 +175,13 @@ module.exports = {
             name: "Premium Tier",
             value: (() => {
               switch (guild.premiumTier) {
-                case 0:
+                case GuildPremiumTier.None:
                   return "None";
-                case 1:
+                case GuildPremiumTier.Tier1:
                   return "Tier 1";
-                case 2:
+                case GuildPremiumTier.Tier2:
                   return "Tier 2";
-                case 3:
+                case GuildPremiumTier.Tier3:
                   return "Tier 3";
               }
             })(),

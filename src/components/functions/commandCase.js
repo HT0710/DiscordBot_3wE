@@ -46,7 +46,7 @@ module.exports = async (interaction, client, value) => {
             .addFields({
               name: "**svd [image] [value]**",
               value:
-                "Singular Value Decomposition is used to automatically perform dimensionality reduction. Options:\n**image**: The image to process.\n**value**: The value to process the image. Smaller mean more reduced.",
+                "Singular Value Decomposition is used to automatically perform dimensionality reduction. Options:\n|- **image**: The image to process.\n|- **value**: The value to process the image. Smaller mean more reduced.",
             }),
         ],
       });
@@ -139,7 +139,8 @@ module.exports = async (interaction, client, value) => {
               },
               {
                 name: "timer",
-                value: "Timer for your poll.",
+                value:
+                  "Timer for your poll.\n|- **Format**: `[number][blank][units-of-time]`.\n|- **Units of time**: s, sec, second, m, min,...\n|- **Example**: 5 s, 12 min, 2 days or forever",
               },
               {
                 name: "description",
@@ -176,6 +177,16 @@ module.exports = async (interaction, client, value) => {
           embed
             .setTitle("**/membercount**")
             .setDescription("Return the total number of current members."),
+        ],
+      });
+    }
+
+    case "history": {
+      return await interaction.reply({
+        embeds: [
+          embed
+            .setTitle("**/history**")
+            .setDescription("Set a channel to store deleted messages."),
         ],
       });
     }
