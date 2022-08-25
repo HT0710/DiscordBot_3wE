@@ -112,7 +112,7 @@ module.exports = async (interaction, client, value, backButton) => {
           for (const type in helpList) {
             helpList[type].forEach((command) => {
               commands.push({
-                name: `**\`/${command.name}\`**`,
+                name: command.name,
                 value: command.dis,
               });
             });
@@ -122,7 +122,12 @@ module.exports = async (interaction, client, value, backButton) => {
             a.name > b.name ? 1 : b.name > a.name ? -1 : 0
           );
 
-          commands.forEach((command) => embed.addFields(command));
+          commands.forEach((command) =>
+            embed.addFields({
+              name: `**\`/${command.name}\`**`,
+              value: command.value,
+            })
+          );
 
           return embed;
         })(),
