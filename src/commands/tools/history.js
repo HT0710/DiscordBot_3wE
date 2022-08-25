@@ -52,8 +52,10 @@ module.exports = {
         .permissionsFor(interaction.guild.roles.everyone)
         .has(PermissionFlagsBits.ViewChannel)
     ) {
-      await interaction.followUp({
-        content: `\`\`\`CS\nHistory channel is public, do you want to private it?\n\`\`\``,
+      await interaction.editReply({
+        content: `History storage has been set to ${channelMention(
+          channel.id
+        )}\n\`\`\`CS\nHistory channel is public, do you want to private it?\n\`\`\``,
         components: [
           new ActionRowBuilder().addComponents(
             new ButtonBuilder()
