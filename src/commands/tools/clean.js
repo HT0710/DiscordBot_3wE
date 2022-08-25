@@ -41,7 +41,7 @@ module.exports = {
         )
       )
       .catch((error) => {
-        console.error(error);
+        console.error(error.message);
         interaction.reply(
           content(
             "There was an error while trying to clean message in this channel!"
