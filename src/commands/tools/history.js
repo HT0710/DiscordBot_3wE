@@ -45,7 +45,9 @@ module.exports = {
       ephemeral: true,
     });
 
-    await channel.send("This channel is now history storage.");
+    await channel.send(
+      "This channel is now history storage.\nMute this channel if you don't want to be distracted."
+    );
 
     if (
       channel

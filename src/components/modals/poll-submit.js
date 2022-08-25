@@ -93,7 +93,9 @@ module.exports = {
         choice.count = count;
         total += count;
       });
-      collectedEmbed.setDescription(`Total: **${total}** reaction`);
+      collectedEmbed.setDescription(
+        `Total: **${total}** ` + (total > 1 ? "reactions!" : "reaction!")
+      );
 
       choices.forEach((choice, index) => {
         let int = Math.round(((collected.at(index).count - 1) / total) * 100);
