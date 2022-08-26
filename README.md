@@ -3,6 +3,11 @@
 ## -> [Invite link](https://discord.com/api/oauth2/authorize?client_id=1006591332204154951&permissions=8&scope=bot%20applications.commands)
 
 # Version logs
+## v1.2@
+- Add timer command
+
+- Remove ai command
+
 ## v1.1@260822
 - Add autocomplete
 - Add history command

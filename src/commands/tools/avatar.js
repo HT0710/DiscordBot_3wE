@@ -14,6 +14,7 @@ module.exports = {
           option
             .setName("target")
             .setDescription("Tag a target to steal there avatar.")
+            .setRequired(true)
         )
     )
     .addSubcommand((subcommand) =>

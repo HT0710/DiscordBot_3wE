@@ -40,11 +40,11 @@
   "moderation": [],
   "music": [],
   "others": [
-    { "name": "ai", "dis": "Choose algorithms to process your data." },
     { "name": "new", "dis": "Show recent 3wE update." },
     {
       "name": "feedback",
       "dis": "Send 3wE a feedback, require a feature or report an error."
-    }
+    },
+    { "name": "timer", "dis": "Set timer." }
   ]
 }
