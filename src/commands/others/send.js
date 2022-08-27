@@ -8,7 +8,7 @@ module.exports = {
       option
         .setName("message_id")
         .setDescription(
-          "Id of the message you want to send. /help faq [how to get channel id]"
+          "Id of the message you want to send. /help faq [how to get message id]"
         )
         .setRequired(true)
     )
