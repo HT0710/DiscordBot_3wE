@@ -57,7 +57,6 @@ const timeFormat = (string) => {
       value = time * 604800;
       break;
 
-    case "m":
     case "month":
     case "months":
       value = time * 2629743;

@@ -26,7 +26,7 @@ module.exports = {
     const logError = async (error, name) => {
       console.error(error.message);
       await interaction.reply({
-        content: `There was an error while executing ${name}!`,
+        content: `There was an error while executing command ${name}!`,
         ephemeral: true,
       });
     };

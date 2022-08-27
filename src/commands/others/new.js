@@ -16,11 +16,11 @@ module.exports = {
             iconURL: `${client.application.owner.displayAvatarURL(imgFormat)}`,
             url: `https://github.com/HT0710`,
           })
-          .setTitle("**v1.1@260822**")
+          .setTitle("**v1.2@280822**")
           .setDescription(
-            "- Add autocomplete\n- Add history command\n- Update poll command\n- Update bot presence\n- Other minor changes and updates"
+            "```- Add timer command\n- Add save command\n- Add send command\n- Add help faq\n- Remove ai command\n- Other minor changes and updates```"
           )
-          .setFooter({ text: "Date 26/08/2022" }),
+          .setFooter({ text: "Date 28/08/2022" }),
       ],
     });
   },

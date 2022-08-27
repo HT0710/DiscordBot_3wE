@@ -206,5 +206,15 @@ module.exports = async (interaction, client, value) => {
         ],
       });
     }
+
+    case "send": {
+      return await interaction.reply({
+        embeds: [
+          embed
+            .setTitle("**/send**")
+            .setDescription("Send a message to another channel."),
+        ],
+      });
+    }
   }
 };
