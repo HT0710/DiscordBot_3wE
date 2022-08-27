@@ -49,7 +49,11 @@ module.exports = {
           return await interaction.reply(
             content("Bot don't have permissions to execute this command.")
           );
-        if (!interaction.memberPermissions.has(CIIP))
+        const app = await client.application.fetch();
+        if (
+          !interaction.memberPermissions.has(CIIP) &&
+          interaction.member.id !== app.owner.id
+        )
           return await interaction.reply(
             content("User don't have permissions to execute this command.")
           );
