@@ -4,7 +4,6 @@ const {
   EmbedBuilder,
   Colors,
 } = require("discord.js");
-const embed = new EmbedBuilder();
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
@@ -18,13 +17,15 @@ module.exports = {
       await interaction.member.send(message);
 
       await interaction.reply({
-        embeds: [embed.setColor(Colors.Green).setTitle("```✅ Saved!```")],
+        embeds: [
+          new EmbedBuilder().setColor(Colors.Green).setTitle("```✅ Saved!```"),
+        ],
         ephemeral: true,
       });
     } catch (e) {
       interaction.reply({
         embeds: [
-          embed
+          new EmbedBuilder()
             .setColor(Colors.Red)
             .setTitle(
               "```This message could not be sent to you! Check your privacy settings.```"
