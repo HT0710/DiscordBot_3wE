@@ -196,5 +196,15 @@ module.exports = async (interaction, client, value) => {
         embeds: [embed.setTitle("**/timer**").setDescription("Set timer.")],
       });
     }
+
+    case "save": {
+      return await interaction.reply({
+        embeds: [
+          embed
+            .setTitle("**/save**")
+            .setDescription("Save by sending this message to you."),
+        ],
+      });
+    }
   }
 };

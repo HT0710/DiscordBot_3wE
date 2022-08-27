@@ -20,18 +20,19 @@ module.exports = {
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("nameInput")
-            .setLabel("Who are you?")
+            .setLabel("Nickname")
             .setPlaceholder("Anonymous")
-            .setRequired(false)
+            .setValue("Anonymous")
             .setStyle(TextInputStyle.Short)
+            .setRequired(true)
         ),
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("feedbackInput")
             .setLabel("Do you have something to say?")
-            .setPlaceholder("A feedback, require a feature or report an error.")
-            .setRequired(true)
+            .setPlaceholder("A feedback, require a feature or report an error")
             .setStyle(TextInputStyle.Paragraph)
+            .setRequired(true)
         )
       );
 

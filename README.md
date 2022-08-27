@@ -5,8 +5,9 @@
 # Version logs
 ## v1.2@
 - Add timer command
-
+- Add save command
 - Remove ai command
+- Other minor changes and updates
 
 ## v1.1@260822
 - Add autocomplete
