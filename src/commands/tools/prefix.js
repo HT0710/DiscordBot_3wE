@@ -26,8 +26,12 @@ module.exports = {
     const changeActivate = interaction.options.getBoolean("activate");
 
     // Check permissions
+    const app = await client.application.fetch();
     if (newPrefix !== null || changeActivate !== null) {
-      if (!interaction.memberPermissions.has(PermissionFlagsBits.ManageGuild)) {
+      if (
+        !interaction.memberPermissions.has(PermissionFlagsBits.ManageGuild) &&
+        interaction.member.id !== app.owner.id
+      ) {
         return await interaction.reply(
           content("You don't have permission to do that!")
         );

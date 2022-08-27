@@ -1,8 +1,16 @@
-# DiscordBot_3wE - v1.1@260822
+# DiscordBot_3wE - v1.2@280822
 
 ## -> [Invite link](https://discord.com/api/oauth2/authorize?client_id=1006591332204154951&permissions=8&scope=bot%20applications.commands)
 
 # Version logs
+## v1.2@280822
+- Add timer command
+- Add save command
+- Add send command
+- Add help faq
+- Remove ai command
+- Other minor changes and updates
+
 ## v1.1@260822
 - Add autocomplete
 - Add history command

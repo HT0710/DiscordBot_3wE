@@ -37,20 +37,20 @@ module.exports = async (interaction, client, value) => {
       });
     }
 
-    case "ai": {
-      return await interaction.reply({
-        embeds: [
-          embed
-            .setTitle("**/ai [+]**")
-            .setDescription("Choose algorithms to process your data.\nOptions:")
-            .addFields({
-              name: "**svd [image] [value]**",
-              value:
-                "Singular Value Decomposition is used to automatically perform dimensionality reduction. Options:\n|- **image**: The image to process.\n|- **value**: The value to process the image. Smaller mean more reduced.",
-            }),
-        ],
-      });
-    }
+    // case "ai": {
+    //   return await interaction.reply({
+    //     embeds: [
+    //       embed
+    //         .setTitle("**/ai [+]**")
+    //         .setDescription("Choose algorithms to process your data.\nOptions:")
+    //         .addFields({
+    //           name: "**svd [image] [value]**",
+    //           value:
+    //             "Singular Value Decomposition is used to automatically perform dimensionality reduction. Options:\n|- **image**: The image to process.\n|- **value**: The value to process the image. Smaller mean more reduced.",
+    //         }),
+    //     ],
+    //   });
+    // }
 
     case "prefix": {
       return await interaction.reply({
@@ -187,6 +187,32 @@ module.exports = async (interaction, client, value) => {
           embed
             .setTitle("**/history**")
             .setDescription("Set a channel to store deleted messages."),
+        ],
+      });
+    }
+
+    case "timer": {
+      return await interaction.reply({
+        embeds: [embed.setTitle("**/timer**").setDescription("Set timer.")],
+      });
+    }
+
+    case "save": {
+      return await interaction.reply({
+        embeds: [
+          embed
+            .setTitle("**/save**")
+            .setDescription("Save by sending this message to you."),
+        ],
+      });
+    }
+
+    case "send": {
+      return await interaction.reply({
+        embeds: [
+          embed
+            .setTitle("**/send**")
+            .setDescription("Send a message to another channel."),
         ],
       });
     }

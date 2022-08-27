@@ -19,33 +19,31 @@ module.exports = {
       );
       return option;
     })
-    .addStringOption((option) =>
-      option
-        .setName("type")
-        .setDescription("Help on a command type.")
-        .setChoices(
-          {
-            name: "tools",
-            value: "tools",
-          },
-          {
-            name: "moderation",
-            value: "moderation",
-          },
-          {
-            name: "music",
-            value: "music",
-          },
-          {
-            name: "others",
-            value: "others",
-          },
-          {
-            name: "all",
-            value: "all",
-          }
-        )
-    ),
+    .addStringOption((option) => {
+      option.setName("type").setDescription("Help on a command type.");
+
+      const types = ["tools", "moderation", "music", "others", "all"];
+
+      types.forEach((type) => option.addChoices({ name: type, value: type }));
+
+      return option;
+    })
+    .addStringOption((option) => {
+      option.setName("faq").setDescription("Frequently Asked Questions.");
+
+      const questions = [
+        "how to get channel id",
+        "how to get message id",
+        "how to get guild id",
+        "poll timer format",
+      ];
+
+      questions.forEach((question) =>
+        option.addChoices({ name: question, value: question })
+      );
+
+      return option;
+    }),
   async execute(interaction, client) {
     const commandCase = require("../../components/functions/commandCase");
     const command = interaction.options.getString("command");
@@ -54,6 +52,10 @@ module.exports = {
     const typeCase = require("../../components/functions/typeCase");
     const type = interaction.options.getString("type");
     if (type) return await typeCase(interaction, client, type);
+
+    const faqCase = require("../../components/functions/faqCase");
+    const question = interaction.options.getString("faq");
+    if (question) return await faqCase(interaction, client, question);
 
     const helpInterface = require("../../components/functions/helpInterface");
     return await interaction.reply(helpInterface);

@@ -21,7 +21,11 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction, client) {
-    if (!interaction.memberPermissions.has(PermissionFlagsBits.ManageGuild)) {
+    const app = await client.application.fetch();
+    if (
+      !interaction.memberPermissions.has(PermissionFlagsBits.ManageGuild) &&
+      interaction.member.id !== app.owner.id
+    ) {
       return await interaction.reply({
         content: "You don't have permission to use this command!",
         ephemeral: true,

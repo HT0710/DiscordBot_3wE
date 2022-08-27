@@ -1,8 +1,17 @@
-const { InteractionType } = require("discord.js");
+const { InteractionType, EmbedBuilder, Colors } = require("discord.js");
 
 module.exports = {
   name: "interactionCreate",
   async execute(interaction, client) {
+    if (!interaction.guild)
+      return await interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setColor(Colors.Yellow)
+            .setTitle("**```Commands can only be used in servers!```**"),
+        ],
+      });
+
     const interactionType = () => {
       if (interaction.isChatInputCommand()) return "chatInputCommand";
       if (interaction.isButton()) return "button";
@@ -17,7 +26,7 @@ module.exports = {
     const logError = async (error, name) => {
       console.error(error.message);
       await interaction.reply({
-        content: `There was an error while executing ${name}!`,
+        content: `There was an error while executing command ${name}!`,
         ephemeral: true,
       });
     };
@@ -84,6 +93,10 @@ module.exports = {
         const contextCommand = client.commands.get(interaction.commandName);
 
         if (!contextCommand) return;
+
+        console.log(
+          `${interaction.user.tag} in #${interaction.guild.name} triggered [${interaction.commandName}].`
+        );
 
         try {
           await contextCommand.execute(interaction, client);
