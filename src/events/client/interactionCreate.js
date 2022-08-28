@@ -12,17 +12,6 @@ module.exports = {
         ],
       });
 
-    const interactionType = () => {
-      if (interaction.isChatInputCommand()) return "chatInputCommand";
-      if (interaction.isButton()) return "button";
-      if (interaction.isSelectMenu()) return "selectMenu";
-      if (interaction.type === InteractionType.ModalSubmit)
-        return "modalSubmit";
-      if (interaction.isContextMenuCommand()) return "contextMenuCommand";
-      if (interaction.type === InteractionType.ApplicationCommandAutocomplete)
-        return "autocomplete";
-    };
-
     const logError = async (error, name) => {
       console.error(error.message);
       await interaction.reply({
@@ -31,7 +20,18 @@ module.exports = {
       });
     };
 
-    switch (interactionType()) {
+    const interactionType = (() => {
+      if (interaction.isChatInputCommand()) return "chatInputCommand";
+      if (interaction.isButton()) return "button";
+      if (interaction.isSelectMenu()) return "selectMenu";
+      if (interaction.type === InteractionType.ModalSubmit)
+        return "modalSubmit";
+      if (interaction.isContextMenuCommand()) return "contextMenuCommand";
+      if (interaction.type === InteractionType.ApplicationCommandAutocomplete)
+        return "autocomplete";
+    })();
+
+    switch (interactionType) {
       case "chatInputCommand": {
         const command = client.commands.get(interaction.commandName);
 
