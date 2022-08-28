@@ -8,7 +8,7 @@ module.exports = {
     const backButton = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("helpButton")
-        .setEmoji("◀️")
+        .setEmoji("⬅️")
         .setLabel("Back to the selection.")
         .setStyle(ButtonStyle.Secondary)
     );
