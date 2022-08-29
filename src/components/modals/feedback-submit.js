@@ -1,8 +1,8 @@
-const { time } = require("discord.js");
+const { time, EmbedBuilder, Colors } = require("discord.js");
 
 module.exports = {
   data: {
-    name: "feedback",
+    name: "feedback-submit",
   },
   async execute(interaction, client) {
     const name = interaction.fields.getTextInputValue("nameInput");
@@ -14,14 +14,19 @@ module.exports = {
 
     await interaction.deferReply({ ephemeral: true });
 
+    const id = interaction.member.id;
     await feedbackChannel.send(
-      `**${name ? name : "Anonymous"}** - ${time(
-        new Date()
-      )}\`\`\`${feedback}\`\`\``
+      `**${
+        name ? name : "Anonymous#" + id.slice(0, 3) + id.slice(-3)
+      }** - ${time(new Date())}\`\`\`${feedback}\`\`\``
     );
 
     await interaction.editReply({
-      content: "Thanks for the feedback!",
+      embeds: [
+        new EmbedBuilder()
+          .setColor(Colors.Gold)
+          .setTitle("```Thanks for the feedback!```"),
+      ],
     });
   },
 };

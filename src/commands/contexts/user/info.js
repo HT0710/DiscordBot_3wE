@@ -4,6 +4,7 @@ const {
   EmbedBuilder,
   Colors,
   time,
+  roleMention,
 } = require("discord.js");
 const { imgFormat } = require("../../../components/functions/exports");
 
@@ -16,7 +17,7 @@ module.exports = {
     const user = interaction.targetUser;
     const member = await interaction.targetMember.fetch();
     const embed = new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setAuthor({
         name: "🔎 \u200b Information Card",
       })
@@ -58,9 +59,12 @@ module.exports = {
         },
         {
           name: `Role List`,
-          value: ((roleCache) => roleCache.map((role) => role.name).join(", "))(
-            member.roles.cache
-          ),
+          value: ((roleCache) =>
+            roleCache
+              .map((role) =>
+                role.name === "@everyone" ? role.name : roleMention(role.id)
+              )
+              .join(", "))(member.roles.cache),
           inline: false,
         }
       );

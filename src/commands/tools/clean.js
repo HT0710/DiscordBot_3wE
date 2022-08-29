@@ -1,8 +1,9 @@
-const { SlashCommandBuilder, PermissionsBitField } = require("discord.js");
-const content = (str) => ({
-  content: str,
-  ephemeral: true,
-});
+const {
+  SlashCommandBuilder,
+  PermissionsBitField,
+  EmbedBuilder,
+  Colors,
+} = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -12,45 +13,69 @@ module.exports = {
       option
         .setName("amount")
         .setDescription("Amount of messages to clean. Max: 20")
+        .setMinValue(1)
+        .setMaxValue(20)
         .setRequired(true)
     ),
   async execute(interaction, client) {
     // Check Permissions
     const MMP = PermissionsBitField.Flags.ManageMessages;
     if (!interaction.appPermissions.has(MMP))
-      return await interaction.reply(
-        content("Bot don't have permissions to execute this command.")
-      );
+      return await interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setColor(Colors.Red)
+            .setTitle(
+              "```Bot don't have permissions to execute this command.```"
+            ),
+        ],
+        ephemeral: true,
+      });
     const app = await client.application.fetch();
     if (
       !interaction.memberPermissions.has(MMP) &&
       interaction.member.id !== app.owner.id
     )
-      return await interaction.reply(
-        content("User don't have permissions to execute this command.")
-      );
+      return await interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setColor(Colors.Red)
+            .setTitle(
+              "```User don't have permissions to execute this command.```"
+            ),
+        ],
+        ephemeral: true,
+      });
 
-    // Check requirement
     const amount = interaction.options.getInteger("amount");
-    if (amount < 1 || amount > 20) {
-      return interaction.reply(content("Amount must be between 1 and 20."));
-    }
 
     // Execute
     await interaction.channel
       .bulkDelete(amount, true)
       .then(
-        await interaction.reply(
-          content(`Successfully cleaned \`${amount}\` messages.`)
-        )
+        await interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setColor(Colors.Green)
+              .setTitle(
+                `\`\`\`Successfully cleaned [${amount}] messages.\`\`\``
+              ),
+          ],
+          ephemeral: true,
+        })
       )
       .catch((error) => {
         console.error(error.message);
-        interaction.reply(
-          content(
-            "There was an error while trying to clean message in this channel!"
-          )
-        );
+        interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setColor(Colors.Red)
+              .setTitle(
+                "```There was an error while trying to clean message in this channel!```"
+              ),
+          ],
+          ephemeral: true,
+        });
       });
   },
 };

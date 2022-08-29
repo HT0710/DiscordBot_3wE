@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, Colors } = require("discord.js");
 const Guild = require("../../schemas/guild");
-const imgFormat = require("../../components/functions/exports");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -24,29 +23,60 @@ module.exports = {
       subcommand.setName("user").setDescription("Show myself profile avatar.")
     ),
   async execute(interaction, client) {
+    await interaction.deferReply();
+
+    const embed = new EmbedBuilder().setFooter({
+      text: `Requested by ${interaction.member.displayName}`,
+    });
+
     switch (interaction.options.getSubcommand()) {
       case "member": {
         const target = interaction.options.getUser("target");
-        if (!target)
-          return await interaction.reply({
-            content: "Need a target to steal there avatar.",
-            ephemeral: true,
-          });
-        return await interaction.reply(target.displayAvatarURL(imgFormat));
+
+        embed
+          .setColor(Colors.Gold)
+          .setTitle(`Avatar for \`\`\`${target.tag}\`\`\``)
+          .setImage(
+            target.displayAvatarURL({
+              dynamic: true,
+              extension: "png",
+              size: 4096,
+            })
+          );
+        break;
       }
 
       case "server": {
         const guild = await Guild.findOne({ id: interaction.guildId });
-        if (!guild.iconURL) return await interaction.reply(imgFormat);
 
-        return await interaction.reply(guild.iconURL);
+        if (!guild.iconURL) {
+          embed
+            .setColor(Colors.Red)
+            .setTitle("```This server has no avatar!```");
+        } else {
+          embed
+            .setColor(Colors.Gold)
+            .setTitle(`Avatar for \`\`\`#${guild.name}\`\`\``)
+            .setImage(guild.iconURL);
+        }
+        break;
       }
 
-      default: {
-        return await interaction.reply(
-          interaction.user.displayAvatarURL(imgFormat)
-        );
+      case "user": {
+        embed
+          .setColor(Colors.Gold)
+          .setTitle(`Avatar for \`\`\`${interaction.user.tag}\`\`\``)
+          .setImage(
+            `${interaction.member.displayAvatarURL({
+              dynamic: true,
+              extension: "png",
+              size: 4096,
+            })}`
+          );
+        break;
       }
     }
+
+    return await interaction.editReply({ embeds: [embed] });
   },
 };

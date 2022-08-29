@@ -6,6 +6,7 @@ const {
   GuildPremiumTier,
   GuildNSFWLevel,
   ChannelType,
+  roleMention,
 } = require("discord.js");
 const { imgFormat } = require("../../components/functions/exports");
 
@@ -36,7 +37,7 @@ module.exports = {
           .find((member) => member.id === user.id)
           .fetch();
         const embed = new EmbedBuilder()
-          .setColor(Colors.Yellow)
+          .setColor(Colors.Gold)
           .setAuthor({
             name: "🔎 \u200b Information Card",
           })
@@ -79,9 +80,11 @@ module.exports = {
             {
               name: `Role List`,
               value: ((roleCache) =>
-                roleCache.map((role) => role.name).join(", "))(
-                member.roles.cache
-              ),
+                roleCache
+                  .map((role) =>
+                    role.name === "@everyone" ? role.name : roleMention(role.id)
+                  )
+                  .join(", "))(member.roles.cache),
               inline: false,
             }
           );
@@ -93,7 +96,7 @@ module.exports = {
         await interaction.deferReply();
         const guild = interaction.guild;
         const embed = new EmbedBuilder()
-          .setColor(Colors.Yellow)
+          .setColor(Colors.Gold)
           .setAuthor({ name: "🔎 \u200b Server Information" })
           .setThumbnail(guild.iconURL(imgFormat))
           .setTitle(`Name: \`${guild.name}\``)
@@ -195,7 +198,11 @@ module.exports = {
           {
             name: `Roles (Total: ${guild.roles.cache.size})`,
             value: ((roleCache) =>
-              roleCache.map((role) => role.name).join(", "))(guild.roles.cache),
+              roleCache
+                .map((role) =>
+                  role.name === "@everyone" ? role.name : roleMention(role.id)
+                )
+                .join(", "))(guild.roles.cache),
             inline: false,
           },
           {

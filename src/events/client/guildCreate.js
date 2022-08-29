@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Guild = require("../../schemas/guild");
-const imgFormat = require("../../components/functions/exports");
 
 module.exports = {
   name: "guildCreate",
@@ -15,7 +14,13 @@ module.exports = {
       _id: mongoose.Types.ObjectId(),
       id: guild.id,
       name: guild.name,
-      iconURL: guild.iconURL() ? guild.iconURL(imgFormat) : null,
+      iconURL: guild.iconURL()
+        ? guild.iconURL({
+            dynamic: true,
+            extension: "png",
+            size: 4096,
+          })
+        : null,
       ownerId: guild.ownerId,
     });
 

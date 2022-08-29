@@ -13,18 +13,19 @@ module.exports = {
       "Send 3wE a feedback, require a feature or report an error."
     ),
   async execute(interaction, client) {
+    const id = interaction.member.id;
     const modal = new ModalBuilder()
-      .setCustomId("feedback")
-      .setTitle("Send a feedback")
+      .setCustomId("feedback-submit")
+      .setTitle("FEEDBACK FORM")
       .addComponents(
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
             .setCustomId("nameInput")
             .setLabel("Nickname")
-            .setPlaceholder("Anonymous")
-            .setValue("Anonymous")
+            .setPlaceholder("Anonymous#" + id.slice(0, 3) + id.slice(-3))
+            .setValue("Anonymous#" + id.slice(0, 3) + id.slice(-3))
             .setStyle(TextInputStyle.Short)
-            .setRequired(true)
+            .setRequired(false)
         ),
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
