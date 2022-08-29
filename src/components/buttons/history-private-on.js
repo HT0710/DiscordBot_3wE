@@ -1,4 +1,4 @@
-const { PermissionFlagsBits } = require("discord.js");
+const { PermissionFlagsBits, EmbedBuilder, Colors } = require("discord.js");
 const Guild = require("../../schemas/guild");
 
 module.exports = {
@@ -12,14 +12,19 @@ module.exports = {
       (channel) => channel.id === historyChannelId
     );
 
-    await historyChannel.permissionOverwrites.create(
+    await historyChannel.permissionOverwrites.edit(
       interaction.guild.roles.everyone,
       { [PermissionFlagsBits.ViewChannel]: false }
     );
 
-    const message = await interaction.message;
     await interaction.update({
-      content: `${message.content.split("\n")[0]} and 🔒**\`private\`**`,
+      embeds: [
+        new EmbedBuilder()
+          .setColor(Colors.Green)
+          .setTitle(
+            `\`\`\`${interaction.message.embeds[0].title} and 🔒 private.\`\`\``
+          ),
+      ],
       components: [],
     });
   },
