@@ -1,5 +1,5 @@
 let channelID = 0;
-const Guild = require("../../schemas/guild");
+const Guild = require("../../../schemas/guild");
 const content = (str) => ({
   content: str,
   ephemeral: true,

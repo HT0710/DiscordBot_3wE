@@ -1,4 +1,4 @@
-const Guild = require("../../schemas/guild");
+const Guild = require("../../../schemas/guild");
 
 module.exports = {
   name: "messageDelete",
