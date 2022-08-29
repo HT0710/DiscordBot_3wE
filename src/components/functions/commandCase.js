@@ -3,7 +3,7 @@ const { EmbedBuilder, Colors } = require("discord.js");
 module.exports = async (interaction, client, name) => {
   const commands = {
     avatar: new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**/avatar [+]**")
       .setDescription("Show avatar profile of the target.\nOptions:")
       .addFields(
@@ -22,12 +22,12 @@ module.exports = async (interaction, client, name) => {
       ),
 
     ping: new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**/ping**")
       .setDescription("Return the ping and the latency."),
 
     // ai: new EmbedBuilder()
-    //   .setColor(Colors.Yellow)
+    //   .setColor(Colors.Gold)
     //   .setTitle("**/ai [+]**")
     //   .setDescription("Choose algorithms to process your data.\nOptions:")
     //   .addFields({
@@ -37,7 +37,7 @@ module.exports = async (interaction, client, name) => {
     //   }),
 
     prefix: new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**/prefix [+]**")
       .setDescription("Show server current prefix info.\nOptions:")
       .addFields(
@@ -52,7 +52,7 @@ module.exports = async (interaction, client, name) => {
       ),
 
     clean: new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**/clean [!amount]**")
       .setDescription("Delete channel messages.\nOptions(!Required):")
       .addFields({
@@ -61,7 +61,7 @@ module.exports = async (interaction, client, name) => {
       }),
 
     invite: new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**/invite [+]**")
       .setDescription("Create a invite.\nOptions:")
       .addFields(
@@ -76,19 +76,19 @@ module.exports = async (interaction, client, name) => {
       ),
 
     new: new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**/new**")
       .setDescription("Show recent 3wE update."),
 
     feedback: new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**/feedback**")
       .setDescription(
         "Send 3wE a feedback, require a feature or report an error."
       ),
 
     poll: new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**/poll [!title] [!timer] [description]**")
       .setDescription("Create a poll.\nOptions(!Required):")
       .addFields(
@@ -108,7 +108,7 @@ module.exports = async (interaction, client, name) => {
       ),
 
     info: new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**/info [+]**")
       .setDescription("Return the information of the target.\nOptions:")
       .addFields(
@@ -123,27 +123,27 @@ module.exports = async (interaction, client, name) => {
       ),
 
     membercount: new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**/membercount**")
       .setDescription("Return the total number of current members."),
 
     history: new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**/history**")
       .setDescription("Set a channel to store deleted messages."),
 
     timer: new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**/timer**")
       .setDescription("Set timer."),
 
     save: new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**/save**")
       .setDescription("Save by sending this message to you."),
 
     send: new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**/send**")
       .setDescription("Send a message to another channel."),
   };

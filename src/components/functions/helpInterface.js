@@ -9,7 +9,7 @@ const {
 module.exports = {
   embeds: [
     new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**What you wanna help about?**")
       .setThumbnail(
         "https://cdn.discordapp.com/attachments/904361331795300362/1009492357516902481/question.gif"

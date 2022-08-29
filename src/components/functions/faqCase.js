@@ -2,7 +2,7 @@ const { EmbedBuilder, Colors } = require("discord.js");
 
 module.exports = async (interaction, client, question) => {
   const step_1 = new EmbedBuilder()
-    .setColor(Colors.Yellow)
+    .setColor(Colors.Gold)
     .setTitle(
       "Step 1: Click on `User Settings` (the gear icon next to your Discord avatar)"
     )
@@ -11,7 +11,7 @@ module.exports = async (interaction, client, question) => {
     );
 
   const step_2 = new EmbedBuilder()
-    .setColor(Colors.Yellow)
+    .setColor(Colors.Gold)
     .setTitle(
       "Step 2: In the left sidebar, click on `Advanced` > Click on the `Developer Mode` toggle to turn it on"
     )
@@ -37,7 +37,7 @@ module.exports = async (interaction, client, question) => {
   switch (question) {
     case "how to get channel id": {
       const channel_3 = new EmbedBuilder()
-        .setColor(Colors.Yellow)
+        .setColor(Colors.Gold)
         .setTitle(
           "Step 3: To find the Channel ID, right-click on the required channel name in the left sidebar and click on `Copy ID`."
         )
@@ -50,7 +50,7 @@ module.exports = async (interaction, client, question) => {
 
     case "how to get message id": {
       const message_3 = new EmbedBuilder()
-        .setColor(Colors.Yellow)
+        .setColor(Colors.Gold)
         .setTitle(
           "Step 3: To find the Message ID of any message in a channel, simply right-click on the message and select `Copy ID`. You can also click on the three dots next to the message and select `Copy ID`."
         )
@@ -63,7 +63,7 @@ module.exports = async (interaction, client, question) => {
 
     case "how to get guild id": {
       const guild_3 = new EmbedBuilder()
-        .setColor(Colors.Yellow)
+        .setColor(Colors.Gold)
         .setTitle(
           "Step 3: To find the Server ID, right-click on the server name in the left sidebar and select `Copy ID`."
         )
@@ -78,7 +78,7 @@ module.exports = async (interaction, client, question) => {
       return await interaction.reply({
         embeds: [
           new EmbedBuilder()
-            .setColor(Colors.Yellow)
+            .setColor(Colors.Gold)
             .setTitle("Timer format")
             .setDescription("``` \u200b [number][blank][units-of-time] ```")
             .setFields(

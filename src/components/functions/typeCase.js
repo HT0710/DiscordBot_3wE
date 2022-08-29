@@ -35,7 +35,7 @@ module.exports = async (interaction, client, value, backButton) => {
       embeds: [
         (() => {
           const embed = new EmbedBuilder()
-            .setColor(Colors.Yellow)
+            .setColor(Colors.Gold)
             .setTitle("**Tools** - Provide server options")
             .setFooter({ text: "Page: 1/1" });
 
@@ -57,7 +57,7 @@ module.exports = async (interaction, client, value, backButton) => {
     moderation: {
       embeds: [
         new EmbedBuilder()
-          .setColor(Colors.Yellow)
+          .setColor(Colors.Gold)
           .setTitle("**Moderation** - Options that have you to manage members")
           // .addFields()
           .setFooter({ text: "Page: 1/1" }),
@@ -68,7 +68,7 @@ module.exports = async (interaction, client, value, backButton) => {
     music: {
       embeds: [
         new EmbedBuilder()
-          .setColor(Colors.Yellow)
+          .setColor(Colors.Gold)
           .setTitle("**Music** - Control bot's music player")
           // .addFields()
           .setFooter({ text: "Page: 1/1" }),
@@ -80,7 +80,7 @@ module.exports = async (interaction, client, value, backButton) => {
       embeds: [
         (() => {
           const embed = new EmbedBuilder()
-            .setColor(Colors.Yellow)
+            .setColor(Colors.Gold)
             .setTitle("**Others** - My other additional commands")
             .setFooter({ text: "Page: 1/1" });
 

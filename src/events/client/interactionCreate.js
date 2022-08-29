@@ -7,7 +7,7 @@ module.exports = {
       return await interaction.reply({
         embeds: [
           new EmbedBuilder()
-            .setColor(Colors.Yellow)
+            .setColor(Colors.Red)
             .setTitle("**```Commands can only be used in servers!```**"),
         ],
       });
