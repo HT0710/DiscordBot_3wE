@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder, Colors } = require("discord.js");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("save")
-    .setDescription("Save by sending this message to you.")
+    .setDescription("Save by sending the message to you.")
     .addStringOption((option) =>
       option
         .setName("message_id")

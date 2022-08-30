@@ -163,7 +163,7 @@ module.exports = async (interaction, client, name) => {
     save: new EmbedBuilder()
       .setColor(Colors.Gold)
       .setTitle("**`/save`**")
-      .setDescription("・Save by sending this message to you."),
+      .setDescription("・Save by sending the message to you."),
 
     send: new EmbedBuilder()
       .setColor(Colors.Gold)

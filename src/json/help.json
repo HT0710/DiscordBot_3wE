@@ -46,7 +46,7 @@
       "desc": "Send 3wE a feedback, require a feature or report an error."
     },
     { "name": "timer", "desc": "Set timer." },
-    { "name": "save", "desc": "Save by sending this message to you." },
+    { "name": "save", "desc": "Save by sending the message to you." },
     { "name": "send", "desc": "Send a message to another channel." }
   ]
 }
