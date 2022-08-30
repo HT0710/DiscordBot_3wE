@@ -40,7 +40,7 @@ module.exports = {
             new ActionRowBuilder().addComponents(newButton.setDisabled(true)),
           ],
         });
-      }, (last - 2) * 1000);
+      }, (prevMsg.embeds[0].data.description.split(":")[2] - Math.floor(new Date().getTime() / 1000) - 1) * 1000);
     }
   },
 };
