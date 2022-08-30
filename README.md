@@ -1,8 +1,16 @@
-# DiscordBot_3wE - v1.2@280822
+# DiscordBot_3wE - v1.3@300822
 
 ## -> [Invite link](https://discord.com/api/oauth2/authorize?client_id=1006591332204154951&permissions=8&scope=bot%20applications.commands)
 
 # Version logs
+## v1.3@300822
+- Add invite to channel command
+- Update invite server command
+- Update help command
+- Update shard event
+- Improve avatar, clean, feedback, info, history commands
+- Other minor changes and updates
+
 ## v1.2@280822
 - Add timer command
 - Add save command

@@ -32,7 +32,7 @@ module.exports = {
     for (let i = 0; i < 10; i++) {
       embed.addFields({
         name: `**\`/${commands[i].name}\`**`,
-        value: ` ${commands[i].value}`,
+        value: `> ${commands[i].value}`,
       });
     }
 
