@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, EmbedBuilder, Colors } = require("discord.js");
-const { imgFormat } = require("../../components/functions/exports");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -10,17 +9,21 @@ module.exports = {
     return await interaction.reply({
       embeds: [
         new EmbedBuilder()
-          .setColor(Colors.Yellow)
+          .setColor(Colors.Gold)
           .setAuthor({
             name: `By ${client.application.owner.tag}`,
-            iconURL: `${client.application.owner.displayAvatarURL(imgFormat)}`,
+            iconURL: `${client.application.owner.displayAvatarURL({
+              dynamic: true,
+              extension: "png",
+              size: 4096,
+            })}`,
             url: `https://github.com/HT0710`,
           })
-          .setTitle("**v1.2@280822**")
+          .setTitle("**v1.3@300822**")
           .setDescription(
-            "```- Add timer command\n- Add save command\n- Add send command\n- Add help faq\n- Remove ai command\n- Other minor changes and updates```"
+            "```- Add invite to channel command\n- Update invite server command\n- Update help command\n- Update shard event\n- Improve avatar, clean, feedback, info, history commands\n- Other minor changes and updates```"
           )
-          .setFooter({ text: "Date 28/08/2022" }),
+          .setFooter({ text: "Date 30/08/2022" }),
       ],
     });
   },

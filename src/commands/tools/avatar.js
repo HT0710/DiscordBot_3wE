@@ -12,7 +12,7 @@ module.exports = {
         .addUserOption((option) =>
           option
             .setName("target")
-            .setDescription("Tag a target to steal there avatar.")
+            .setDescription("Member to get avatar")
             .setRequired(true)
         )
     )
@@ -20,7 +20,7 @@ module.exports = {
       subcommand.setName("server").setDescription("Show server profile avatar.")
     )
     .addSubcommand((subcommand) =>
-      subcommand.setName("user").setDescription("Show myself profile avatar.")
+      subcommand.setName("user").setDescription("Show your profile avatar.")
     ),
   async execute(interaction, client) {
     await interaction.deferReply();

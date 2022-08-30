@@ -6,7 +6,6 @@ const {
   time,
   roleMention,
 } = require("discord.js");
-const { imgFormat } = require("../../../components/functions/exports");
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
@@ -23,7 +22,13 @@ module.exports = {
       })
       .setTitle(`User: \`${user.username}#${user.discriminator}\``)
       .setDescription(`**ID:** \u200b ${user.id}`)
-      .setThumbnail(member.displayAvatarURL(imgFormat))
+      .setThumbnail(
+        member.displayAvatarURL({
+          dynamic: true,
+          extension: "png",
+          size: 4096,
+        })
+      )
       .setFields(
         {
           name: `Nickname` + " \u200b".repeat(10),

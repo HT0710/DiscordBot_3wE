@@ -10,7 +10,7 @@
     },
     {
       "name": "invite",
-      "desc": "Invite me to your server or Create a server invite."
+      "desc": "Create an invite."
     },
     {
       "name": "ping",
