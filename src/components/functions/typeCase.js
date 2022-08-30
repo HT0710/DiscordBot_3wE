@@ -22,7 +22,7 @@ module.exports = async (interaction, client, value, backButton) => {
           menu.addOptions(
             new SelectMenuOptionBuilder()
               .setLabel(cmd.name)
-              .setDescription(cmd.dis)
+              .setDescription(cmd.desc)
               .setValue(cmd.name)
           )
         );
@@ -35,14 +35,14 @@ module.exports = async (interaction, client, value, backButton) => {
       embeds: [
         (() => {
           const embed = new EmbedBuilder()
-            .setColor(Colors.Yellow)
+            .setColor(Colors.Gold)
             .setTitle("**Tools** - Provide server options")
             .setFooter({ text: "Page: 1/1" });
 
           tools.forEach((command) =>
             embed.addFields({
               name: `**\`/${command.name}\`**`,
-              value: command.dis,
+              value: command.desc,
             })
           );
 
@@ -57,7 +57,7 @@ module.exports = async (interaction, client, value, backButton) => {
     moderation: {
       embeds: [
         new EmbedBuilder()
-          .setColor(Colors.Yellow)
+          .setColor(Colors.Gold)
           .setTitle("**Moderation** - Options that have you to manage members")
           // .addFields()
           .setFooter({ text: "Page: 1/1" }),
@@ -68,7 +68,7 @@ module.exports = async (interaction, client, value, backButton) => {
     music: {
       embeds: [
         new EmbedBuilder()
-          .setColor(Colors.Yellow)
+          .setColor(Colors.Gold)
           .setTitle("**Music** - Control bot's music player")
           // .addFields()
           .setFooter({ text: "Page: 1/1" }),
@@ -80,14 +80,14 @@ module.exports = async (interaction, client, value, backButton) => {
       embeds: [
         (() => {
           const embed = new EmbedBuilder()
-            .setColor(Colors.Yellow)
+            .setColor(Colors.Gold)
             .setTitle("**Others** - My other additional commands")
             .setFooter({ text: "Page: 1/1" });
 
           others.forEach((command) =>
             embed.addFields({
               name: `**\`/${command.name}\`**`,
-              value: command.dis,
+              value: command.desc,
             })
           );
 
@@ -98,43 +98,12 @@ module.exports = async (interaction, client, value, backButton) => {
         ? [commandMenu(others), backButton]
         : [commandMenu(others)],
     },
-
-    all: {
-      embeds: [
-        (() => {
-          const embed = new EmbedBuilder()
-            .setColor(Colors.Yellow)
-            .setTitle("**All commands**")
-            .setFooter({ text: "Page: 1/1" });
-
-          let commands = [];
-          const helpList = require("../../json/help.json");
-          for (const type in helpList) {
-            helpList[type].forEach((command) => {
-              commands.push({
-                name: command.name,
-                value: command.dis,
-              });
-            });
-          }
-
-          commands.sort((a, b) =>
-            a.name > b.name ? 1 : b.name > a.name ? -1 : 0
-          );
-
-          commands.forEach((command) =>
-            embed.addFields({
-              name: `**\`/${command.name}\`**`,
-              value: command.value,
-            })
-          );
-
-          return embed;
-        })(),
-      ],
-      components: backButton ? [backButton] : [],
-    },
   };
+
+  if (value === "all")
+    return client.buttons
+      .get("help-all-page_1")
+      .execute(interaction, client, true);
 
   try {
     return await interaction.update(type[value]);

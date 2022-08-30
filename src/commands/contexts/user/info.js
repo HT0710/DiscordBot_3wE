@@ -4,8 +4,8 @@ const {
   EmbedBuilder,
   Colors,
   time,
+  roleMention,
 } = require("discord.js");
-const { imgFormat } = require("../../../components/functions/exports");
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
@@ -16,13 +16,19 @@ module.exports = {
     const user = interaction.targetUser;
     const member = await interaction.targetMember.fetch();
     const embed = new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setAuthor({
         name: "🔎 \u200b Information Card",
       })
       .setTitle(`User: \`${user.username}#${user.discriminator}\``)
       .setDescription(`**ID:** \u200b ${user.id}`)
-      .setThumbnail(member.displayAvatarURL(imgFormat))
+      .setThumbnail(
+        member.displayAvatarURL({
+          dynamic: true,
+          extension: "png",
+          size: 4096,
+        })
+      )
       .setFields(
         {
           name: `Nickname` + " \u200b".repeat(10),
@@ -58,9 +64,12 @@ module.exports = {
         },
         {
           name: `Role List`,
-          value: ((roleCache) => roleCache.map((role) => role.name).join(", "))(
-            member.roles.cache
-          ),
+          value: ((roleCache) =>
+            roleCache
+              .map((role) =>
+                role.name === "@everyone" ? role.name : roleMention(role.id)
+              )
+              .join(", "))(member.roles.cache),
           inline: false,
         }
       );

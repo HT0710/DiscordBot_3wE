@@ -2,51 +2,51 @@
   "tools": [
     {
       "name": "avatar",
-      "dis": "Return avatar of the member or the server or the user."
+      "desc": "Return avatar of the member or the server or the user."
     },
     {
       "name": "clean",
-      "dis": "Delete channel messages."
+      "desc": "Delete channel messages."
     },
     {
       "name": "invite",
-      "dis": "Invite me to your server or Create a server invite."
+      "desc": "Create an invite."
     },
     {
       "name": "ping",
-      "dis": "Return the ping and the latency."
+      "desc": "Return the ping and the latency."
     },
     {
       "name": "prefix",
-      "dis": "Show server current prefix info and prefix commands."
+      "desc": "Show server current prefix info and prefix commands."
     },
     {
       "name": "poll",
-      "dis": "Create a poll."
+      "desc": "Create a poll."
     },
     {
       "name": "info",
-      "dis": "Return the information of the target."
+      "desc": "Return the information of the target."
     },
     {
       "name": "membercount",
-      "dis": "Return the total number of current members."
+      "desc": "Return the total number of current members."
     },
     {
       "name": "history",
-      "dis": "Set a channel to store deleted messages."
+      "desc": "Set a channel to store deleted messages."
     }
   ],
   "moderation": [],
   "music": [],
   "others": [
-    { "name": "new", "dis": "Show recent 3wE update." },
+    { "name": "new", "desc": "Show recent 3wE update." },
     {
       "name": "feedback",
-      "dis": "Send 3wE a feedback, require a feature or report an error."
+      "desc": "Send 3wE a feedback, require a feature or report an error."
     },
-    { "name": "timer", "dis": "Set timer." },
-    { "name": "save", "dis": "Save by sending this message to you." },
-    { "name": "send", "dis": "Send a message to another channel." }
+    { "name": "timer", "desc": "Set timer." },
+    { "name": "save", "desc": "Save by sending the message to you." },
+    { "name": "send", "desc": "Send a message to another channel." }
   ]
 }

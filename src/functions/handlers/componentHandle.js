@@ -35,6 +35,20 @@ module.exports = (client) => {
           break;
         }
 
+        case "pages": {
+          const pageFolders = readdirSync(`./src/components/${folder}`);
+          for (const pageTypeFolders of pageFolders) {
+            const pageFiles = readdirSync(
+              `./src/components/${folder}/${pageTypeFolders}`
+            );
+            for (const file of pageFiles) {
+              const page = require(`../../components/${folder}/${pageTypeFolders}/${file}`);
+              buttons.set(page.data.name, page);
+            }
+          }
+          break;
+        }
+
         default: {
           break;
         }

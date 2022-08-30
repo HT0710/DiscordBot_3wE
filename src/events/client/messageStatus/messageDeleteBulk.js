@@ -1,4 +1,4 @@
-const Guild = require("../../schemas/guild");
+const Guild = require("../../../schemas/guild");
 
 module.exports = {
   name: "messageDeleteBulk",
@@ -13,6 +13,9 @@ module.exports = {
       (channel) => channel.id == historyChannelId
     );
 
-    messages.forEach(async (message) => await historyChannel.send(message));
+    messages.forEach(
+      async (message) =>
+        await historyChannel.send(message).catch((e) => console.log(e.message))
+    );
   },
 };

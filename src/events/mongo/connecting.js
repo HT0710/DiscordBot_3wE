@@ -3,6 +3,6 @@ const chalk = require("chalk");
 module.exports = {
   name: "connecting",
   execute() {
-    console.log(chalk.yellow("[Database Status]: Connecting..."));
+    console.log("[Database Status]:", chalk.yellow("Connecting..."));
   },
 };

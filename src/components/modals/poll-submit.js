@@ -32,7 +32,7 @@ module.exports = {
       .setDescription(
         descList.join("\n") +
           "\n" +
-          `Time left: **${
+          `Expire: **${
             timer
               ? time(new Date(new Date().getTime() + (timer + 1) * 1000), "R")
               : "♾️"
