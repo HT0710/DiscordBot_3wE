@@ -166,17 +166,6 @@ module.exports = {
         const temporary = interaction.options.getBoolean("temporary");
         const last = interaction.options.getInteger("last_for");
 
-        const desc = `${
-          last
-            ? `Expire: **${time(
-                new Date(new Date().getTime() + last * 1000),
-                "R"
-              )}**`
-            : ""
-        }${last && message ? "\n" : ""}${
-          message ? `\`\`\`${message}\`\`\`` : ""
-        }`;
-
         await interaction.deferReply({ ephemeral: true });
 
         const CIIP = PermissionFlagsBits.CreateInstantInvite;
@@ -206,6 +195,18 @@ module.exports = {
             ],
           });
 
+        const desc = () =>
+          `${
+            last
+              ? `Expire: **${time(
+                  new Date(new Date().getTime() + last * 1000),
+                  "R"
+                )}**`
+              : ""
+          }${last && message ? "\n" : ""}${
+            message ? `\`\`\`${message}\`\`\`` : ""
+          }`;
+
         const invite = await channel.createInvite({
           temporary: temporary ? temporary : null,
           maxAge: last ? last : null,
@@ -220,7 +221,7 @@ module.exports = {
                 .setTitle(
                   `\`\`\`Click the button to join #${channel.name}.\`\`\``
                 )
-                .setDescription(desc ? desc : null),
+                .setDescription(desc() ? desc() : null),
             ],
             components: [row(invite.url, "Click here!")],
           });
@@ -249,7 +250,7 @@ module.exports = {
               .setTitle(
                 `\`\`\`Copy the button to get the invite link to #${channel.name}.\`\`\``
               )
-              .setDescription(desc ? desc : null),
+              .setDescription(desc() ? desc() : null),
           ],
           components: [
             row(invite.url, "Copy this!").addComponents(
