@@ -1,10 +1,21 @@
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, Partials } = require("discord.js");
 const { connect } = require("mongoose");
 const fs = require("fs");
 require("dotenv").config();
 
 const client = new Client({
   intents: 3258319,
+  partials: [
+    Partials.Channel,
+    Partials.GuildMember,
+    Partials.GuildScheduledEvent,
+    Partials.Message,
+    Partials.Reaction,
+    Partials.ThreadMember,
+    Partials.User,
+  ],
+  allowedMentions: { parse: ["everyone", "roles", "users"] },
+  rest: { timeout: 1000 },
 });
 
 client.commands = new Collection();
