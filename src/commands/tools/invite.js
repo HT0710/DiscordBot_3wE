@@ -127,7 +127,10 @@ module.exports = {
       }
 
       case "server": {
-        await interaction.deferReply({ ephemeral: true });
+        const public = interaction.options.getBoolean("public");
+
+        if (public) await interaction.deferReply();
+        else await interaction.deferReply({ ephemeral: true });
 
         if (!(await hasPermission())) return;
 

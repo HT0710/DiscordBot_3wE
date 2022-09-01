@@ -1,8 +1,18 @@
-# DiscordBot_3wE - v1.3@300822
+# DiscordBot_3wE - v1.4@010922
 
 ## -> [Invite link](https://discord.com/api/oauth2/authorize?client_id=1006591332204154951&permissions=8&scope=bot%20applications.commands)
 
 # Version logs
+## v1.4@010922
+- Add module execution
+- Add version log database
+- Update invite command
+- Update membercount command
+- Update all event logs
+- Update client options
+- Improve ping, help, new command
+- Fix nonce error of deleting messages
+
 ## v1.3@300822
 - Add invite to channel command
 - Update invite server command
