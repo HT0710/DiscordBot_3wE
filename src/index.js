@@ -1,6 +1,7 @@
 const { Client, Collection, Partials } = require("discord.js");
 const { connect } = require("mongoose");
 const fs = require("fs");
+const chalk = require("chalk");
 require("dotenv").config();
 
 const client = new Client({
@@ -15,7 +16,7 @@ const client = new Client({
     Partials.User,
   ],
   allowedMentions: { parse: ["everyone", "roles", "users"] },
-  rest: { timeout: 1000 },
+  rest: { timeout: 10000 },
 });
 
 client.commands = new Collection();
@@ -36,7 +37,11 @@ for (const folder of functionsFolder) {
 }
 
 process.on("unhandledRejection", (error) =>
-  console.error("[Unhandled promise rejection]:", error.message)
+  console.error(
+    chalk.red("[Unhandled Rejection]:"),
+    chalk.yellow(`${error.name}:`),
+    error.message
+  )
 );
 
 client.handleEvents();

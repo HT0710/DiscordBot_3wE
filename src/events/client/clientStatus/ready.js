@@ -4,7 +4,7 @@ module.exports = {
   name: "ready",
   once: true,
   execute(client) {
-    console.log("[Client Status]:", chalk.green("Ready"));
+    console.log("[Client]:", chalk.green("Ready"));
 
     client.pickPresence("online");
   },

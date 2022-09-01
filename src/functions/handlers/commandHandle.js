@@ -40,7 +40,13 @@ module.exports = (client) => {
       .put(Routes.applicationCommands(process.env.ID), {
         body: client.commandArray,
       })
-      .then(() => console.log("[Command Status]:", chalk.green(`Updated`)))
-      .catch((err) => console.error(err.message));
+      .then(() => console.log("[Command]:", chalk.green(`Ready`)))
+      .catch((error) =>
+        console.error(
+          chalk.red("[REST API Error]:"),
+          chalk.yellow(`${error.name}:`),
+          error.message
+        )
+      );
   };
 };

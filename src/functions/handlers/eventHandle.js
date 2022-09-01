@@ -52,6 +52,6 @@ module.exports = (client) => {
       }
     }
 
-    console.log("[Event Status]:", chalk.green(`Ready`));
+    console.log("[Event]:", chalk.green(`Ready`));
   };
 };

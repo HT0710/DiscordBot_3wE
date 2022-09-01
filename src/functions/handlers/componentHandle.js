@@ -56,6 +56,6 @@ module.exports = (client) => {
       }
     }
 
-    console.log("[Component Status]:", chalk.green(`Ready`));
+    console.log("[Component]:", chalk.green(`Ready`));
   };
 };

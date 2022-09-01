@@ -9,15 +9,29 @@ module.exports = {
         .setColor(Colors.Red)
         .setTitle("**```Commands can only be used in servers!```**");
 
-      return await interaction.reply({ embeds: [preventEmbed] });
+      return await interaction.reply({
+        embeds: [preventEmbed],
+        ephemeral: true,
+      });
     }
 
     const logError = async (error, name) => {
-      console.error(chalk.red("[Interaction Error]:"), error.message);
+      console.error(
+        chalk.red("[Interaction Error]:"),
+        chalk.blue(`${name}:`),
+        chalk.yellow(`${error.name}:`),
+        error.message
+      );
 
       const errorEmbed = new EmbedBuilder()
         .setColor(Colors.Red)
         .setTitle(`\`An error occurred while executing the command ${name}!\``);
+
+      if (interaction.deferred)
+        return await interaction.editReply({
+          embeds: [errorEmbed],
+          ephemeral: true,
+        });
 
       await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
     };
@@ -66,7 +80,7 @@ module.exports = {
         try {
           await button.execute(interaction, client);
         } catch (error) {
-          await logError(error, interaction.commandName);
+          await logError(error, interaction.customId);
         }
         break;
       }
@@ -83,7 +97,7 @@ module.exports = {
         try {
           await menu.execute(interaction, client);
         } catch (error) {
-          await logError(error, interaction.commandName);
+          await logError(error, interaction.customId);
         }
         break;
       }
@@ -100,7 +114,7 @@ module.exports = {
         try {
           await modal.execute(interaction, client);
         } catch (error) {
-          await logError(error, interaction.commandName);
+          await logError(error, interaction.customId);
         }
         break;
       }
@@ -120,7 +134,7 @@ module.exports = {
         try {
           await contextCommand.execute(interaction, client);
         } catch (error) {
-          await logError(error, interaction.commandName);
+          await logError(error, `[${interaction.commandName}]`);
         }
         break;
       }
