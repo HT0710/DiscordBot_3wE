@@ -177,8 +177,7 @@ module.exports = {
           .setCustomId("invite-clipboard")
           .setLabel("Copy to clipboard!")
           .setEmoji("📋")
-          .setStyle(ButtonStyle.Primary)
-          .setDisabled(true);
+          .setStyle(ButtonStyle.Primary);
 
         await interaction.editReply({
           embeds: [clickEmbed],
@@ -275,8 +274,7 @@ module.exports = {
             .setCustomId("invite-clipboard")
             .setLabel("Copy to clipboard!")
             .setEmoji("📋")
-            .setStyle(ButtonStyle.Primary)
-            .setDisabled(true);
+            .setStyle(ButtonStyle.Primary);
 
           const publicButton = new ButtonBuilder()
             .setCustomId("invite-public")
