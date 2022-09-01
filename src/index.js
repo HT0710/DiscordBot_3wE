@@ -1,4 +1,4 @@
-const { Client, Collection, GatewayIntentBits } = require("discord.js");
+const { Client, Collection } = require("discord.js");
 const { connect } = require("mongoose");
 const fs = require("fs");
 require("dotenv").config();
@@ -23,6 +23,10 @@ for (const folder of functionsFolder) {
     require(`./functions/${folder}/${file}`)(client);
   }
 }
+
+process.on("unhandledRejection", (error) =>
+  console.error("[Unhandled promise rejection]:", error.message)
+);
 
 client.handleEvents();
 client.handleCommands();

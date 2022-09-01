@@ -13,6 +13,10 @@ module.exports = {
       (channel) => channel.id == historyChannelId
     );
 
-    await historyChannel.send(message).catch((e) => console.log(e.message));
+    await historyChannel.send(message).catch((e) => {
+      message.nonce = Math.random().toString().slice(2);
+
+      historyChannel.send(message).catch((e) => console.log(e.message));
+    });
   },
 };

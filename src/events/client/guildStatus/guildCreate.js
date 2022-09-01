@@ -1,3 +1,4 @@
+const { EmbedBuilder, Colors } = require("discord.js");
 const mongoose = require("mongoose");
 const Guild = require("../../../schemas/guild");
 
@@ -6,7 +7,11 @@ module.exports = {
   async execute(guild, client) {
     console.log(`${client.user.tag} has joined #${guild.name}`);
 
-    guild.systemChannel.send("I finally awaked. **`/help`** for the info.");
+    const embed = new EmbedBuilder()
+      .setColor(Colors.Gold)
+      .setTitle("**Try first command `/help`.**");
+
+    await guild.systemChannel.send({ embeds: [embed] });
 
     if (await Guild.exists({ id: guild.id })) return;
 
