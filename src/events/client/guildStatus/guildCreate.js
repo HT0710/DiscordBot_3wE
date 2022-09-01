@@ -1,3 +1,4 @@
+const chalk = require("chalk");
 const { EmbedBuilder, Colors } = require("discord.js");
 const mongoose = require("mongoose");
 const Guild = require("../../../schemas/guild");
@@ -5,7 +6,10 @@ const Guild = require("../../../schemas/guild");
 module.exports = {
   name: "guildCreate",
   async execute(guild, client) {
-    console.log(`${client.user.tag} has joined #${guild.name}`);
+    console.log(
+      "[Guild Status]:",
+      `${client.user.tag} has ${chalk.green("joined")} @${guild.name}`
+    );
 
     const embed = new EmbedBuilder()
       .setColor(Colors.Gold)

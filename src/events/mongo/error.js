@@ -4,6 +4,6 @@ module.exports = {
   name: "error",
   execute(error) {
     console.log("[Database Status]:", chalk.red("Error!"));
-    console.error(error);
+    console.error(error.message);
   },
 };
