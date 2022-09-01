@@ -1,3 +1,4 @@
+const chalk = require("chalk");
 const { readdirSync } = require("fs");
 
 module.exports = (client) => {
@@ -54,5 +55,7 @@ module.exports = (client) => {
         }
       }
     }
+
+    console.log("[Component Status]:", chalk.green(`Ready`));
   };
 };

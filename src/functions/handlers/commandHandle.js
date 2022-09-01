@@ -1,4 +1,5 @@
 const { REST } = require("@discordjs/rest");
+const chalk = require("chalk");
 const { Routes } = require("discord.js");
 const fs = require("fs");
 require("dotenv").config();
@@ -39,7 +40,7 @@ module.exports = (client) => {
       .put(Routes.applicationCommands(process.env.ID), {
         body: client.commandArray,
       })
-      .then(() => console.log(`Successfully updated.`))
+      .then(() => console.log("[Command Status]:", chalk.green(`Updated`)))
       .catch((err) => console.error(err.message));
   };
 };

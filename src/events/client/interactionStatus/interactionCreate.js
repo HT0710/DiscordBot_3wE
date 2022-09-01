@@ -1,23 +1,25 @@
+const chalk = require("chalk");
 const { InteractionType, EmbedBuilder, Colors } = require("discord.js");
 
 module.exports = {
   name: "interactionCreate",
   async execute(interaction, client) {
-    if (!interaction.guild)
-      return await interaction.reply({
-        embeds: [
-          new EmbedBuilder()
-            .setColor(Colors.Red)
-            .setTitle("**```Commands can only be used in servers!```**"),
-        ],
-      });
+    if (!interaction.guild) {
+      const preventEmbed = new EmbedBuilder()
+        .setColor(Colors.Red)
+        .setTitle("**```Commands can only be used in servers!```**");
+
+      return await interaction.reply({ embeds: [preventEmbed] });
+    }
 
     const logError = async (error, name) => {
-      console.error(error.message);
-      await interaction.reply({
-        content: `There was an error while executing command ${name}!`,
-        ephemeral: true,
-      });
+      console.error(chalk.red("[Interaction Error]:"), error.message);
+
+      const errorEmbed = new EmbedBuilder()
+        .setColor(Colors.Red)
+        .setTitle(`\`An error occurred while executing the command ${name}!\``);
+
+      await interaction.reply({ embeds: [errorEmbed], ephemeral: true });
     };
 
     const interactionType = (() => {
@@ -38,7 +40,10 @@ module.exports = {
         if (!command) return;
 
         console.log(
-          `${interaction.user.tag} in #${interaction.guild.name} triggered ${interaction}.`
+          "[Interaction]:",
+          `${interaction.user.tag} in @${interaction.guild.name} ${chalk.cyan(
+            "triggered"
+          )} ${interaction}`
         );
 
         try {
@@ -52,7 +57,11 @@ module.exports = {
       case "button": {
         const button = client.buttons.get(interaction.customId);
 
-        if (!button) return console.error("There is no code for this button.");
+        if (!button)
+          return console.error(
+            "[Interaction]:",
+            chalk.gray("There is no code for this Button.")
+          );
 
         try {
           await button.execute(interaction, client);
@@ -66,7 +75,10 @@ module.exports = {
         const menu = client.selectMenus.get(interaction.customId);
 
         if (!menu)
-          return console.error("There is no code for this select menu.");
+          return console.error(
+            "[Interaction]:",
+            chalk.gray("There is no code for this Menu Selection.")
+          );
 
         try {
           await menu.execute(interaction, client);
@@ -79,7 +91,11 @@ module.exports = {
       case "modalSubmit": {
         const modal = client.modals.get(interaction.customId);
 
-        if (!modal) return console.error("There is no code for this modal.");
+        if (!modal)
+          return console.error(
+            "[Interaction]:",
+            chalk.gray("There is no code for this Modal.")
+          );
 
         try {
           await modal.execute(interaction, client);
@@ -95,7 +111,10 @@ module.exports = {
         if (!contextCommand) return;
 
         console.log(
-          `${interaction.user.tag} in #${interaction.guild.name} triggered [${interaction.commandName}].`
+          "[Interaction]:",
+          `${interaction.user.tag} in @${interaction.guild.name} ${chalk.cyan(
+            "triggered"
+          )} [${interaction.commandName}]`
         );
 
         try {

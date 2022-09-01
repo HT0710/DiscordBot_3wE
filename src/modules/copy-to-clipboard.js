@@ -1,0 +1,1 @@
+import clipboard from "clipboardy"; clipboard.writeSync("[object Object]");
