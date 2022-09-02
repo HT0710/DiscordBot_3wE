@@ -1,7 +1,6 @@
 const { Client, Collection, Partials } = require("discord.js");
 const { connect } = require("mongoose");
 const fs = require("fs");
-const chalk = require("chalk");
 require("dotenv").config();
 
 const client = new Client({
@@ -35,14 +34,6 @@ for (const folder of functionsFolder) {
     require(`./functions/${folder}/${file}`)(client);
   }
 }
-
-process.on("unhandledRejection", (error) =>
-  console.error(
-    chalk.red("[Unhandled Rejection]:"),
-    chalk.yellow(`${error.name}:`),
-    error.message
-  )
-);
 
 client.handleEvents();
 client.handleCommands();
