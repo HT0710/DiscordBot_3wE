@@ -56,9 +56,9 @@ module.exports = {
           new EmbedBuilder()
             .setColor(Colors.Yellow)
             .setTitle(
-              `Your ${hour === 0 ? "" : `${hour} h : `}${
+              `Your \`${hour === 0 ? "" : `${hour}h : `}${
                 minute === 0 ? "" : `${minute}m : `
-              }${second === 0 ? "" : `${second} s`} has ended!`
+              }${second === 0 ? "" : `${second}s`}\` has ended!`
             ),
         ],
       });
