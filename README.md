@@ -1,8 +1,16 @@
-# DiscordBot_3wE - v1.4@010922
+# DiscordBot_3wE - v1.5
 
 ## -> [Invite link](https://discord.com/api/oauth2/authorize?client_id=1006591332204154951&permissions=8&scope=bot%20applications.commands)
 
 # Version logs
+## v1.5@040922
+- Add process event
+- Improve event handle
+- Improve save, send, poll, prefix command
+- Fix and update invite command
+- Minor changes on avatar, clean command
+- Complete improvement of all current commands
+
 ## v1.4@010922
 - Add module execution
 - Add version log database
