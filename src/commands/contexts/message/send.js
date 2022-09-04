@@ -22,15 +22,15 @@ module.exports = {
               .setCustomId("channelId")
               .setLabel("Input channel id")
               .setPlaceholder(
-                "Note:\nYou can send to another server only if bot is in it\n/help faq [how to get channel id]"
+                "Can send to another server only if bot is in it. /help faq"
               )
-              .setStyle(TextInputStyle.Paragraph)
+              .setStyle(TextInputStyle.Short)
               .setRequired(true)
           ),
           new ActionRowBuilder().addComponents(
             new TextInputBuilder()
               .setCustomId("messageId")
-              .setLabel("You don't need to change message id here!")
+              .setLabel("You don't need to change the message id here!")
               .setPlaceholder("/help faq [how to get message id]")
               .setValue(interaction.targetMessage.id)
               .setStyle(TextInputStyle.Short)

@@ -10,6 +10,15 @@ module.exports = (client) => {
         .readdirSync(`./src/events/${folder}`)
         .filter((file) => file.endsWith(".js"));
       switch (folder) {
+        case "process": {
+          for (const file of eventFiles) {
+            const event = require(`../../events/${folder}/${file}`);
+
+            process.on(event.name, (...args) => event.execute(...args, client));
+          }
+          break;
+        }
+
         case "client": {
           const clientFolder = fs.readdirSync(`./src/events/${folder}`);
           for (const clientTypeFolders of clientFolder) {
@@ -44,6 +53,7 @@ module.exports = (client) => {
                 event.execute(...args, client)
               );
           }
+          break;
         }
 
         default: {
@@ -52,6 +62,6 @@ module.exports = (client) => {
       }
     }
 
-    console.log("[Event Status]:", chalk.green(`Ready`));
+    console.log("[Event]:", chalk.green(`Ready`));
   };
 };

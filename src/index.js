@@ -15,7 +15,7 @@ const client = new Client({
     Partials.User,
   ],
   allowedMentions: { parse: ["everyone", "roles", "users"] },
-  rest: { timeout: 1000 },
+  rest: { timeout: 10000 },
 });
 
 client.commands = new Collection();
@@ -34,10 +34,6 @@ for (const folder of functionsFolder) {
     require(`./functions/${folder}/${file}`)(client);
   }
 }
-
-process.on("unhandledRejection", (error) =>
-  console.error("[Unhandled promise rejection]:", error.message)
-);
 
 client.handleEvents();
 client.handleCommands();

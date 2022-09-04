@@ -1,3 +1,4 @@
+const chalk = require("chalk");
 const { EmbedBuilder, Colors, time } = require("discord.js");
 const Poll = require("../../schemas/poll");
 
@@ -26,65 +27,81 @@ module.exports = {
     };
     format(desc, 0);
 
-    const embed = new EmbedBuilder()
-      .setColor(Colors.Yellow)
-      .setTitle(`**${title}**`)
-      .setDescription(
-        descList.join("\n") +
-          "\n" +
-          `Expire: **${
-            timer
-              ? time(new Date(new Date().getTime() + (timer + 1) * 1000), "R")
-              : "♾️"
-          }**` +
-          "\n" +
-          "- \u200B \u200B".repeat(18)
-      )
+    const pollEmbed = new EmbedBuilder()
+      .setColor(Colors.Gold)
+      .setTitle(`\`${title}\``)
       .setFooter({
         text: `By ${interaction.member.displayName}`,
         iconURL: interaction.member.displayAvatarURL({ size: 4096 }),
       })
       .setTimestamp();
 
-    const icons = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣"];
-    const reacts = [];
+    const icons = ["🇦", "🇧", "🇨", "🇩", "🇪"];
     const choices = [];
-    icons.forEach((icon, index) => {
-      const value = interaction.fields.getTextInputValue(
-        (index + 1).toString()
-      );
-      if (value) {
-        choices.push({ name: value, count: 0, percent: { int: 0, str: "" } });
-        reacts.push(icon);
-        embed.addFields({
-          name: `${icon} \u200B \u200B ${value}`,
-          value: "\u200B",
-        });
-      }
+    const reacted = [];
+    icons.forEach((icon) => {
+      const value = interaction.fields.getTextInputValue(icon);
+      if (!value) return;
+
+      reacted.push(icon);
+      choices.push({
+        icon: icon,
+        value: value,
+        count: 0,
+        percent: { int: 0, str: "" },
+      });
+
+      pollEmbed.addFields({
+        name: `${icon} : **${value}**`,
+        value: "──",
+      });
     });
 
-    const message = await interaction.reply({
-      embeds: [embed],
-      fetchReply: true,
-    });
-    reacts.forEach(async (icon) => await message.react(icon));
+    const expire = timer
+      ? time(new Date(new Date().getTime() + timer * 1000), "R")
+      : "♾️";
+
+    pollEmbed.setDescription(
+      descList.join("\n") +
+        "\n" +
+        `Expire: **${expire}**` +
+        "\n" +
+        "━".repeat(20)
+    );
 
     poll.createAt = new Date().getTime();
     poll.endAt = timer ? poll.createAt + timer : timer;
-    await poll.save().catch((e) => console.error(e.message));
 
-    const filter = (reaction, user) => {
-      return reacts.includes(reaction.emoji.name);
-    };
+    const message = await interaction.reply({
+      embeds: [pollEmbed],
+      fetchReply: true,
+    });
 
-    const collector = message.createReactionCollector({
+    choices.forEach(async (choice) => await message.react(choice.icon));
+
+    await poll
+      .save()
+      .catch((e) =>
+        console.error(
+          chalk.red("[Poll Save Error]:"),
+          chalk.yellow(e.name + ":"),
+          e.message
+        )
+      );
+
+    const filter = (reaction, user) => reacted.includes(reaction.emoji.name);
+
+    const collector = await message.createReactionCollector({
       filter,
       time: timer ? timer * 1000 : null,
     });
 
     const collectedEmbed = new EmbedBuilder()
-      .setColor(Colors.Yellow)
-      .setTitle(`**Result:** \` ${title} \``);
+      .setColor(Colors.Gold)
+      .setTitle(`**Result for \` ${title} \`**`)
+      .setFooter({
+        text: `Poll by ${interaction.member.displayName} has ended!`,
+      });
 
     collector.on("end", async (collected) => {
       let total = 0;
@@ -93,36 +110,51 @@ module.exports = {
         choice.count = count;
         total += count;
       });
+
       collectedEmbed.setDescription(
-        `Total: **${total}** ` + (total > 1 ? "reactions!" : "reaction!")
+        `Total: **\`${total}\`** ` +
+          (total > 1 ? "reactions!" : "reaction!") +
+          `\n${"━".repeat(20)}`
       );
 
       choices.forEach((choice, index) => {
         let int = Math.round(((collected.at(index).count - 1) / total) * 100);
         choice.percent.int = int ? int : 0;
         const repeat = Math.round(choice.percent.int / 10);
-        choice.percent.str = "🟨".repeat(repeat) + "⬛".repeat(10 - repeat);
+        choice.percent.str = "🟧".repeat(repeat) + "⬛".repeat(10 - repeat);
       });
 
       choices.sort((b, a) =>
         a.percent.int > b.percent.int
           ? 1
           : a.percent.int === b.percent.int
-          ? a.name < b.name
+          ? a.icon < b.icon
             ? 1
             : -1
           : -1
       );
 
-      choices.forEach((choice) => {
+      choices[0].icon += " \u200b \u200b 👑";
+      choices.forEach((choice, index) => {
         collectedEmbed.addFields({
-          name: `**${choice.name}**`,
-          value: `${choice.percent.str} **${choice.percent.int}%**`,
+          name: `> ${choice.icon}`,
+          value:
+            `\`${choice.percent.str}\` : **${choice.percent.int}%**` +
+            (index === choices.length - 1 ? `\n\n${"━".repeat(20)}` : ""),
         });
       });
 
       await interaction.followUp({ embeds: [collectedEmbed] });
-      await poll.delete().catch((e) => console.error(e.message));
+
+      await poll
+        .delete()
+        .catch((e) =>
+          console.error(
+            chalk.red("[Delete Message Error]:"),
+            chalk.yellow(`${e.name}:`),
+            e.message
+          )
+        );
     });
   },
 };

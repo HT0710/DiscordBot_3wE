@@ -21,7 +21,7 @@ module.exports = async (interaction, client, name) => {
         },
         {
           name: "**`/avatar user`**",
-          value: "・Show your profile avatar.",
+          value: "・Show yourself profile avatar.",
         }
       ),
 

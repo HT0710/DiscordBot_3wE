@@ -20,7 +20,7 @@ module.exports = {
       subcommand.setName("server").setDescription("Show server profile avatar.")
     )
     .addSubcommand((subcommand) =>
-      subcommand.setName("user").setDescription("Show your profile avatar.")
+      subcommand.setName("user").setDescription("Show yourself profile avatar.")
     ),
   async execute(interaction, client) {
     await interaction.deferReply();

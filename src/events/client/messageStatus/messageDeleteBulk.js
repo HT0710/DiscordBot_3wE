@@ -18,7 +18,15 @@ module.exports = {
         await historyChannel.send(message).catch((e) => {
           message.nonce = Math.random().toString().slice(2);
 
-          historyChannel.send(message).catch((e) => console.log(e.message));
+          historyChannel
+            .send(message)
+            .catch((e) =>
+              console.error(
+                chalk.red(`[Message Delete Error]:`),
+                chalk.yellow(`${error.name}:`),
+                error.message
+              )
+            );
         })
     );
   },

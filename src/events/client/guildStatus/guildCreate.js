@@ -33,6 +33,14 @@ module.exports = {
       ownerId: guild.ownerId,
     });
 
-    await setup.save().catch((e) => console.error(e.message));
+    await setup
+      .save()
+      .catch((error) =>
+        console.error(
+          chalk.red(`[Guild Create Error]:`),
+          chalk.yellow(`${error.name}:`),
+          error.message
+        )
+      );
   },
 };

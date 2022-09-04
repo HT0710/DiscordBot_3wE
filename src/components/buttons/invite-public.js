@@ -1,9 +1,4 @@
-const {
-  ButtonBuilder,
-  ButtonStyle,
-  EmbedBuilder,
-  ActionRowBuilder,
-} = require("discord.js");
+const { ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: {
@@ -11,8 +6,8 @@ module.exports = {
   },
   async execute(interaction, client) {
     const prevMsg = interaction.message;
-    const channel = interaction.channel;
     const embed = prevMsg.embeds[0].data;
+    const channel = embed.title.match(/#(.*?)./i)[1];
     const inviteURL = embed.description.match(/\((.*?)\)/i)[1];
     const last = embed.description.includes("Expire:");
 
@@ -26,7 +21,7 @@ module.exports = {
     embed.title = `\`\`\`Click the button to join #${channel.name}.\`\`\``;
     prevMsg.components[0].components = [joinButton];
 
-    const msg = await channel.send(prevMsg);
+    const msg = await interaction.channel.send(prevMsg);
     await interaction.update({
       content: "Done!",
       embeds: [],

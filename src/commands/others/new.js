@@ -7,7 +7,7 @@ module.exports = {
     .setName("new")
     .setDescription("Show recent bot update."),
   async execute(interaction, client) {
-    const current = "1.4";
+    const current = "1.5";
 
     const version = await Version.findOne({ version: current });
     if (!version) {
@@ -15,14 +15,12 @@ module.exports = {
         _id: mongoose.Types.ObjectId(),
         version: current,
         content: [
-          "Add module execution",
-          "Add version log database",
-          "Update invite command",
-          "Update membercount command",
-          "Update all event logs",
-          "Update client options",
-          "Improve ping, help, new command",
-          "Fix nonce error of deleting messages",
+          "Add process event",
+          "Improve event handle",
+          "Improve save, send, poll, prefix command",
+          "Fix and update invite command",
+          "Minor changes on avatar, clean command",
+          "Complete improvement of all current commands",
         ],
         date: new Date().toLocaleDateString("vi-VN", {
           day: "2-digit",

@@ -1,10 +1,10 @@
 const chalk = require("chalk");
 
 module.exports = {
-  name: "error",
-  execute(error) {
+  name: "uncaughtException",
+  execute(error, client) {
     console.error(
-      chalk.red("[Database Error]:"),
+      chalk.red("[Uncaught Exception]:"),
       chalk.yellow(`${error.name}:`),
       error.message
     );
