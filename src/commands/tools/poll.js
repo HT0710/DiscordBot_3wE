@@ -1,3 +1,4 @@
+const chalk = require("chalk");
 const {
   SlashCommandBuilder,
   ActionRowBuilder,
@@ -12,8 +13,7 @@ const Poll = require("../../schemas/poll");
 const timeFormat = (string) => {
   let str = string.trim();
   str = str.toLowerCase();
-  if (["forever", "no", "0", "infinity", "eternity"].includes(str))
-    return "forever";
+  if (["forever", "no", "0", "infinity", "eternity"].includes(str)) return null;
 
   const component = str.split(" ");
   if (component.length > 2) return "error";
@@ -21,52 +21,25 @@ const timeFormat = (string) => {
   const time = parseFloat(component[0]);
   if (isNaN(time)) return "error";
 
-  const format = component[1];
+  const unit = component[1];
 
-  let value;
-  switch (format) {
-    case "s":
-    case "sec":
-    case "second":
-    case "seconds":
-      value = time;
-      break;
+  if (["s", "sec", "second", "seconds"].includes(unit)) return time;
+  else time * 60;
 
-    case "m":
-    case "min":
-    case "minute":
-    case "minutes":
-      value = time * 60;
-      break;
+  if (["m", "min", "minute", "minutes"].includes(unit)) return time;
+  else time * 60;
 
-    case "h":
-    case "hour":
-    case "hours":
-      value = time * 3600;
-      break;
+  if (["h", "hour", "hours"].includes(unit)) return time;
+  else time * 24;
 
-    case "d":
-    case "day":
-    case "days":
-      value = time * 86400;
-      break;
+  if (["d", "day", "days"].includes(unit)) return time;
+  else time * 7;
 
-    case "w":
-    case "week":
-    case "weeks":
-      value = time * 604800;
-      break;
+  if (["w", "week", "weeks"].includes(unit)) return time;
+  else time * 4.348;
 
-    case "month":
-    case "months":
-      value = time * 2629743;
-      break;
-
-    default:
-      return "error";
-  }
-
-  return value.toString();
+  if (["month", "months"].includes(unit)) return time;
+  else return "error";
 };
 
 module.exports = {
@@ -85,8 +58,8 @@ module.exports = {
         .setDescription(
           "Timer for your poll. Format: [number][blank][units-of-time]. Ex: 5 s, 12 min, 2 days or forever"
         )
-        .setRequired(true)
         .setAutocomplete(true)
+        .setRequired(true)
     )
     .addStringOption((option) =>
       option.setName("description").setDescription("Description for your poll")
@@ -116,26 +89,17 @@ module.exports = {
     const description = interaction.options.getString("description");
     const rawTimer = interaction.options.getString("timer");
     let timer = timeFormat(rawTimer);
-    switch (timer) {
-      case "error":
-        return await interaction.reply({
-          embeds: [
-            new EmbedBuilder()
-              .setColor(Colors.Yellow)
-              .setTitle("Wrong timer format.")
-              .setDescription(
-                "**Format**: [number][blank][units-of-time].\n**Units of time**: s, sec, second, m, min,...\n**Example**: 5 s, 12 min, 2 days or forever"
-              ),
-          ],
-          ephemeral: true,
-        });
 
-      case "forever":
-        timer = null;
-        break;
+    if (timer === "error") {
+      const errorEmbed = new EmbedBuilder()
+        .setColor(Colors.Red)
+        .setTitle("`Wrong timer format`")
+        .setDescription("> /help faq [poll timer format]");
 
-      default:
-        timer = parseInt(timer);
+      return await interaction.editReply({
+        embeds: [errorEmbed],
+        ephemeral: true,
+      });
     }
 
     const poll = new Poll({
@@ -147,23 +111,31 @@ module.exports = {
       timer: timer,
     });
 
-    await poll.save().catch((e) => console.log(e.message));
+    await poll
+      .save()
+      .catch((e) =>
+        console.error(
+          chalk.red("[Poll Save Error]:"),
+          chalk.yellow(e.name + ":"),
+          e.message
+        )
+      );
 
     const modal = new ModalBuilder()
       .setCustomId("poll-submit")
       .setTitle("Options for your poll");
 
-    for (let i = 1; i <= 5; i++) {
+    ["🇦", "🇧", "🇨", "🇩", "🇪"].forEach((icon) =>
       modal.addComponents(
         new ActionRowBuilder().addComponents(
           new TextInputBuilder()
-            .setCustomId(i.toString())
-            .setLabel("Choice " + i)
-            .setRequired(i > 2 ? false : true)
+            .setCustomId(icon)
+            .setLabel(icon)
             .setStyle(TextInputStyle.Short)
+            .setRequired(["🇦", "🇧"].includes(icon) ? true : false)
         )
-      );
-    }
+      )
+    );
 
     await interaction.showModal(modal);
   },

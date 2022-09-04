@@ -1,6 +1,7 @@
+const chalk = require("chalk");
 const {
   SlashCommandBuilder,
-  PermissionsBitField,
+  PermissionFlagsBits,
   EmbedBuilder,
   Colors,
 } = require("discord.js");
@@ -18,64 +19,54 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction, client) {
+    await interaction.deferReply({ ephemeral: true });
+
     // Check Permissions
-    const MMP = PermissionsBitField.Flags.ManageMessages;
-    if (!interaction.appPermissions.has(MMP))
-      return await interaction.reply({
-        embeds: [
-          new EmbedBuilder()
-            .setColor(Colors.Red)
-            .setTitle(
-              "```Bot don't have permissions to execute this command.```"
-            ),
-        ],
-        ephemeral: true,
-      });
+    const MMP = PermissionFlagsBits.ManageMessages;
+    if (!interaction.appPermissions.has(MMP)) {
+      const permsEmbed = new EmbedBuilder()
+        .setColor(Colors.Red)
+        .setTitle("`Bot don't have permissions to execute this command.`");
+
+      return await interaction.editReply({ embeds: [permsEmbed] });
+    }
+
     const app = await client.application.fetch();
     if (
       !interaction.memberPermissions.has(MMP) &&
       interaction.member.id !== app.owner.id
-    )
-      return await interaction.reply({
-        embeds: [
-          new EmbedBuilder()
-            .setColor(Colors.Red)
-            .setTitle(
-              "```User don't have permissions to execute this command.```"
-            ),
-        ],
-        ephemeral: true,
-      });
+    ) {
+      const permsEmbed = new EmbedBuilder()
+        .setColor(Colors.Red)
+        .setTitle("`User don't have permissions to execute this command.`");
+
+      return await interaction.editReply({ embeds: [permsEmbed] });
+    }
 
     const amount = interaction.options.getInteger("amount");
 
     // Execute
-    await interaction.channel
-      .bulkDelete(amount, true)
-      .then(
-        await interaction.reply({
-          embeds: [
-            new EmbedBuilder()
-              .setColor(Colors.Green)
-              .setTitle(
-                `\`\`\`Successfully cleaned [${amount}] messages.\`\`\``
-              ),
-          ],
-          ephemeral: true,
-        })
-      )
-      .catch((error) => {
-        console.error(error.message);
-        interaction.reply({
-          embeds: [
-            new EmbedBuilder()
-              .setColor(Colors.Red)
-              .setTitle(
-                "```There was an error while trying to clean message in this channel!```"
-              ),
-          ],
-          ephemeral: true,
-        });
-      });
+    try {
+      await interaction.channel.bulkDelete(amount, true);
+
+      const doneEmbed = new EmbedBuilder()
+        .setColor(Colors.Green)
+        .setTitle(`\`Successfully cleaned [${amount}] messages.\``);
+
+      await interaction.editReply({ embeds: [doneEmbed] });
+    } catch (error) {
+      console.error(
+        chalk.red("[Bunk Delete Error]:"),
+        chalk.yellow(error.name),
+        error.message
+      );
+
+      const errorEmbed = new EmbedBuilder()
+        .setColor(Colors.Red)
+        .setTitle(
+          "`There was an error while trying to clean message in this channel!`"
+        );
+      await interaction.editReply({ embeds: [errorEmbed] });
+    }
   },
 };
