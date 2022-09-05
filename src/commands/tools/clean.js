@@ -26,7 +26,9 @@ module.exports = {
     if (!interaction.appPermissions.has(MMP)) {
       const permsEmbed = new EmbedBuilder()
         .setColor(Colors.Red)
-        .setTitle("`Bot don't have permissions to execute this command.`");
+        .setTitle(
+          "`Bot don't have [Manage Messages] permission to execute this command.`"
+        );
 
       return await interaction.editReply({ embeds: [permsEmbed] });
     }
@@ -38,7 +40,9 @@ module.exports = {
     ) {
       const permsEmbed = new EmbedBuilder()
         .setColor(Colors.Red)
-        .setTitle("`User don't have permissions to execute this command.`");
+        .setTitle(
+          "`User don't have [Manage Messages] permission to execute this command.`"
+        );
 
       return await interaction.editReply({ embeds: [permsEmbed] });
     }
