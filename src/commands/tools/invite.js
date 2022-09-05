@@ -169,15 +169,15 @@ module.exports = {
         const clickEmbed = new EmbedBuilder()
           .setColor(Colors.Gold)
           .setTitle(
-            `\`\`\`Copy the button to get the invite link to @${interaction.guild.name}.\`\`\``
+            `\`\`\`Click the button to get the invite link to @${interaction.guild.name}.\`\`\``
           )
           .setDescription(expire.join("\n"));
 
         const clickButton = new ButtonBuilder()
-          .setURL(getInvite)
-          .setLabel("Copy this!")
+          .setCustomId("invite-clipboard")
+          .setLabel("Copy to clipboard")
           .setEmoji("📋")
-          .setStyle(ButtonStyle.Link);
+          .setStyle(ButtonStyle.Primary);
 
         await interaction.editReply({
           embeds: [clickEmbed],
@@ -266,15 +266,15 @@ module.exports = {
           const clickEmbed = new EmbedBuilder()
             .setColor(Colors.Gold)
             .setTitle(
-              `\`\`\`Copy the button to get the invite link to #${channel.name}.\`\`\``
+              `\`\`\`Click the button to get the invite link to #${channel.name}.\`\`\``
             )
             .setDescription(desc.join("\n"));
 
           const clickButton = new ButtonBuilder()
-            .setURL(getInvite)
-            .setLabel("Copy this!")
+            .setCustomId("invite-clipboard")
+            .setLabel("Copy to clipboard")
             .setEmoji("📋")
-            .setStyle(ButtonStyle.Link);
+            .setStyle(ButtonStyle.Primary);
 
           const publicButton = new ButtonBuilder()
             .setCustomId("invite-public")
