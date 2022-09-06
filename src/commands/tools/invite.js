@@ -78,7 +78,7 @@ module.exports = {
         const embed = new EmbedBuilder()
           .setColor(Colors.Red)
           .setTitle(
-            "```Bot don't have permissions to execute this command.```"
+            "```Bot don't have [Create Invite] permission to execute this command.```"
           );
 
         await interaction.editReply({ embeds: [embed] });
@@ -92,7 +92,7 @@ module.exports = {
         const embed = new EmbedBuilder()
           .setColor(Colors.Red)
           .setTitle(
-            "```User don't have permissions to execute this command.```"
+            "```User don't have [Create Invite] permission to execute this command.```"
           );
 
         await interaction.editReply({ embeds: [embed] });
@@ -107,7 +107,7 @@ module.exports = {
         await interaction.deferReply({ ephemeral: true });
 
         const inviteURL =
-          "https://discord.com/api/oauth2/authorize?client_id=1006591332204154951&permissions=8&scope=applications.commands%20bot";
+          "https://discord.com/api/oauth2/authorize?client_id=1006591332204154951&permissions=1239097535991&scope=bot%20applications.commands";
 
         const embed = new EmbedBuilder()
           .setColor(Colors.Gold)
@@ -169,15 +169,15 @@ module.exports = {
         const clickEmbed = new EmbedBuilder()
           .setColor(Colors.Gold)
           .setTitle(
-            `\`\`\`Copy the button to get the invite link to @${interaction.guild.name}.\`\`\``
+            `\`\`\`Click the button to get the invite link to @${interaction.guild.name}.\`\`\``
           )
           .setDescription(expire.join("\n"));
 
         const clickButton = new ButtonBuilder()
-          .setURL(getInvite)
-          .setLabel("Copy this!")
+          .setCustomId("invite-clipboard")
+          .setLabel("Copy to clipboard")
           .setEmoji("📋")
-          .setStyle(ButtonStyle.Link);
+          .setStyle(ButtonStyle.Primary);
 
         await interaction.editReply({
           embeds: [clickEmbed],
@@ -266,15 +266,15 @@ module.exports = {
           const clickEmbed = new EmbedBuilder()
             .setColor(Colors.Gold)
             .setTitle(
-              `\`\`\`Copy the button to get the invite link to #${channel.name}.\`\`\``
+              `\`\`\`Click the button to get the invite link to #${channel.name}.\`\`\``
             )
             .setDescription(desc.join("\n"));
 
           const clickButton = new ButtonBuilder()
-            .setURL(getInvite)
-            .setLabel("Copy this!")
+            .setCustomId("invite-clipboard")
+            .setLabel("Copy to clipboard")
             .setEmoji("📋")
-            .setStyle(ButtonStyle.Link);
+            .setStyle(ButtonStyle.Primary);
 
           const publicButton = new ButtonBuilder()
             .setCustomId("invite-public")

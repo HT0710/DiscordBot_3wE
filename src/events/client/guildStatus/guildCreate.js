@@ -13,7 +13,7 @@ module.exports = {
 
     const embed = new EmbedBuilder()
       .setColor(Colors.Gold)
-      .setTitle("**Try first command `/help`.**");
+      .setTitle("**Try your first command `/help`.**");
 
     await guild.systemChannel.send({ embeds: [embed] });
 

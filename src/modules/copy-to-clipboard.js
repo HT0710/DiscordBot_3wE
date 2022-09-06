@@ -1,1 +1,1 @@
-import clipboard from "clipboardy"; clipboard.writeSync("[object Object]");
+import clipboard from "clipboardy"; clipboard.writeSync("https://discord.gg/WF92cDFn");

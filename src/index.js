@@ -35,13 +35,15 @@ for (const folder of functionsFolder) {
   }
 }
 
-client.handleEvents();
-client.handleCommands();
-client.handleComponents();
-
-client.login(process.env.TOKEN);
 (async () => {
+  await client.handleEvents();
+
   await connect(process.env.databaseTOKEN).catch((error) =>
     console.error(error)
   );
+
+  await client.handleCommands();
+  await client.handleComponents();
+
+  await client.login(process.env.TOKEN);
 })();

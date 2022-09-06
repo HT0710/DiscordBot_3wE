@@ -34,7 +34,9 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
             .setColor(Colors.Red)
-            .setTitle("```You don't have permission to use this command!```"),
+            .setTitle(
+              "```You don't have [Manage Guild] permission to use this command!```"
+            ),
         ],
       });
     }

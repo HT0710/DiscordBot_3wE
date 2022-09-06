@@ -40,7 +40,9 @@ module.exports = {
       ) {
         const permsEmbed = new EmbedBuilder()
           .setColor(Colors.Red)
-          .setTitle("`User don't have permissions to execute this command.`");
+          .setTitle(
+            "`User don't have [Manage Guild] permission to execute this command.`"
+          );
         return await interaction.editReply({ embeds: [permsEmbed] });
       }
     }
