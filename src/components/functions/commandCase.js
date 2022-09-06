@@ -30,16 +30,6 @@ module.exports = async (interaction, client, name) => {
       .setTitle("**`/ping`**")
       .setDescription("・Return the ping and the latency."),
 
-    // ai: new EmbedBuilder()
-    //   .setColor(Colors.Gold)
-    //   .setTitle("**/ai [+]**")
-    //   .setDescription("Choose algorithms to process your data.\nOptions:")
-    //   .addFields({
-    //     name: "**svd [image] [value]**",
-    //     value:
-    //       "Singular Value Decomposition is used to automatically perform dimensionality reduction. Options:\n> **image**: The image to process.\n> **value**: The value to process the image. Smaller mean more reduced.",
-    //   }),
-
     prefix: new EmbedBuilder()
       .setColor(Colors.Gold)
       .setTitle("**`/prefix`**")
@@ -101,7 +91,14 @@ module.exports = async (interaction, client, name) => {
     new: new EmbedBuilder()
       .setColor(Colors.Gold)
       .setTitle("**`/new`**")
-      .setDescription("・Show recent bot update."),
+      .setDescription(
+        [
+          "・Show recent bot update.",
+          ">>> Options: **version, public**",
+          "・**version**: Show updates on specific version.",
+          "・**public**: Public this info.",
+        ].join("\n")
+      ),
 
     feedback: new EmbedBuilder()
       .setColor(Colors.Gold)
@@ -143,7 +140,7 @@ module.exports = async (interaction, client, name) => {
       .setDescription(
         [
           "・Return the information of the target.",
-          "> Subcommands: **member, server**",
+          "> Subcommands: **member, server, me**",
         ].join("\n")
       )
       .addFields(
@@ -152,11 +149,25 @@ module.exports = async (interaction, client, name) => {
           value: [
             "・Return the information of the member target.",
             "・**[target]**: Member to get info.",
+            ">>> Options: **public**",
+            "・**public**: Public this info.",
           ].join("\n"),
         },
         {
           name: "**`/info server`**",
-          value: "・Return the information of the server.",
+          value: [
+            "・Return the information of the server.",
+            ">>> Options: **public**",
+            "・**public**: Public this info.",
+          ].join("\n"),
+        },
+        {
+          name: "**`/info me`**",
+          value: [
+            "・Return the information of the bot.",
+            ">>> Options: **public**",
+            "・**public**: Public this info.",
+          ].join("\n"),
         }
       ),
 
@@ -172,13 +183,28 @@ module.exports = async (interaction, client, name) => {
 
     history: new EmbedBuilder()
       .setColor(Colors.Gold)
-      .setTitle("**`/history`**")
-      .setDescription("・Set a channel to store deleted messages."),
+      .setTitle("**`/history [channel]`**")
+      .setDescription(
+        [
+          "・Set a channel to store deleted messages.",
+          "・**[Channel]**: The channel to set as history storage.",
+          ">>> You cannot recover deleted messages on Discord. So this command saves those messages in a selected private channel called the history storage channel.",
+        ].join("\n")
+      ),
 
     timer: new EmbedBuilder()
       .setColor(Colors.Gold)
-      .setTitle("**`/timer`**")
-      .setDescription("・Set timer."),
+      .setTitle("**`/timer [minute]`**")
+      .setDescription(
+        [
+          "・Set timer.",
+          "・**[minute]**: Set minutes for your timer.",
+          ">>> Options: **hour, second, description**",
+          "・**hour**: Set hours for your timer.",
+          "・**second**: Set seconds for your timer.",
+          "・**description**: Set timer description.",
+        ].join("\n")
+      ),
 
     save: new EmbedBuilder()
       .setColor(Colors.Gold)
@@ -189,6 +215,20 @@ module.exports = async (interaction, client, name) => {
       .setColor(Colors.Gold)
       .setTitle("**`/send`**")
       .setDescription("・Send a message to another channel."),
+
+    reminder: new EmbedBuilder()
+      .setColor(Colors.Gold)
+      .setTitle("**`/reminder [content] [minute]`**")
+      .setDescription(
+        [
+          "・Remind you after time.",
+          "・**[content]**: Set reminder content.",
+          "・**[minute]**: Set minute for reminder.",
+          ">>> Options: **hour, second**",
+          "・**hour**: Set hours for reminder.",
+          "・**second**: Set seconds for reminder.",
+        ].join("\n")
+      ),
   };
 
   return await interaction.reply({ embeds: [commands[name]], ephemeral: true });

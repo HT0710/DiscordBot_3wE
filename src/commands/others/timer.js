@@ -11,62 +11,58 @@ module.exports = {
     .setDescription("Set timer.")
     .addIntegerOption((option) =>
       option
-        .setName("hour")
-        .setDescription("Set hour for your timer")
+        .setName("minute")
+        .setDescription("Set minutes for your timer")
         .setMinValue(0)
-        .setMaxValue(24)
         .setRequired(true)
     )
     .addIntegerOption((option) =>
       option
-        .setName("minute")
-        .setDescription("Set minute for your timer")
+        .setName("hour")
+        .setDescription("Set hours for your timer")
         .setMinValue(0)
-        .setRequired(true)
+        .setMaxValue(24)
     )
     .addIntegerOption((option) =>
       option
         .setName("second")
-        .setDescription("Set second for your timer")
+        .setDescription("Set seconds for your timer")
         .setMinValue(0)
-        .setRequired(true)
+    )
+    .addStringOption((option) =>
+      option.setName("description").setDescription("Set timer description")
     ),
   async execute(interaction, client) {
+    await interaction.deferReply();
+
     const hour = interaction.options.getInteger("hour");
     const minute = interaction.options.getInteger("minute");
     const second = interaction.options.getInteger("second");
+    const desc = interaction.options.getString("description");
+
     const timer = (hour * 3600 + minute * 60 + second + 1) * 1000;
-    await interaction.reply({
-      embeds: [
-        new EmbedBuilder()
-          .setColor(Colors.Yellow)
-          .setTitle(
-            `Timer ${time(new Date(new Date().getTime() + timer), "R")}`
-          )
-          .setFooter({
-            text: `by ${interaction.member.displayName}`,
-            iconURL: interaction.member.displayAvatarURL(),
-          })
-          .setTimestamp(),
-      ],
-    });
+
+    const timerEmbed = new EmbedBuilder()
+      .setColor(Colors.Gold)
+      .setTitle(
+        `\`Timer ends\` ${time(new Date(new Date().getTime() + timer), "R")}`
+      )
+      .setDescription(desc ? `>>> ${desc}` : null);
+
+    await interaction.editReply({ embeds: [timerEmbed] });
+
     setTimeout(async () => {
-      await interaction.editReply({
-        embeds: [
-          new EmbedBuilder()
-            .setColor(Colors.Yellow)
-            .setTitle(
-              `Your \`${hour === 0 ? "" : `${hour}h : `}${
-                minute === 0 ? "" : `${minute}m : `
-              }${second === 0 ? "" : `${second}s`}\` has ended!`
-            ),
-        ],
-      });
-      await interaction.followUp({
-        embeds: [
-          new EmbedBuilder().setColor(Colors.Yellow).setTitle("Time up!"),
-        ],
-      });
+      const endedEmbed = new EmbedBuilder()
+        .setTitle("`Timer has ended.`")
+        .setDescription(desc ? `>>> ${desc}` : null);
+
+      await interaction.editReply({ embeds: [endedEmbed] });
+
+      const timeUpEmbed = new EmbedBuilder()
+        .setColor(Colors.Gold)
+        .setTitle("`Time up!`");
+
+      await interaction.followUp({ embeds: [timeUpEmbed] });
     }, timer);
   },
 };
