@@ -10,7 +10,6 @@
 - Update info command
 - Update timer command
 - Improve permission error
-- Bring back copy to clipboard button
 - Other minor changes and updates
 
 ## v1.5@040922
