@@ -47,6 +47,7 @@
     },
     { "name": "timer", "desc": "Set timer." },
     { "name": "save", "desc": "Save by sending the message to you." },
-    { "name": "send", "desc": "Send a message to another channel." }
+    { "name": "send", "desc": "Send a message to another channel." },
+    { "name": "reminder", "desc": "Remind you after time." }
   ]
 }

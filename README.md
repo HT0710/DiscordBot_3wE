@@ -1,8 +1,18 @@
-# DiscordBot_3wE - v1.5
+# DiscordBot_3wE - v1.6
 
 ## -> [Invite link](https://discord.com/api/oauth2/authorize?client_id=1006591332204154951&permissions=8&scope=bot%20applications.commands)
 
 # Version logs
+## v1.6@060922
+- Add remind command
+- Add info me command
+- Add version for new command
+- Update info command
+- Update timer command
+- Improve permission error
+- Bring back copy to clipboard button
+- Other minor changes and updates
+
 ## v1.5@040922
 - Add process event
 - Improve event handle
