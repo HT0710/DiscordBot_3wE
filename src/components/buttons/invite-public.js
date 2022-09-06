@@ -7,7 +7,7 @@ module.exports = {
   async execute(interaction, client) {
     const prevMsg = interaction.message;
     const embed = prevMsg.embeds[0].data;
-    const channel = embed.title.match(/#(.*?)./i)[1];
+    const channel = embed.title.match(/#(.*?)\./i)[1];
     const inviteURL = embed.description.match(/\((.*?)\)/i)[1];
     const last = embed.description.includes("Expire:");
 
@@ -18,7 +18,7 @@ module.exports = {
       .setEmoji("✨");
 
     prevMsg.nonce = Math.random().toString().slice(2);
-    embed.title = `\`\`\`Click the button to join #${channel.name}.\`\`\``;
+    embed.title = `\`\`\`Click the button to join #${channel}.\`\`\``;
     prevMsg.components[0].components = [joinButton];
 
     const msg = await interaction.channel.send(prevMsg);
@@ -31,7 +31,7 @@ module.exports = {
     if (last) {
       setTimeout(() => {
         const expiredEmbed = new EmbedBuilder().setTitle(
-          `\`\`\`#${channel.name} invite link has Expired!\`\`\``
+          `\`\`\`#${channel} invite link has Expired!\`\`\``
         );
 
         msg.edit({
