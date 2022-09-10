@@ -1,4 +1,4 @@
-const { ActivityType } = require("discord.js");
+const { ActivityType, PresenceUpdateStatus } = require("discord.js");
 
 module.exports = (client) => {
   client.pickPresence = async (option) => {
@@ -10,17 +10,47 @@ module.exports = (client) => {
             type: ActivityType.Playing,
           },
         ],
-        status: "online",
+        status: PresenceUpdateStatus.Online,
+      },
+
+      coding: {
+        activities: [
+          {
+            name: "VS Code ⌨️ /help",
+            type: ActivityType.Competing,
+          },
+        ],
+        status: PresenceUpdateStatus.Idle,
+      },
+
+      toilet: {
+        activities: [
+          {
+            name: "toilet 🚾 /help",
+            type: ActivityType.Competing,
+          },
+        ],
+        status: PresenceUpdateStatus.Idle,
+      },
+
+      chilling: {
+        activities: [
+          {
+            name: "Metal Music 🔥 /help",
+            type: ActivityType.Listening,
+          },
+        ],
+        status: PresenceUpdateStatus.DoNotDisturb,
       },
 
       default: {
         activities: [
           {
-            name: "Curious 🤨 /help",
-            type: ActivityType.Competing,
+            name: "You 🤨 /help",
+            type: ActivityType.Watching,
           },
         ],
-        status: "online",
+        status: PresenceUpdateStatus.Online,
       },
     };
 
