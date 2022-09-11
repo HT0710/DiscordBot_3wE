@@ -36,6 +36,9 @@ module.exports = {
         "how to get message id",
         "how to get guild id",
         "poll timer format",
+        "text format",
+        "embed colors",
+        "how to remove bot",
       ];
 
       questions.forEach((question) =>
