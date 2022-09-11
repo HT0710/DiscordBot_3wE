@@ -1,59 +1,85 @@
 const { ActivityType, PresenceUpdateStatus } = require("discord.js");
 
 module.exports = (client) => {
-  client.pickPresence = async (option) => {
-    const types = {
-      online: {
-        activities: [
-          {
-            name: "Free Fire 🔥 /help",
-            type: ActivityType.Playing,
-          },
-        ],
-        status: PresenceUpdateStatus.Online,
-      },
+  client.pickPresence = {
+    online: {
+      activities: [
+        {
+          name: "Free Fire 🔥 /help",
+          type: ActivityType.Playing,
+        },
+      ],
+      status: PresenceUpdateStatus.Online,
+    },
 
-      coding: {
-        activities: [
-          {
-            name: "VS Code ⌨️ /help",
-            type: ActivityType.Competing,
-          },
-        ],
-        status: PresenceUpdateStatus.Idle,
-      },
+    playing_2: {
+      activities: [
+        {
+          name: "Cyberpunk 2077 👽 /help",
+          type: ActivityType.Playing,
+        },
+      ],
+      status: PresenceUpdateStatus.Online,
+    },
 
-      toilet: {
-        activities: [
-          {
-            name: "toilet 🚾 /help",
-            type: ActivityType.Competing,
-          },
-        ],
-        status: PresenceUpdateStatus.Idle,
-      },
+    coding: {
+      activities: [
+        {
+          name: "VS Code ⌨️ /help",
+          type: ActivityType.Competing,
+        },
+      ],
+      status: PresenceUpdateStatus.Idle,
+    },
 
-      chilling: {
-        activities: [
-          {
-            name: "Metal Music 🔥 /help",
-            type: ActivityType.Listening,
-          },
-        ],
-        status: PresenceUpdateStatus.DoNotDisturb,
-      },
+    toilet: {
+      activities: [
+        {
+          name: "Toilet 🚾 /help",
+          type: ActivityType.Competing,
+        },
+      ],
+      status: PresenceUpdateStatus.Idle,
+    },
 
-      default: {
-        activities: [
-          {
-            name: "You 🤨 /help",
-            type: ActivityType.Watching,
-          },
-        ],
-        status: PresenceUpdateStatus.Online,
-      },
-    };
+    chilling: {
+      activities: [
+        {
+          name: "Metal ❤️‍🔥 /help",
+          type: ActivityType.Listening,
+        },
+      ],
+      status: PresenceUpdateStatus.DoNotDisturb,
+    },
 
-    client.user.setPresence(types[option]);
+    lofi: {
+      activities: [
+        {
+          name: "chill lofi 🌌 /help",
+          type: ActivityType.Listening,
+        },
+      ],
+      status: PresenceUpdateStatus.DoNotDisturb,
+    },
+
+    chilling: {
+      activities: [
+        {
+          name: "RPG 🧙‍♂️ /help",
+          type: ActivityType.Streaming,
+        },
+      ],
+      status: PresenceUpdateStatus.DoNotDisturb,
+    },
+
+    default: {
+      activities: [
+        {
+          name: "You 📸🤨 /help",
+          type: ActivityType.Watching,
+        },
+      ],
+      status: PresenceUpdateStatus.Online,
+    },
   };
 };

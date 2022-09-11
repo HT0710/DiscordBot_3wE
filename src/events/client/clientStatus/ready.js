@@ -6,17 +6,15 @@ module.exports = {
   execute(client) {
     console.log("[Client]:", chalk.green("Ready"));
 
-    const presences = ["online", "coding", "chilling", "toilet", "default"];
+    const presences = Object.keys(client.pickPresence);
 
-    client.pickPresence(
-      presences[Math.floor(Math.random() * presences.length)]
+    client.user.setPresence(
+      client.pickPresence[presences[(presences.length * Math.random()) << 0]]
     );
 
     setInterval(
       () =>
-        client.pickPresence(
-          presences[Math.floor(Math.random() * presences.length)]
-        ),
+        client.pickPresence[presences[(presences.length * Math.random()) << 0]],
       900000
     );
   },
