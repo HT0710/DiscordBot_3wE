@@ -14,7 +14,7 @@ const client = new Client({
     Partials.ThreadMember,
     Partials.User,
   ],
-  allowedMentions: { parse: ["everyone", "roles", "users"] },
+  allowedMentions: { repliedUser: true, parse: ["everyone", "roles", "users"] },
   rest: { timeout: 10000 },
 });
 

@@ -9,6 +9,7 @@ const {
   ModalBuilder,
   TextInputBuilder,
   TextInputStyle,
+  AttachmentBuilder,
 } = require("discord.js");
 
 module.exports = {
@@ -65,24 +66,24 @@ module.exports = {
 
       case "full": {
         await interaction.deferReply({ ephemeral: true });
+        const thumbnail = new AttachmentBuilder(
+          "./src/pictures/embed/thumbnail.jpg"
+        );
+        const image = new AttachmentBuilder("./src/pictures/embed/image.jpg");
         const rawEmbed = new EmbedBuilder()
           .setColor(Colors.Gold)
           .setAuthor({
-            name: "Author name (URL available)",
+            name: "Author (URL available)",
             iconURL: client.user.displayAvatarURL(),
           })
-          .setThumbnail(
-            "https://cdn.discordapp.com/attachments/904361331795300362/1018235399455387729/thumbnail.jpg"
-          )
+          .setThumbnail("attachment://thumbnail.jpg")
           .setTitle("Title (URL available)")
           .setDescription("Description\n> /help faq [discord text format]")
           .addFields({ name: "Single field", value: "Value" })
           .addFields({ name: "Inline field 1", value: "Value 1", inline: true })
           .addFields({ name: "Inline field 2", value: "Value 2", inline: true })
           .addFields({ name: "Inline field 3", value: "Value 3", inline: true })
-          .setImage(
-            "https://cdn.discordapp.com/attachments/904361331795300362/1018235127484125407/thumbnail.jpg"
-          )
+          .setImage("attachment://image.jpg")
           .setFooter({
             text: "Footer",
             iconURL: client.user.displayAvatarURL(),
@@ -133,6 +134,7 @@ module.exports = {
         await interaction.editReply({
           embeds: [rawEmbed],
           components: [editRow, actionRow],
+          files: [thumbnail, image],
         });
         break;
       }

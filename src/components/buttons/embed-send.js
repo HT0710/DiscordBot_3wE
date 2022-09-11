@@ -5,10 +5,8 @@ module.exports = {
     name: `embed-send`,
   },
   async execute(interaction, client) {
-    const prevMsg = interaction.message;
-    prevMsg.components = [];
-    prevMsg.nonce = Math.random().toString().slice(2);
-    await interaction.channel.send(prevMsg);
+    const embed = interaction.message.embeds[0];
+    await interaction.channel.send({ embeds: [embed] });
 
     const doneEmbed = new EmbedBuilder()
       .setColor("Green")

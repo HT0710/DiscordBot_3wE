@@ -18,9 +18,8 @@ module.exports = {
     const logError = async (error, name) => {
       console.error(
         chalk.red("[Interaction Error]:"),
-        chalk.blue(`${name}:`),
-        chalk.yellow(`${error.name}:`),
-        error.message
+        chalk.yellow(`${name}:`),
+        error
       );
 
       const errorEmbed = new EmbedBuilder()

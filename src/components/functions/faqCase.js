@@ -66,7 +66,7 @@ module.exports = async (interaction, client, question) => {
     }
 
     case "how to remove bot": {
-      const step123Image = new AttachmentBuilder(
+      const step123 = new AttachmentBuilder(
         "./src/pictures/help-faq/remove-bot/step123.png"
       );
       const removeBotEmbed = new EmbedBuilder()
@@ -96,7 +96,7 @@ module.exports = async (interaction, client, question) => {
 
       return await interaction.editReply({
         embeds: [removeBotEmbed],
-        files: [step123Image],
+        files: [step123],
       });
     }
 
