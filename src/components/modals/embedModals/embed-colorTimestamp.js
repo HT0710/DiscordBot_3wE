@@ -1,11 +1,12 @@
+const { EmbedBuilder } = require("discord.js");
+const convert = require("color-convert");
+const colors = require("color-name");
+
 module.exports = {
   data: {
     name: "embed-colorTimestamp",
   },
   async execute(interaction, client) {
-    const { EmbedBuilder } = require("discord.js");
-    const convert = require("color-convert");
-    const colors = require("color-name");
     const embed = interaction.message.embeds[0];
     const prevEmbed = EmbedBuilder.from(embed);
 

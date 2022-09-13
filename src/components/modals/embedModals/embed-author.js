@@ -1,10 +1,11 @@
+const { EmbedBuilder } = require("discord.js");
+const isValidURL = require("../../../extras/isValidURL");
+
 module.exports = {
   data: {
     name: "embed-author",
   },
   async execute(interaction, client) {
-    const { EmbedBuilder } = require("discord.js");
-    const isValidURL = require("../../../extras/isValidURL");
     const embed = interaction.message.embeds[0];
     const first = require("../../../extras/embed-checkFirst")(embed);
     const prevEmbed = EmbedBuilder.from(embed);

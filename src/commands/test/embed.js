@@ -9,6 +9,8 @@ const {
   TextInputBuilder,
   TextInputStyle,
   AttachmentBuilder,
+  SelectMenuBuilder,
+  SelectMenuOptionBuilder,
 } = require("discord.js");
 
 module.exports = {
@@ -115,11 +117,19 @@ module.exports = {
           colorTimestampButton
         );
 
-        const addFieldsButton = new ButtonBuilder()
-          .setCustomId("embed-addFields")
-          .setLabel("Add fields")
-          .setStyle(ButtonStyle.Primary);
-        const fieldsRow = new ActionRowBuilder().addComponents(addFieldsButton);
+        const fieldsMenu = new SelectMenuBuilder()
+          .setCustomId("embed-fields")
+          .setPlaceholder("Field options")
+          .setMinValues(1)
+          .setMaxValues(1)
+          .addOptions(
+            new SelectMenuOptionBuilder()
+              .setLabel("Add field")
+              .setValue("embed-addField")
+              .setDescription("Max 25 fields can be added")
+              .setEmoji("🔶")
+          );
+        const fieldsRow = new ActionRowBuilder().addComponents(fieldsMenu);
 
         const sendButton = new ButtonBuilder()
           .setCustomId("embed-send")

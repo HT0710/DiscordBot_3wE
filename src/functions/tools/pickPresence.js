@@ -22,6 +22,16 @@ module.exports = (client) => {
       status: PresenceUpdateStatus.Online,
     },
 
+    valorant: {
+      activities: [
+        {
+          name: "Valorant 🔫 /help",
+          type: ActivityType.Playing,
+        },
+      ],
+      status: PresenceUpdateStatus.Online,
+    },
+
     coding: {
       activities: [
         {
@@ -42,6 +52,16 @@ module.exports = (client) => {
       status: PresenceUpdateStatus.Idle,
     },
 
+    lol: {
+      activities: [
+        {
+          name: "LoL 🎮 /help",
+          type: ActivityType.Competing,
+        },
+      ],
+      status: PresenceUpdateStatus.DoNotDisturb,
+    },
+
     chilling: {
       activities: [
         {
@@ -59,13 +79,23 @@ module.exports = (client) => {
           type: ActivityType.Listening,
         },
       ],
-      status: PresenceUpdateStatus.DoNotDisturb,
+      status: PresenceUpdateStatus.Idle,
     },
 
     chilling: {
       activities: [
         {
-          name: "RPG 🧙‍♂️ /help",
+          name: "MMORPG 🧙‍♂️ /help",
+          type: ActivityType.Streaming,
+        },
+      ],
+      status: PresenceUpdateStatus.DoNotDisturb,
+    },
+
+    youtube: {
+      activities: [
+        {
+          name: "youtube ▶️ /help",
           type: ActivityType.Streaming,
         },
       ],
@@ -75,7 +105,7 @@ module.exports = (client) => {
     default: {
       activities: [
         {
-          name: "You 📸🤨 /help",
+          name: "You 🤨📸 /help",
           type: ActivityType.Watching,
         },
       ],

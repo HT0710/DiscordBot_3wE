@@ -1,13 +1,13 @@
+const { EmbedBuilder } = require("discord.js");
+const convert = require("color-convert");
+const colors = require("color-name");
+
 module.exports = {
   data: {
     name: "embed-simple",
   },
   async execute(interaction, client) {
     await interaction.deferReply({ ephemeral: true });
-
-    const { EmbedBuilder } = require("discord.js");
-    const convert = require("color-convert");
-    const colors = require("color-name");
 
     const title = interaction.fields.getTextInputValue("title");
     const description = interaction.fields.getTextInputValue("description");

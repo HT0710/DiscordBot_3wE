@@ -6,7 +6,7 @@ module.exports = {
     console.error(
       chalk.red("[Unhandled Rejection]:"),
       chalk.yellow(`${reason.name}:`),
-      reason.message
+      reason
     );
   },
 };

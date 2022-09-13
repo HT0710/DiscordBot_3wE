@@ -6,9 +6,9 @@ module.exports = client = {
     name: name,
   },
   execute(modals) {
-    const embedButtons = readdirSync(`./src/components/modals/${name}`);
+    const embedModals = readdirSync(`./src/components/modals/${name}`);
 
-    for (const file of embedButtons) {
+    for (const file of embedModals) {
       const modal = require(`../../components/modals/${name}/${file}`);
       modals.set(modal.data.name, modal);
     }
