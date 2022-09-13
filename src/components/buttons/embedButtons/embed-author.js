@@ -12,7 +12,7 @@ module.exports = {
   },
   async execute(interaction, client) {
     const embed = interaction.message.embeds[0];
-    const first = require("../../extras/embed-checkFirst")(embed);
+    const first = require("../../../extras/embed-checkFirst")(embed);
     const prevEmbed = EmbedBuilder.from(embed);
     const author = prevEmbed.data.author;
 

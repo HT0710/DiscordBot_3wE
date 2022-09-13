@@ -15,7 +15,8 @@ module.exports = (client) => {
         case "buttons": {
           for (const file of componentFiles) {
             const button = require(`../../components/${folder}/${file}`);
-            buttons.set(button.data.name, button);
+            if (button.data.name === "embedButtons") button.execute(buttons);
+            else buttons.set(button.data.name, button);
           }
           break;
         }
@@ -31,7 +32,8 @@ module.exports = (client) => {
         case "modals": {
           for (const file of componentFiles) {
             const modal = require(`../../components/${folder}/${file}`);
-            modals.set(modal.data.name, modal);
+            if (modal.data.name === "embedModals") modal.execute(modals);
+            else modals.set(modal.data.name, modal);
           }
           break;
         }

@@ -1,37 +1,34 @@
 module.exports = {
   data: {
-    name: "embed-author",
+    name: "embed-footer",
   },
   async execute(interaction, client) {
     const { EmbedBuilder } = require("discord.js");
-    const isValidURL = require("../../extras/isValidURL");
+    const isValidURL = require("../../../extras/isValidURL");
     const embed = interaction.message.embeds[0];
-    const first = require("../../extras/embed-checkFirst")(embed);
+    const first = require("../../../extras/embed-checkFirst")(embed);
     const prevEmbed = EmbedBuilder.from(embed);
 
-    const name = interaction.fields.getTextInputValue("name");
+    const name = interaction.fields.getTextInputValue("text");
     const iconURL = interaction.fields.getTextInputValue("iconURL");
-    const url = interaction.fields.getTextInputValue("url");
 
     if (first) {
       if (!name) return await interaction.update({});
       else {
-        var newEmbed = new EmbedBuilder().setAuthor({
-          name: name,
+        var newEmbed = new EmbedBuilder().setFooter({
+          text: name,
           iconURL: isValidURL(iconURL) ? iconURL : null,
-          url: isValidURL(url) ? url : null,
         });
         if (prevEmbed.data.color) newEmbed.setColor(prevEmbed.data.color);
         if (prevEmbed.data.timestamp) newEmbed.setTimestamp();
       }
     } else {
       var newEmbed = prevEmbed;
-      if (name === "") delete newEmbed.data.author;
+      if (name === "") delete newEmbed.data.footer;
       else
-        newEmbed.setAuthor({
-          name: name,
+        newEmbed.setFooter({
+          text: name,
           iconURL: isValidURL(iconURL) ? iconURL : null,
-          url: isValidURL(url) ? url : null,
         });
     }
 

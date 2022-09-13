@@ -76,7 +76,7 @@ module.exports = {
           })
           .setThumbnail("attachment://thumbnail.jpg")
           .setTitle("Title (URL available)")
-          .setDescription("Description\n> /help faq [discord text format]")
+          .setDescription("Description\n> /help faq [text format]")
           .addFields({ name: "Single field", value: "Value" })
           .addFields({ name: "Inline field 1", value: "Value 1", inline: true })
           .addFields({ name: "Inline field 2", value: "Value 2", inline: true })
@@ -115,6 +115,12 @@ module.exports = {
           colorTimestampButton
         );
 
+        const addFieldsButton = new ButtonBuilder()
+          .setCustomId("embed-addFields")
+          .setLabel("Add fields")
+          .setStyle(ButtonStyle.Primary);
+        const fieldsRow = new ActionRowBuilder().addComponents(addFieldsButton);
+
         const sendButton = new ButtonBuilder()
           .setCustomId("embed-send")
           .setLabel("Send")
@@ -130,7 +136,7 @@ module.exports = {
 
         await interaction.editReply({
           embeds: [rawEmbed],
-          components: [editRow, actionRow],
+          components: [editRow, fieldsRow, actionRow],
           files: [thumbnail, image],
         });
         break;
