@@ -11,6 +11,10 @@ module.exports = {
     const doneEmbed = new EmbedBuilder()
       .setColor("Green")
       .setTitle("`Embed sended!`");
-    await interaction.update({ embeds: [doneEmbed], components: [] });
+    await interaction.update({
+      embeds: [doneEmbed],
+      components: [],
+      files: [],
+    });
   },
 };

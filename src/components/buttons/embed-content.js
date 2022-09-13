@@ -3,6 +3,7 @@ const {
   TextInputBuilder,
   TextInputStyle,
   ActionRowBuilder,
+  EmbedBuilder,
 } = require("discord.js");
 
 module.exports = {
@@ -10,21 +11,8 @@ module.exports = {
     name: `embed-content`,
   },
   async execute(interaction, client) {
-    const checkFirst = (a, b) =>
-      a.length === b.length && a.every((i) => b.includes(i));
     const embed = interaction.message.embeds[0];
-    const first = checkFirst(Object.keys(embed.data), [
-      "type",
-      "title",
-      "timestamp",
-      "thumbnail",
-      "image",
-      "footer",
-      "fields",
-      "description",
-      "color",
-      "author",
-    ]);
+    const first = require("../../extras/embed-checkFirst")(embed);
 
     const titleRow = new TextInputBuilder()
       .setCustomId("title")
@@ -44,11 +32,12 @@ module.exports = {
       .setStyle(TextInputStyle.Short)
       .setRequired(false);
 
+    const prevEmbed = EmbedBuilder.from(embed);
     if (!first) {
-      if (embed.data.title) titleRow.setValue(embed.data.title);
-      if (embed.data.description)
-        descriptionRow.setValue(embed.data.description);
-      if (embed.data.url) urlRow.setValue(embed.data.url);
+      if (prevEmbed.data.title) titleRow.setValue(prevEmbed.data.title);
+      if (prevEmbed.data.description)
+        descriptionRow.setValue(prevEmbed.data.description);
+      if (prevEmbed.data.url) urlRow.setValue(prevEmbed.data.url);
     }
 
     const contentModal = new ModalBuilder()
@@ -59,6 +48,7 @@ module.exports = {
         new ActionRowBuilder().addComponents(descriptionRow),
         new ActionRowBuilder().addComponents(urlRow)
       );
+
     await interaction.showModal(contentModal);
   },
 };

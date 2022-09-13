@@ -1,6 +1,6 @@
 module.exports = {
   data: {
-    name: "embed-images",
+    name: "embed-footer",
   },
   async execute(interaction, client) {
     const { EmbedBuilder } = require("discord.js");
@@ -9,25 +9,27 @@ module.exports = {
     const first = require("../../extras/embed-checkFirst")(embed);
     const prevEmbed = EmbedBuilder.from(embed);
 
-    const thumbnail = interaction.fields.getTextInputValue("thumbnail");
-    const image = interaction.fields.getTextInputValue("image");
+    const name = interaction.fields.getTextInputValue("text");
+    const iconURL = interaction.fields.getTextInputValue("iconURL");
 
     if (first) {
-      if (!thumbnail && !image) return await interaction.update({});
+      if (!name) return await interaction.update({});
       else {
-        var newEmbed = new EmbedBuilder();
-        if (isValidURL(thumbnail)) newEmbed.setThumbnail(thumbnail);
-        if (isValidURL(image)) newEmbed.setImage(image);
+        var newEmbed = new EmbedBuilder().setFooter({
+          text: name,
+          iconURL: isValidURL(iconURL) ? iconURL : null,
+        });
         if (prevEmbed.data.color) newEmbed.setColor(prevEmbed.data.color);
         if (prevEmbed.data.timestamp) newEmbed.setTimestamp();
       }
     } else {
       var newEmbed = prevEmbed;
-      if (thumbnail === "") delete newEmbed.data.thumbnail;
-      else if (isValidURL(thumbnail)) newEmbed.setThumbnail(thumbnail);
-
-      if (image === "") delete newEmbed.data.image;
-      else if (isValidURL(image)) newEmbed.setImage(image);
+      if (name === "") delete newEmbed.data.footer;
+      else
+        newEmbed.setFooter({
+          text: name,
+          iconURL: isValidURL(iconURL) ? iconURL : null,
+        });
     }
 
     try {

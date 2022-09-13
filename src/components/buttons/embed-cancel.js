@@ -8,6 +8,10 @@ module.exports = {
     const cancelEmbed = new EmbedBuilder()
       .setColor("Red")
       .setTitle("`Embed canceled!`");
-    await interaction.update({ embeds: [cancelEmbed], components: [] });
+    await interaction.update({
+      embeds: [cancelEmbed],
+      components: [],
+      files: [],
+    });
   },
 };

@@ -1,7 +1,6 @@
 const {
   SlashCommandBuilder,
   EmbedBuilder,
-  Colors,
   ButtonBuilder,
   ButtonStyle,
   PermissionFlagsBits,
@@ -71,7 +70,6 @@ module.exports = {
         );
         const image = new AttachmentBuilder("./src/pictures/embed/image.jpg");
         const rawEmbed = new EmbedBuilder()
-          .setColor(Colors.Gold)
           .setAuthor({
             name: "Author (URL available)",
             iconURL: client.user.displayAvatarURL(),
@@ -87,8 +85,7 @@ module.exports = {
           .setFooter({
             text: "Footer",
             iconURL: client.user.displayAvatarURL(),
-          })
-          .setTimestamp();
+          });
 
         const contentButton = new ButtonBuilder()
           .setCustomId("embed-content")

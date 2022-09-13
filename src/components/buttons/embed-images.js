@@ -3,6 +3,7 @@ const {
   TextInputBuilder,
   TextInputStyle,
   ActionRowBuilder,
+  EmbedBuilder,
 } = require("discord.js");
 
 module.exports = {
@@ -10,36 +11,27 @@ module.exports = {
     name: `embed-images`,
   },
   async execute(interaction, client) {
-    const checkFirst = (a, b) =>
-      a.length === b.length && a.every((i) => b.includes(i));
     const embed = interaction.message.embeds[0];
-    const first = checkFirst(Object.keys(embed.data), [
-      "type",
-      "title",
-      "timestamp",
-      "thumbnail",
-      "image",
-      "footer",
-      "fields",
-      "description",
-      "color",
-      "author",
-    ]);
+    const first = require("../../extras/embed-checkFirst")(embed);
 
     const thumbnailRow = new TextInputBuilder()
       .setCustomId("thumbnail")
       .setLabel("Thumbnail URL")
+      .setPlaceholder("https://...")
       .setStyle(TextInputStyle.Short)
       .setRequired(false);
     const imageRow = new TextInputBuilder()
       .setCustomId("image")
       .setLabel("Image URL")
+      .setPlaceholder("https://...")
       .setStyle(TextInputStyle.Short)
       .setRequired(false);
 
+    const prevEmbed = EmbedBuilder.from(embed);
     if (!first) {
-      if (embed.data.thumbnail) thumbnailRow.setValue(embed.data.thumbnail.url);
-      if (embed.data.image) imageRow.setValue(embed.data.image.url);
+      if (prevEmbed.data.thumbnail)
+        thumbnailRow.setValue(prevEmbed.data.thumbnail.url);
+      if (prevEmbed.data.image) imageRow.setValue(prevEmbed.data.image.url);
     }
 
     const imagesModal = new ModalBuilder()
@@ -49,6 +41,7 @@ module.exports = {
         new ActionRowBuilder().addComponents(thumbnailRow),
         new ActionRowBuilder().addComponents(imageRow)
       );
+
     await interaction.showModal(imagesModal);
   },
 };
