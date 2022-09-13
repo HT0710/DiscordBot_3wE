@@ -16,7 +16,7 @@ const {
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("embed")
-    .setDescription("Create an embed")
+    .setDescription("Create an embed.")
     .addStringOption((option) =>
       option
         .setName("type")

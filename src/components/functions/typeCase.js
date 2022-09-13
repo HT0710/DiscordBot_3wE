@@ -56,11 +56,23 @@ module.exports = async (interaction, client, value, backButton) => {
 
     moderation: {
       embeds: [
-        new EmbedBuilder()
-          .setColor(Colors.Gold)
-          .setTitle("**Moderation** - Options that have you to manage members")
-          // .addFields()
-          .setFooter({ text: "Page: 1/1" }),
+        (() => {
+          const embed = new EmbedBuilder()
+            .setColor(Colors.Gold)
+            .setTitle(
+              "**Moderation** - Options that have you to manage members"
+            )
+            .setFooter({ text: "Page: 1/1" });
+
+          moderation.forEach((command) =>
+            embed.addFields({
+              name: `**\`/${command.name}\`**`,
+              value: command.desc,
+            })
+          );
+
+          return embed;
+        })(),
       ],
       components: backButton ? [backButton] : [],
     },
