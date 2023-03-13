@@ -12,7 +12,7 @@ module.exports = {
   },
   async execute(interaction, client) {
     const embed = new EmbedBuilder()
-      .setColor(Colors.Yellow)
+      .setColor(Colors.Gold)
       .setTitle("**All commands**")
       .setFooter({ text: "~ Page 2 ~" });
 

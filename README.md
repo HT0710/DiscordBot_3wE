@@ -1,8 +1,19 @@
-# DiscordBot_3wE - v1.6
+# DiscordBot_3wE - v1.7
 
-## -> [Invite link](https://discord.com/api/oauth2/authorize?client_id=1006591332204154951&permissions=8&scope=bot%20applications.commands)
+# hiatus
+
+## -> [Invite link](https://discord.com/oauth2/authorize?client_id=1006591332204154951&permissions=1239097535991&scope=bot%20applications.commands)
 
 # Version logs
+## v1.7@
+- Add kick command
+- Add embed command
+- Add sticky command
+- Add unstick command
+- Update help command
+- Update presence event
+- Other minor changes and updates
+
 ## v1.6@060922
 - Add remind command
 - Add info me command

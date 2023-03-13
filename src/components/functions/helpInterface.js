@@ -10,30 +10,40 @@ module.exports = {
   embeds: [
     new EmbedBuilder()
       .setColor(Colors.Gold)
-      .setTitle("**What you wanna help about?**")
-      .setThumbnail(
-        "https://cdn.discordapp.com/attachments/904361331795300362/1009492357516902481/question.gif"
-      )
+      .setTitle("**`What you wanna help about❔`**")
+      .setDescription("━".repeat(20) + "**` type `**" + "━".repeat(20))
       .addFields(
         {
-          name: "🛠️ \u200B \u200B **Tools**",
-          value: "`/help type tools`",
+          name: "🛠️ \u200B \u200B \u200B **Tools**",
+          value: "```/help type Tools```",
         },
         {
-          name: "🚫 \u200B \u200B **Moderator**",
-          value: "`/help type moderator`",
+          name: "🚫 \u200B \u200B \u200B **Moderation**",
+          value: "n```/help type Moderation```",
         },
         {
-          name: "🎵 \u200B \u200B **Music**",
-          value: "`/help type music`",
+          name: "🎵 \u200B \u200B \u200B **Music**",
+          value: "```/help type Music```",
         },
         {
-          name: "🔸 \u200B \u200B **Others**",
-          value: "`/help type others`",
+          name: "⚡ \u200B \u200B \u200B **Context Menus**",
+          value: "```/help type Context Menus```",
         },
         {
-          name: "🔹 \u200B \u200B **All**",
-          value: "`/help type all`",
+          name: "⭐ \u200B \u200B \u200B **Others**",
+          value: "```/help type Others```",
+        },
+        {
+          name: "📜 \u200B \u200B \u200B **All**",
+          value: "```/help type All```",
+        },
+        {
+          name: "━".repeat(19) + "**` command `**" + "━".repeat(18),
+          value: "> Show help on a specific command.\n```/help command```",
+        },
+        {
+          name: "━".repeat(20) + "**` faq `**" + "━".repeat(21),
+          value: "> Show Frequently Asked Questions.\n```/help faq```",
         }
       ),
   ],
@@ -43,34 +53,42 @@ module.exports = {
         .setCustomId("helpMenu")
         .setMinValues(1)
         .setMaxValues(1)
-        .setPlaceholder("👉 \u200B \u200B Select here!")
+        .setPlaceholder("👉 \u200B \u200B Choose type of help")
         .setOptions(
           new SelectMenuOptionBuilder()
             .setLabel("Tools")
             .setEmoji("🛠️")
-            .setDescription("Tools that help you manage the server.")
+            .setDescription("Tools that help you manage the server")
             .setValue("tools"),
           new SelectMenuOptionBuilder()
             .setLabel("Moderation")
             .setEmoji("🚫")
-            .setDescription("Options that help you to manage members.")
+            .setDescription(
+              "Options that help you to manage members and messages"
+            )
             .setValue("moderation"),
           new SelectMenuOptionBuilder()
             .setLabel("Music")
             .setEmoji("🎵")
-            .setDescription("Control bot's music player.")
+            .setDescription("Control bot's music player")
             .setValue("music"),
           new SelectMenuOptionBuilder()
+            .setLabel("Context Menus")
+            .setEmoji("⚡")
+            .setDescription("Quick commands performed by right-clicking")
+            .setValue("contextMenus"),
+          new SelectMenuOptionBuilder()
             .setLabel("Others")
-            .setEmoji("🔸")
-            .setDescription("My other additional commands.")
+            .setEmoji("⭐")
+            .setDescription("Other useful commands")
             .setValue("others"),
           new SelectMenuOptionBuilder()
             .setLabel("All")
-            .setEmoji("🔹")
-            .setDescription("All of my commands.")
+            .setEmoji("📜")
+            .setDescription("Show all commands")
             .setValue("all")
         )
     ),
   ],
+  ephemeral: true,
 };

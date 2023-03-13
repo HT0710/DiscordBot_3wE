@@ -229,6 +229,44 @@ module.exports = async (interaction, client, name) => {
           "・**second**: Set seconds for reminder.",
         ].join("\n")
       ),
+
+    kick: new EmbedBuilder()
+      .setColor(Colors.Gold)
+      .setTitle("**`Kick [member]`**")
+      .setDescription(
+        [
+          "・Kicks the member provided.",
+          "・**[member]**: Choose the member to kick.",
+          ">>> Options: **reason**",
+          "・**reason**: Reason for kicking this member.",
+        ].join("\n")
+      ),
+
+    embed: new EmbedBuilder()
+      .setColor(Colors.Gold)
+      .setTitle("**`Embed [type]`**")
+      .setDescription(
+        ["・Create an embed.", "・**[type]**: Type of the Embed."].join("\n")
+      )
+      .addFields(
+        {
+          name: "**`simple`**",
+          value: [
+            "・Fast and simple embed.",
+            ">>> Input title, description and color.",
+          ].join("\n"),
+        },
+        {
+          name: "**`full`**",
+          value: [
+            "・Full embed builder",
+            "Add up to 25 fields.",
+            ">>> /help faq [text format]",
+            "Support up to 134 different colors.",
+            "/help faq [embed colors]",
+          ].join("\n"),
+        }
+      ),
   };
 
   return await interaction.reply({ embeds: [commands[name]], ephemeral: true });

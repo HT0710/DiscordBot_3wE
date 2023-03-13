@@ -37,7 +37,7 @@
       "desc": "Set a channel to store deleted messages."
     }
   ],
-  "moderation": [],
+  "moderation": [{ "name": "kick", "desc": "Kicks the member provided." }],
   "music": [],
   "others": [
     { "name": "new", "desc": "Show recent 3wE update." },
@@ -48,6 +48,7 @@
     { "name": "timer", "desc": "Set timer." },
     { "name": "save", "desc": "Save by sending the message to you." },
     { "name": "send", "desc": "Send a message to another channel." },
-    { "name": "reminder", "desc": "Remind you after time." }
+    { "name": "reminder", "desc": "Remind you after time." },
+    { "name": "embed", "desc": "Create an embed" }
   ]
 }
