@@ -1,6 +1,4 @@
-# DiscordBot_3wE - v1.7
-
-# hiatus
+# DiscordBot_3wE - v1.7 - hiatus
 
 ## -> [Invite link](https://discord.com/oauth2/authorize?client_id=1006591332204154951&permissions=1239097535991&scope=bot%20applications.commands)
 
