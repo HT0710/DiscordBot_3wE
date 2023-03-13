@@ -2,6 +2,11 @@
 
 ## -> [Invite link](https://discord.com/oauth2/authorize?client_id=1006591332204154951&permissions=1239097535991&scope=bot%20applications.commands)
 
+## Note
+The latest update before the hiatus is **incomplete**, so some new features (1.7) may not work or not work properly. Meanwhile the old features (<1.7) still work normally.
+
+---
+
 # Version logs
 ## v1.7@130922
 - Add kick command
