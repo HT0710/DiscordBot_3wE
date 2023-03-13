@@ -22,6 +22,7 @@ client.commands = new Collection();
 client.buttons = new Collection();
 client.selectMenus = new Collection();
 client.modals = new Collection();
+client.stickyChannel = new Collection();
 client.commandArray = [];
 
 const functionsFolder = fs.readdirSync("./src/functions");
@@ -47,3 +48,5 @@ for (const folder of functionsFolder) {
 
   await client.login(process.env.TOKEN);
 })();
+
+(() => {})();

@@ -6,7 +6,7 @@ module.exports = {
     console.error(
       chalk.red(`[Client Error]:`),
       chalk.yellow(`${error.name}:`),
-      error.message
+      error
     );
   },
 };

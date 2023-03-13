@@ -1,5 +1,5 @@
-let channelID = 0;
 const Guild = require("../../../schemas/guild");
+let channelID = 0;
 const content = (str) => ({
   content: str,
   ephemeral: true,
@@ -10,6 +10,27 @@ module.exports = {
   async execute(message, client) {
     // Check bot
     if (message.author.bot) return;
+
+    const stickyChannel = client.stickyChannel.get(message.channel.id);
+    if (stickyChannel) {
+      let { messageId, count, content, frequency, reply } = stickyChannel;
+      let prevMessage = await message.channel.messages.cache.get(messageId);
+      if (count >= frequency) {
+        count = 0;
+        try {
+          await prevMessage.delete();
+          var newMessage = await message.channel.send({ content: content });
+        } catch (error) {}
+        messageId = newMessage.id;
+      }
+      await client.stickyChannel.set(message.channel.id, {
+        messageId: messageId,
+        count: ++count,
+        content: content,
+        frequency: frequency,
+        reply: reply,
+      });
+    }
 
     const guild = await Guild.findOne({ id: message.guildId });
     const prefix = guild.prefix.current;

@@ -22,9 +22,21 @@ module.exports = {
     .addStringOption((option) => {
       option.setName("type").setDescription("Help on a command type.");
 
-      const types = ["tools", "moderation", "music", "others", "all"];
+      const types = {
+        Tools: "tools",
+        Moderation: "moderation",
+        Music: "music",
+        "Context Menus": "contextMenus",
+        Others: "others",
+        All: "all",
+      };
 
-      types.forEach((type) => option.addChoices({ name: type, value: type }));
+      for (const type in types) {
+        option.addChoices({
+          name: type,
+          value: types[type],
+        });
+      }
 
       return option;
     })

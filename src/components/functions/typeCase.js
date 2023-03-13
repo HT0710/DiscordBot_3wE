@@ -110,6 +110,29 @@ module.exports = async (interaction, client, value, backButton) => {
         ? [commandMenu(others), backButton]
         : [commandMenu(others)],
     },
+
+    contextMenus: {
+      embeds: [
+        (() => {
+          const embed = new EmbedBuilder()
+            .setColor(Colors.Gold)
+            .setTitle("**Others** - My other additional commands")
+            .setFooter({ text: "Page: 1/1" });
+
+          others.forEach((command) =>
+            embed.addFields({
+              name: `**\`/${command.name}\`**`,
+              value: command.desc,
+            })
+          );
+
+          return embed;
+        })(),
+      ],
+      components: backButton
+        ? [commandMenu(others), backButton]
+        : [commandMenu(others)],
+    },
   };
 
   if (value === "all")
