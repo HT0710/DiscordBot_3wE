@@ -3,7 +3,7 @@
 ## -> [Invite link](https://discord.com/oauth2/authorize?client_id=1006591332204154951&permissions=1239097535991&scope=bot%20applications.commands)
 
 # Version logs
-## v1.7@
+## v1.7@130922
 - Add kick command
 - Add embed command
 - Add sticky command
